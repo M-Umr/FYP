@@ -1,0 +1,1719 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <!-- Required meta tags-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="au theme template">
+    <meta name="author" content="Hau Nguyen">
+    <meta name="keywords" content="au theme template">
+<link href="{% static 'images/dill3.png' %}" rel="icon">
+    <!-- Title Page-->
+    <title>Calendar</title>
+
+    <!-- Fontfaces CSS-->
+    <link href="{% static 'others/css/font-face.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'others/vendor/font-awesome-4.7/css/font-awesome.min.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'others/vendor/font-awesome-5/css/fontawesome-all.min.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'others/vendor/mdi-font/css/material-design-iconic-font.min.css' %}" rel="stylesheet" media="all">
+
+    <!-- Bootstrap CSS-->
+    <link href="{% static 'others/vendor/bootstrap-4.1/bootstrap.min.css' %}" rel="stylesheet" media="all">
+
+    <!-- Vendor CSS-->
+    <link href="{% static 'others/vendor/animsition/animsition.min.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'others/vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'others/vendor/wow/animate.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'others/vendor/css-hamburgers/hamburgers.min.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'others/vendor/slick/slick.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'others/vendor/select2/select2.min.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'others/vendor/perfect-scrollbar/perfect-scrollbar.css' %}" rel="stylesheet" media="all">
+
+    <!-- FullCalendar -->
+    <link href="{% static 'others/vendor/fullcalendar-3.10.0/fullcalendar.css' %}" rel='stylesheet' media="all" />
+
+    <!-- Main CSS-->
+    <link href="{% static 'others/css/theme.css' %}" rel="stylesheet" media="all">
+
+
+
+<style>
+<!--body {font-family: Arial, Helvetica, sans-serif;}-->
+* {box-sizing: border-box;}
+
+/* Button used to open the contact form - fixed at the bottom of the page */
+.open-button {
+<!--  background-color: #555;-->
+  color: white;
+  padding: 18px 30px;
+  border: none;
+  cursor: pointer;
+  opacity: 0.8;
+<!--  position: fixed;-->
+<!--  bottom: 23px;-->
+<!--  right: 28px;-->
+<!--  width: 280px;-->
+}
+
+/* The popup form - hidden by default */
+.form-popup {
+  display: none;
+  position: fixed;
+  bottom: 0;
+<!--  right: 15px;-->
+  border: 3px solid #f1f1f1;
+  z-index: 9;
+}
+
+/* Add styles to the form container */
+.form-container {
+  max-width: 300px;
+  padding: 10px;
+  background-color: white;
+}
+
+/* Full-width input fields */
+.form-container input[type=text] {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  border: none;
+  background: #f1f1f1;
+}
+
+/* When the inputs get focus, do something */
+.form-container input[type=text]:focus, .form-container input[type=password]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+/* Set a style for the submit/login button */
+.form-container .btn {
+  background-color: #04AA6D;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  margin-bottom:10px;
+  opacity: 0.8;
+}
+
+/* Add a red background color to the cancel button */
+.form-container .cancel {
+  background-color: red;
+}
+
+/* Add some hover effects to buttons */
+.form-container .btn:hover, .open-button:hover {
+  opacity: 1;
+}
+</style>
+
+
+
+
+    <style type="text/css">
+    /* force class color to override the bootstrap base rule
+       NOTE: adding 'url: #' to calendar makes this unneeded
+     */
+    .fc-event, .fc-event:hover {
+          color: #fff !important;
+          text-decoration: none;
+    }
+
+
+
+
+
+
+
+
+<!--    clock style-->
+
+
+.clockpicker .input-group-addon {
+	cursor: pointer;
+}
+.clockpicker-moving {
+	cursor: move;
+}
+.clockpicker-align-left.popover > .arrow {
+	left: 25px;
+}
+.clockpicker-align-top.popover > .arrow {
+	top: 17px;
+}
+.clockpicker-align-right.popover > .arrow {
+	left: auto;
+	right: 25px;
+}
+.clockpicker-align-bottom.popover > .arrow {
+	top: auto;
+	bottom: 6px;
+}
+.clockpicker-popover .popover-title {
+	background-color: #fff;
+	color: #999;
+	font-size: 24px;
+	font-weight: bold;
+	line-height: 30px;
+	text-align: center;
+}
+.clockpicker-popover .popover-title span {
+	cursor: pointer;
+}
+.clockpicker-popover .popover-content {
+	background-color: #f8f8f8;
+	padding: 12px;
+}
+.popover-content:last-child {
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+}
+.clockpicker-plate {
+	background-color: #fff;
+	border: 1px solid #ccc;
+	border-radius: 50%;
+	width: 200px;
+	height: 200px;
+	overflow: visible;
+	position: relative;
+	/* Disable text selection highlighting. Thanks to Hermanya */
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+.clockpicker-canvas,
+.clockpicker-dial {
+	width: 200px;
+	height: 200px;
+	position: absolute;
+	left: -1px;
+	top: -1px;
+}
+.clockpicker-minutes {
+	visibility: hidden;
+}
+.clockpicker-tick {
+	border-radius: 50%;
+	color: #666;
+	line-height: 26px;
+	text-align: center;
+	width: 26px;
+	height: 26px;
+	position: absolute;
+	cursor: pointer;
+}
+.clockpicker-tick.active,
+.clockpicker-tick:hover {
+	background-color: rgb(192, 229, 247);
+	background-color: rgba(0, 149, 221, .25);
+}
+.clockpicker-button {
+	background-image: none;
+	background-color: #fff;
+	border-width: 1px 0 0;
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
+	margin: 0;
+	padding: 10px 0;
+}
+.clockpicker-button:hover {
+	background-image: none;
+	background-color: #ebebeb;
+}
+.clockpicker-button:focus {
+	outline: none!important;
+}
+.clockpicker-dial {
+	-webkit-transition: -webkit-transform 350ms, opacity 350ms;
+	-moz-transition: -moz-transform 350ms, opacity 350ms;
+	-ms-transition: -ms-transform 350ms, opacity 350ms;
+	-o-transition: -o-transform 350ms, opacity 350ms;
+	transition: transform 350ms, opacity 350ms;
+}
+.clockpicker-dial-out {
+	opacity: 0;
+}
+.clockpicker-hours.clockpicker-dial-out {
+	-webkit-transform: scale(1.2, 1.2);
+	-moz-transform: scale(1.2, 1.2);
+	-ms-transform: scale(1.2, 1.2);
+	-o-transform: scale(1.2, 1.2);
+	transform: scale(1.2, 1.2);
+}
+.clockpicker-minutes.clockpicker-dial-out {
+	-webkit-transform: scale(.8, .8);
+	-moz-transform: scale(.8, .8);
+	-ms-transform: scale(.8, .8);
+	-o-transform: scale(.8, .8);
+	transform: scale(.8, .8);
+}
+.clockpicker-canvas {
+	-webkit-transition: opacity 175ms;
+	-moz-transition: opacity 175ms;
+	-ms-transition: opacity 175ms;
+	-o-transition: opacity 175ms;
+	transition: opacity 175ms;
+}
+.clockpicker-canvas-out {
+	opacity: 0.25;
+}
+.clockpicker-canvas-bearing,
+.clockpicker-canvas-fg {
+	stroke: none;
+	fill: rgb(0, 149, 221);
+}
+.clockpicker-canvas-bg {
+	stroke: none;
+	fill: rgb(192, 229, 247);
+}
+.clockpicker-canvas-bg-trans {
+	fill: rgba(0, 149, 221, .25);
+}
+.clockpicker-canvas line {
+	stroke: rgb(0, 149, 221);
+	stroke-width: 1;
+	stroke-linecap: round;
+	/*shape-rendering: crispEdges;*/
+}
+.clockpicker-button.am-button {
+	margin: 1px;
+	padding: 5px;
+	border: 1px solid rgba(0, 0, 0, .2);
+	border-radius: 4px;
+
+}
+.clockpicker-button.pm-button {
+	margin: 1px 1px 1px 136px;
+	padding: 5px;
+	border: 1px solid rgba(0, 0, 0, .2);
+	border-radius: 4px;
+}
+
+
+
+<!--jquery for Clock-->
+
+
+
+
+/* Picked from bootstrap: .popover, .btn, .text-primary */
+
+.popover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1010;
+  display: none;
+  max-width: 276px;
+  padding: 1px;
+  text-align: left;
+  white-space: normal;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ccc;
+  border: 1px solid rgba(0, 0, 0, .2);
+  border-radius: 6px;
+  -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
+          box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
+}
+.popover.top {
+  margin-top: -10px;
+}
+.popover.right {
+  margin-left: 10px;
+}
+.popover.bottom {
+  margin-top: 10px;
+}
+.popover.left {
+  margin-left: -10px;
+}
+.popover-title {
+  padding: 8px 14px;
+  margin: 0;
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 18px;
+  background-color: #f7f7f7;
+  border-bottom: 1px solid #ebebeb;
+  border-radius: 5px 5px 0 0;
+}
+.popover-content {
+  padding: 9px 14px;
+}
+.popover > .arrow,
+.popover > .arrow:after {
+  position: absolute;
+  display: block;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  /* The following are set in WordPress (wp-admin/css/revisions.css) - reset them to initial values */
+  overflow:visible;
+  margin:0;
+  padding:0;
+  z-index:auto;
+  background-color:transparent;
+  -webkit-box-shadow:none;
+  box-shadow:none;
+  bottom:auto;
+  left:auto;
+  right:auto;
+  top:auto;
+  -webkit-transform:none;
+  -ms-transform:none;
+  transform:none;
+}
+.popover > .arrow {
+  border-width: 11px;
+}
+.popover > .arrow:after {
+  content: "";
+  border-width: 10px;
+}
+.popover.top > .arrow {
+  bottom: -11px;
+  left: 50%;
+  margin-left: -11px;
+  border-top-color: #999;
+  border-top-color: rgba(0, 0, 0, .25);
+  border-bottom-width: 0;
+}
+.popover.top > .arrow:after {
+  bottom: 1px;
+  margin-left: -10px;
+  content: " ";
+  border-top-color: #fff;
+  border-bottom-width: 0;
+}
+.popover.right > .arrow {
+  top: 50%;
+  left: -11px;
+  margin-top: -11px;
+  border-right-color: #999;
+  border-right-color: rgba(0, 0, 0, .25);
+  border-left-width: 0;
+}
+.popover.right > .arrow:after {
+  bottom: -10px;
+  left: 1px;
+  content: " ";
+  border-right-color: #fff;
+  border-left-width: 0;
+}
+.popover.bottom > .arrow {
+  top: -11px;
+  left: 50%;
+  margin-left: -11px;
+  border-top-width: 0;
+  border-bottom-color: #999;
+  border-bottom-color: rgba(0, 0, 0, .25);
+}
+.popover.bottom > .arrow:after {
+  top: 1px;
+  margin-left: -10px;
+  content: " ";
+  border-top-width: 0;
+  border-bottom-color: #fff;
+}
+.popover.left > .arrow {
+  top: 50%;
+  right: -11px;
+  margin-top: -11px;
+  border-right-width: 0;
+  border-left-color: #999;
+  border-left-color: rgba(0, 0, 0, .25);
+}
+.popover.left > .arrow:after {
+  right: 1px;
+  bottom: -10px;
+  content: " ";
+  border-right-width: 0;
+  border-left-color: #fff;
+}
+.btn {
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  background-image: none;
+  border: 1px solid transparent;
+
+}
+.btn:focus,
+.btn:active:focus,
+.btn.active:focus {
+  outline: thin dotted;
+  outline: 5px auto -webkit-focus-ring-color;
+  outline-offset: -2px;
+}
+.btn:hover,
+.btn:focus {
+  color: #333;
+  text-decoration: none;
+}
+.btn:active,
+.btn.active {
+  background-image: none;
+  outline: 0;
+  -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+          box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+}
+.btn-default {
+  color: #333;
+  background-color: #fff;
+  border-color: #ccc;
+}
+.btn-default:hover,
+.btn-default:focus,
+.btn-default:active,
+.btn-default.active,
+.open .dropdown-toggle.btn-default {
+  color: #333;
+  background-color: #ebebeb;
+  border-color: #adadad;
+}
+.btn-default:active,
+.btn-default.active,
+.open .dropdown-toggle.btn-default {
+  background-image: none;
+}
+.btn-block {
+  display: block;
+  width: 100%;
+}
+.text-primary {
+  color: #428bca;
+}
+
+/*!
+ * ClockPicker v{package.version} for Bootstrap (http://weareoutman.github.io/clockpicker/)
+ * Copyright 2014 Wang Shenwei.
+ * Licensed under MIT (https://github.com/weareoutman/clockpicker/blob/gh-pages/LICENSE)
+ */
+
+.clockpicker .input-group-addon {
+	cursor: pointer;
+}
+.clockpicker-moving {
+	cursor: move;
+}
+.clockpicker-align-left.popover > .arrow {
+	left: 25px;
+}
+.clockpicker-align-top.popover > .arrow {
+	top: 17px;
+}
+.clockpicker-align-right.popover > .arrow {
+	left: auto;
+	right: 25px;
+}
+.clockpicker-align-bottom.popover > .arrow {
+	top: auto;
+	bottom: 6px;
+}
+.clockpicker-popover .popover-title {
+	background-color: #fff;
+	color: #999;
+	font-size: 24px;
+	font-weight: bold;
+	line-height: 30px;
+	text-align: center;
+}
+.clockpicker-popover .popover-title span {
+	cursor: pointer;
+}
+.clockpicker-popover .popover-content {
+	background-color: #f8f8f8;
+	padding: 12px;
+}
+.popover-content:last-child {
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+}
+.clockpicker-plate {
+	background-color: #fff;
+	border: 1px solid #ccc;
+	border-radius: 50%;
+	width: 200px;
+	height: 200px;
+	overflow: visible;
+	position: relative;
+	/* Disable text selection highlighting. Thanks to Hermanya */
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+.clockpicker-canvas,
+.clockpicker-dial {
+	width: 200px;
+	height: 200px;
+	position: absolute;
+	left: -1px;
+	top: -1px;
+}
+.clockpicker-minutes {
+	visibility: hidden;
+}
+.clockpicker-tick {
+	border-radius: 50%;
+	color: #666;
+	line-height: 26px;
+	text-align: center;
+	width: 26px;
+	height: 26px;
+	position: absolute;
+	cursor: pointer;
+}
+.clockpicker-tick.active,
+.clockpicker-tick:hover {
+	background-color: rgb(192, 229, 247);
+	background-color: rgba(0, 149, 221, .25);
+}
+.clockpicker-button {
+	background-image: none;
+	background-color: #fff;
+	border-width: 1px 0 0;
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
+	margin: 0;
+	padding: 10px 0;
+}
+.clockpicker-button:hover {
+	background-image: none;
+	background-color: #ebebeb;
+}
+.clockpicker-button:focus {
+	outline: none!important;
+}
+.clockpicker-dial {
+	-webkit-transition: -webkit-transform 350ms, opacity 350ms;
+	-moz-transition: -moz-transform 350ms, opacity 350ms;
+	-ms-transition: -ms-transform 350ms, opacity 350ms;
+	-o-transition: -o-transform 350ms, opacity 350ms;
+	transition: transform 350ms, opacity 350ms;
+}
+.clockpicker-dial-out {
+	opacity: 0;
+}
+.clockpicker-hours.clockpicker-dial-out {
+	-webkit-transform: scale(1.2, 1.2);
+	-moz-transform: scale(1.2, 1.2);
+	-ms-transform: scale(1.2, 1.2);
+	-o-transform: scale(1.2, 1.2);
+	transform: scale(1.2, 1.2);
+}
+.clockpicker-minutes.clockpicker-dial-out {
+	-webkit-transform: scale(.8, .8);
+	-moz-transform: scale(.8, .8);
+	-ms-transform: scale(.8, .8);
+	-o-transform: scale(.8, .8);
+	transform: scale(.8, .8);
+}
+.clockpicker-canvas {
+	-webkit-transition: opacity 175ms;
+	-moz-transition: opacity 175ms;
+	-ms-transition: opacity 175ms;
+	-o-transition: opacity 175ms;
+	transition: opacity 175ms;
+}
+.clockpicker-canvas-out {
+	opacity: 0.25;
+}
+.clockpicker-canvas-bearing,
+.clockpicker-canvas-fg {
+	stroke: none;
+	fill: rgb(0, 149, 221);
+}
+.clockpicker-canvas-bg {
+	stroke: none;
+	fill: rgb(192, 229, 247);
+}
+.clockpicker-canvas-bg-trans {
+	fill: rgba(0, 149, 221, .25);
+}
+.clockpicker-canvas line {
+	stroke: rgb(0, 149, 221);
+	stroke-width: 1;
+	stroke-linecap: round;
+	/*shape-rendering: crispEdges;*/
+}
+.clockpicker-button.am-button {
+	margin: 1px;
+	padding: 5px;
+	border: 1px solid rgba(0, 0, 0, .2);
+	border-radius: 4px;
+
+}
+.clockpicker-button.pm-button {
+	margin: 1px 1px 1px 136px;
+	padding: 5px;
+	border: 1px solid rgba(0, 0, 0, .2);
+	border-radius: 4px;
+}
+
+
+<!--Buttons Style-->
+.dabutton{
+
+  background-color: #e9e9e9;
+    border: 1px solid #e9e9e9;
+    border-radius: 3px;
+    color: #757575;
+    display: block;
+    font-size: 14px;
+    margin-bottom: 10px;
+    padding: 5px 5px;
+    text-align: center;
+	position: relative;
+	width:100%;
+
+
+}
+.btn{border: 2px solid black;}
+<!--End Button Style-->
+
+
+
+
+
+
+
+
+    </style>
+
+</head>
+
+<!-- animsition overrides all click events on clickable things like a,
+      since calendar doesn't add href's be default,
+      it leads to odd behaviors like loading 'undefined'
+      moving the class to menus lead to only the menu having the effect -->
+<body class="animsition">
+{% csrf_token %}
+    <div class="page-wrapper">
+        <!-- HEADER MOBILE-->
+        <header class="header-mobile d-block d-lg-none">
+            <div class="header-mobile__bar">
+                <div class="container-fluid">
+                    <div class="header-mobile-inner">
+
+                        <a class="logo" >
+                             <img src="{% static 'images/dill3.png' %} ">
+                             <a class="navbar-brand"  href="{% url 'doctors' %}" style="color:black;">We<span><b>Doctor's</b></span></a>
+<!--                            <img src="images/icon/logo.png" alt="CoolAdmin" />-->
+                        </a>
+                        <button class="hamburger hamburger--slider" type="button">
+                            <span class="hamburger-box">
+                                <span class="hamburger-inner"></span>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <nav class="navbar-mobile">
+                <div class="container-fluid">
+                    <ul class="navbar-mobile__list list-unstyled">
+                        <li class="has-sub">
+                            <a class="js-arrow" href="{% url 'doctors' %}">
+                                <i class="fas fa-tachometer-alt"></i>Home</a>
+<li>
+                            <a  href="{% url 'appointment_requests_doctor' %}">
+                                <i class="fas fa-copy"></i>Appointment Request</a>
+
+                                </li>
+                            <a href="{% url 'calendar' %}">
+                                <i class="fas fa-calendar-alt"></i>Set Avaliability</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'mapdoctor' %}">
+                                <i class="fas fa-map-marker-alt"></i>Maps</a>
+                        </li>
+                         <li>
+                            <a href="{% url 'prescribe_medicine_livecall' %}">
+                                <i class="fas fa-desktop"></i>Live Call</a>
+                        </li>
+<!--                        <li>-->
+<!--                            <a href="{% url 'prescription' %}">-->
+<!--                                <i class="far fa-check-square"></i>Prescribe Medicine</a>-->
+<!--                        </li>-->
+<!--                         <li >-->
+<!--                            <a href="{% url 'my_patients_doctor' %}">-->
+<!--                                <i class="fas fa-chart-bar"></i>My Patients</a>-->
+<!--                        </li>-->
+<!--                        <li class="has-sub">-->
+<!--                            <a class="js-arrow" href="#">-->
+<!--                                <i class="fas fa-copy"></i>Pages</a>-->
+<!--                            <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">-->
+<!--                                <li>-->
+<!--                                    <a href="login.html">Login</a>-->
+<!--                                </li>-->
+<!--                                <li>-->
+<!--                                    <a href="register.html">Register</a>-->
+<!--                                </li>-->
+<!--                                <li>-->
+<!--                                    <a href="forget-pass.html">Forget Password</a>-->
+<!--                                </li>-->
+<!--                            </ul>-->
+<!--                        </li>-->
+<!--                        <li class="has-sub">-->
+<!--                            <a class="js-arrow" href="#">-->
+<!--                                <i class="fas fa-desktop"></i>UI Elements</a>-->
+<!--                            <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">-->
+<!--                                <li>-->
+<!--                                    <a href="button.html">Button</a>-->
+<!--                                </li>-->
+<!--                                <li>-->
+<!--                                    <a href="badge.html">Badges</a>-->
+<!--                                </li>-->
+<!--                                <li>-->
+<!--                                    <a href="tab.html">Tabs</a>-->
+<!--                                </li>-->
+<!--                                <li>-->
+<!--                                    <a href="card.html">Cards</a>-->
+<!--                                </li>-->
+<!--                                <li>-->
+<!--                                    <a href="alert.html">Alerts</a>-->
+<!--                                </li>-->
+<!--                                <li>-->
+<!--                                    <a href="progress-bar.html">Progress Bars</a>-->
+<!--                                </li>-->
+<!--                                <li>-->
+<!--                                    <a href="modal.html">Modals</a>-->
+<!--                                </li>-->
+<!--                                <li>-->
+<!--                                    <a href="switch.html">Switchs</a>-->
+<!--                                </li>-->
+<!--                                <li>-->
+<!--                                    <a href="grid.html">Grids</a>-->
+<!--                                </li>-->
+<!--                                <li>-->
+<!--                                    <a href="fontawesome.html">Fontawesome Icon</a>-->
+<!--                                </li>-->
+<!--                                <li>-->
+<!--                                    <a href="typo.html">Typography</a>-->
+<!--                                </li>-->
+<!--                            </ul>-->
+<!--                        </li>-->
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <!-- END HEADER MOBILE-->
+
+        <!-- MENU SIDEBAR-->
+        <aside class="menu-sidebar d-none d-lg-block">
+            <div class="logo">
+                <a >
+                    <img src="{% static 'images/dill3.png' %} ">
+                     <a class="navbar-brand"  href="{% url 'doctors' %}" style="color:black;">We<span><b>Doctor's</b></span></a>
+<!--                    <img src="images/icon/logo.png" alt="Cool Admin" />-->
+                </a>
+            </div>
+            <div class="menu-sidebar__content js-scrollbar1">
+                <nav class="navbar-sidebar">
+                    <ul class="list-unstyled navbar__list">
+                        <li class="has-sub">
+                            <a class="js-arrow" href="{% url 'doctors' %}">
+                                <i class="fas fa-tachometer-alt"></i>Home</a>
+
+                        </li>
+<!--                        <li>-->
+<!--                            <a href="chart.html">-->
+<!--                                <i class="fas fa-chart-bar"></i>Charts</a>-->
+<!--                        </li>-->
+<!--                        <li>-->
+<!--                            <a href="table.html">-->
+<!--                                <i class="fas fa-table"></i>Tables</a>-->
+<!--                        </li>-->
+<!--                        <li>-->
+<!--                            <a href="form.html">-->
+<!--                                <i class="far fa-check-square"></i>Forms</a>-->
+<!--                        </li>-->
+                        <li>
+                            <a  href="{% url 'appointment_requests_doctor' %}">
+                                <i class="fas fa-copy"></i>Appointment Request</a>
+
+                                </li>
+                        <li class="active">
+                            <a href="{% url 'calendar' %}">
+                                <i class="fas fa-calendar-alt"></i>Set Avaliability</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'mapdoctor' %}">
+                                <i class="fas fa-map-marker-alt"></i>Maps</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'prescribe_medicine_livecall' %}">
+                                <i class="fas fa-desktop"></i>Live Call</a>
+                        </li>
+<!--                        <li>-->
+<!--                            <a href="{% url 'prescription' %}">-->
+<!--                                <i class="far fa-check-square"></i>Prescribe Medicine</a>-->
+<!--                        </li>-->
+<!--                         <li >-->
+<!--                            <a href="{% url 'my_patients_doctor' %}">-->
+<!--                                <i class="fas fa-chart-bar"></i>My Patients</a>-->
+<!--                        </li>-->
+<!--                        <li class="has-sub">-->
+<!--                            <a class="js-arrow" href="#">-->
+<!--                                <i class="fas fa-copy"></i>Pages</a>-->
+<!--                            <ul class="list-unstyled navbar__sub-list js-sub-list">-->
+<!--                                <li>-->
+<!--                                    <a href="login.html">Login</a>-->
+<!--                                </li>-->
+<!--                                <li>-->
+<!--                                    <a href="register.html">Register</a>-->
+<!--                                </li>-->
+<!--                                <li>-->
+<!--                                    <a href="forget-pass.html">Forget Password</a>-->
+<!--                                </li>-->
+<!--                            </ul>-->
+<!--                        </li>-->
+<!--                        <li class="has-sub">-->
+<!--                            <a class="js-arrow" href="#">-->
+<!--                                <i class="fas fa-desktop"></i>UI Elements</a>-->
+<!--                            <ul class="list-unstyled navbar__sub-list js-sub-list">-->
+<!--                                <li>-->
+<!--                                    <a href="button.html">Button</a>-->
+<!--                                </li>-->
+<!--                                <li>-->
+<!--                                    <a href="badge.html">Badges</a>-->
+<!--                                </li>-->
+<!--                                <li>-->
+<!--                                    <a href="tab.html">Tabs</a>-->
+<!--                                </li>-->
+<!--                                <li>-->
+<!--                                    <a href="card.html">Cards</a>-->
+<!--                                </li>-->
+<!--                                <li>-->
+<!--                                    <a href="alert.html">Alerts</a>-->
+<!--                                </li>-->
+<!--                                <li>-->
+<!--                                    <a href="progress-bar.html">Progress Bars</a>-->
+<!--                                </li>-->
+<!--                                <li>-->
+<!--                                    <a href="modal.html">Modals</a>-->
+<!--                                </li>-->
+<!--                                <li>-->
+<!--                                    <a href="switch.html">Switchs</a>-->
+<!--                                </li>-->
+<!--                                <li>-->
+<!--                                    <a href="grid.html">Grids</a>-->
+<!--                                </li>-->
+<!--                                <li>-->
+<!--                                    <a href="fontawesome.html">Fontawesome Icon</a>-->
+<!--                                </li>-->
+<!--                                <li>-->
+<!--                                    <a href="typo.html">Typography</a>-->
+<!--                                </li>-->
+<!--                            </ul>-->
+<!--                        </li>-->
+                    </ul>
+                </nav>
+            </div>
+        </aside>
+        <!-- END MENU SIDEBAR-->
+
+        <!-- PAGE CONTAINER-->
+        <div class="page-container">
+            <!-- HEADER DESKTOP-->
+            <header class="header-desktop">
+                <div class="section__content section__content--p30">
+                    <div class="container-fluid">
+                        <div class="header-wrap">
+                            <form class="form-header" action="" method="POST">
+<!--                                <input class="au-input au-input&#45;&#45;xl" type="text" name="search" placeholder="Search for datas &amp; reports..." />-->
+<!--                                <button class="au-btn&#45;&#45;submit" type="submit">-->
+<!--                                    <i class="zmdi zmdi-search"></i>-->
+<!--                                </button>-->
+                            </form>
+                            <div class="header-button">
+<!--                                <div class="noti-wrap">-->
+<!--                                    <div class="noti__item js-item-menu">-->
+<!--                                        <i class="zmdi zmdi-comment-more"></i>-->
+<!--                                        <span class="quantity">1</span>-->
+<!--                                        <div class="mess-dropdown js-dropdown">-->
+<!--                                            <div class="mess__title">-->
+<!--                                                <p>You have 2 news message</p>-->
+<!--                                            </div>-->
+<!--                                            <div class="mess__item">-->
+<!--                                                <div class="image img-cir img-40">-->
+<!--                                                    <img src="images/icon/avatar-06.jpg" alt="Michelle Moreno" />-->
+<!--                                                </div>-->
+<!--                                                <div class="content">-->
+<!--                                                    <h6>Michelle Moreno</h6>-->
+<!--                                                    <p>Have sent a photo</p>-->
+<!--                                                    <span class="time">3 min ago</span>-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                            <div class="mess__item">-->
+<!--                                                <div class="image img-cir img-40">-->
+<!--                                                    <img src="images/icon/avatar-04.jpg" alt="Diane Myers" />-->
+<!--                                                </div>-->
+<!--                                                <div class="content">-->
+<!--                                                    <h6>Diane Myers</h6>-->
+<!--                                                    <p>You are now connected on message</p>-->
+<!--                                                    <span class="time">Yesterday</span>-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                            <div class="mess__footer">-->
+<!--                                                <a href="#">View all messages</a>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                    <div class="noti__item js-item-menu">-->
+<!--                                        <i class="zmdi zmdi-email"></i>-->
+<!--                                        <span class="quantity">1</span>-->
+<!--                                        <div class="email-dropdown js-dropdown">-->
+<!--                                            <div class="email__title">-->
+<!--                                                <p>You have 3 New Emails</p>-->
+<!--                                            </div>-->
+<!--                                            <div class="email__item">-->
+<!--                                                <div class="image img-cir img-40">-->
+<!--                                                    <img src="images/icon/avatar-06.jpg" alt="Cynthia Harvey" />-->
+<!--                                                </div>-->
+<!--                                                <div class="content">-->
+<!--                                                    <p>Meeting about new dashboard...</p>-->
+<!--                                                    <span>Cynthia Harvey, 3 min ago</span>-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                            <div class="email__item">-->
+<!--                                                <div class="image img-cir img-40">-->
+<!--                                                    <img src="images/icon/avatar-05.jpg" alt="Cynthia Harvey" />-->
+<!--                                                </div>-->
+<!--                                                <div class="content">-->
+<!--                                                    <p>Meeting about new dashboard...</p>-->
+<!--                                                    <span>Cynthia Harvey, Yesterday</span>-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                            <div class="email__item">-->
+<!--                                                <div class="image img-cir img-40">-->
+<!--                                                    <img src="images/icon/avatar-04.jpg" alt="Cynthia Harvey" />-->
+<!--                                                </div>-->
+<!--                                                <div class="content">-->
+<!--                                                    <p>Meeting about new dashboard...</p>-->
+<!--                                                    <span>Cynthia Harvey, April 12,,2018</span>-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                            <div class="email__footer">-->
+<!--                                                <a href="#">See all emails</a>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                    <div class="noti__item js-item-menu">-->
+<!--                                        <i class="zmdi zmdi-notifications"></i>-->
+<!--                                        <span class="quantity">3</span>-->
+<!--                                        <div class="notifi-dropdown js-dropdown">-->
+<!--                                            <div class="notifi__title">-->
+<!--                                                <p>You have 3 Notifications</p>-->
+<!--                                            </div>-->
+<!--                                            <div class="notifi__item">-->
+<!--                                                <div class="bg-c1 img-cir img-40">-->
+<!--                                                    <i class="zmdi zmdi-email-open"></i>-->
+<!--                                                </div>-->
+<!--                                                <div class="content">-->
+<!--                                                    <p>You got a email notification</p>-->
+<!--                                                    <span class="date">April 12, 2018 06:50</span>-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                            <div class="notifi__item">-->
+<!--                                                <div class="bg-c2 img-cir img-40">-->
+<!--                                                    <i class="zmdi zmdi-account-box"></i>-->
+<!--                                                </div>-->
+<!--                                                <div class="content">-->
+<!--                                                    <p>Your account has been blocked</p>-->
+<!--                                                    <span class="date">April 12, 2018 06:50</span>-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                            <div class="notifi__item">-->
+<!--                                                <div class="bg-c3 img-cir img-40">-->
+<!--                                                    <i class="zmdi zmdi-file-text"></i>-->
+<!--                                                </div>-->
+<!--                                                <div class="content">-->
+<!--                                                    <p>You got a new file</p>-->
+<!--                                                    <span class="date">April 12, 2018 06:50</span>-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                            <div class="notifi__footer">-->
+<!--                                                <a href="#">All notifications</a>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+                                <div class="account-wrap">
+                                    <div class="account-item clearfix js-item-menu">
+                                        <div class="image">
+                                           {% if not doctor.image%}
+                                            <img src="{% static 'images/download.png' %}"  />
+                                            {% endif %}
+                                            {% if doctor.image%}
+                                            <img src='/media/{{doctor.image}}'  />
+                                            {% endif %}
+                                        </div>
+                                        <div class="content">
+                                            <a class="js-acc-btn" href="#">{{doctor.first_name}} {{doctor.last_name}}</a>
+                                        </div>
+                                        <div class="account-dropdown js-dropdown">
+                                            <div class="info clearfix">
+                                                <div class="image">
+                                                    <a href="#">
+                                                        {% if not doctor.image%}
+                                            <img src="{% static 'images/download.png' %}"  />
+                                            {% endif %}
+                                            {% if doctor.image%}
+                                            <img src='/media/{{doctor.image}}'  />
+                                            {% endif %}
+                                                    </a>
+                                                </div>
+                                                <div class="content">
+                                                    <h5 class="name">
+                                                        <a href="#">{{doctor.first_name}} {{doctor.last_name}}</a>
+                                                    </h5>
+                                                    <span class="email">{{doctor.email}}</span>
+                                                </div>
+                                            </div>
+                                            <div class="account-dropdown__body">
+                                                <div class="account-dropdown__item">
+
+                                                        <button class="zmdi zmdi-account open-button"  onclick="openForm()"> Set Fee</button>
+
+                                                        <div class="form-popup" id="myForm">
+  <form action="#" class="form-container">
+    <h1>Set Consulting Fee</h1>
+
+    <label ><b>Consulting Fee Amount</b></label>
+    <input type="text" placeholder="Enter Amount (PKR)"  required>
+
+
+
+    <button type="submit" class="btn">Save</button>
+    <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+  </form>
+</div>
+
+                                                    <script>
+function openForm() {
+  document.getElementById("myForm").style.display = "block";
+}
+
+function closeForm() {
+  document.getElementById("myForm").style.display = "none";
+}
+</script>
+
+
+                                                </div>
+                                                <div class="account-dropdown__item">
+                                                <div class="account-dropdown__item">
+                                                    <a href="{% url 'update_doctor_profile' %}">
+                                                        <i class="zmdi zmdi-settings"></i>Edit Profile</a>
+                                                </div>
+                                                <div class="account-dropdown__item">
+                                                    <a href="#">
+                                                        <i class="zmdi zmdi-money-box"></i>Earning</a>
+                                                </div>
+                                            </div>
+                                            <div class="account-dropdown__footer">
+                                                <a href="{% url 'user_singnout' %}" method="POST">
+													<form action="/singnout/"  >
+														 {% csrf_token %}
+                                                    <button type="submit" class="zmdi zmdi-power btn "></button> Logout
+												</form></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            <!-- END HEADER DESKTOP-->
+
+            <!-- MAIN CONTENT-->
+            <div class="main-content">
+                <div class="section__content section__content--p30">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col">
+                              <div class="au-card">
+<!--                                <div id="calendar"></div>-->
+
+
+
+                                   <!--    appointment-->
+         <div class="panel-body">
+                        <!-- panel content start -->
+                            <div class="bootstrap-iso">
+                             <div class="container-fluid">
+                              <div class="row">
+                               <div class="col-md-12 col-sm-12 col-xs-12">
+                                <form class="form-horizontal" method="post" action="/doctor_schdule/">
+                                    {% csrf_token %}
+<!--                                 <div class="form-group form-group-lg">-->
+<!--                                  <label class="control-label col-sm-2 requiredField" for="date">-->
+<!--                                   Date-->
+<!--                                   <span class="asteriskField">-->
+<!--                                    *-->
+<!--                                   </span>-->
+<!--                                  </label>-->
+<!--                                  <div class="col-sm-10">-->
+<!--                                   <div class="input-group">-->
+<!--                                    <div class="input-group-addon">-->
+<!--                                     <i class="fa fa-calendar">-->
+<!--                                     </i>-->
+<!--                                    </div>-->
+<!--                                    <input class="form-control" id="date" name="date" type="text" required/>-->
+<!--                                   </div>-->
+<!--                                  </div>-->
+<!--                                 </div>-->
+                                 <div class="form-group form-group-lg">
+                                  <label class="control-label col-sm-2 requiredField" for="scheduleday">
+                                   Day
+                                   <span class="asteriskField">
+                                    *
+                                   </span>
+                                  </label>
+                                  <div class="col-sm-10">
+                                   <select class="select form-control" id="scheduleday" name="scheduleday" required>
+                                    <option value="Monday">
+                                     Monday
+                                    </option>
+                                    <option value="Tuesday">
+                                     Tuesday
+                                    </option>
+                                    <option value="Wednesday">
+                                     Wednesday
+                                    </option>
+                                    <option value="Thursday">
+                                     Thursday
+                                    </option>
+                                    <option value="Friday">
+                                     Friday
+                                    </option>
+                                    <option value="Saturday">
+                                     Saturday
+                                    </option>
+                                    <option value="Sunday">
+                                     Sunday
+                                    </option>
+                                   </select>
+                                  </div>
+                                 </div>
+                                 <div class="form-group form-group-lg">
+                                  <label class="control-label col-sm-2 requiredField" for="starttime">
+                                   Start Time
+                                   <span class="asteriskField">
+                                    *
+                                   </span>
+                                  </label>
+
+                                  <div class="col-sm-10">
+                                   <div class="input-group clockpicker"  data-align="top" data-autoclose="true">
+                                    <div class="input-group-addon">
+                                     <i class="fa fa-clock-o">
+                                     </i>
+                                    </div>
+                                    <input class="form-control" id="starttime" name="starttime" type="text" required/>
+                                   </div>
+                                  </div>
+                                 </div>
+<!--                                 <div class="form-group form-group-lg">-->
+<!--                                  <label class="control-label col-sm-2 requiredField" for="endtime">-->
+<!--                                   End Time-->
+<!--                                   <span class="asteriskField">-->
+<!--                                    *-->
+<!--                                   </span>-->
+<!--                                  </label>-->
+<!--                                  <div class="col-sm-10">-->
+<!--                                   <div class="input-group clockpicker"  data-align="top" data-autoclose="true">-->
+<!--                                    <div class="input-group-addon">-->
+<!--                                     <i class="fa fa-clock-o">-->
+<!--                                     </i>-->
+<!--                                    </div>-->
+<!--                                    <input class="form-control" id="endtime" name="endtime" type="text" required/>-->
+<!--                                   </div>-->
+<!--                                  </div>-->
+<!--                                 </div>-->
+                                 <div class="form-group form-group-lg">
+                                  <label class="control-label col-sm-2 requiredField" for="bookavail">
+                                   Availabilty
+                                   <span class="asteriskField">
+                                    *
+                                   </span>
+                                  </label>
+                                  <div class="col-sm-10">
+                                   <select class="select form-control" id="bookavail" name="bookavail" required>
+                                    <option value="available">
+                                     available
+                                    </option>
+                                    <option value="notavail">
+                                     notavailable
+                                    </option>
+                                   </select>
+                                  </div>
+                                 </div>
+                                    <div class="form-group form-group-lg">
+                                  <label class="control-label col-sm-2 requiredField" for="scheduleday">
+                                   Set Slot
+                                   <span class="asteriskField">
+                                    *
+                                   </span>
+                                  </label>
+                                  <div class="col-sm-10">
+                                   <select class="select form-control" id="slot" name="slot" required>
+                                    <option value="1">
+                                     1
+                                    </option>
+                                       <option value="2">
+                                     2
+                                    </option>
+                                         <option value="3">
+                                     3
+                                    </option>
+
+                                   </select>
+                                  </div>
+                                 </div>
+                                 <div class="form-group">
+                                  <div class="col-sm-10 col-sm-offset-2">
+                                   <button class="btn btn-primary " name="submit" type="submit">
+                                    Set Time
+                                   </button>
+<!--                                      <button class="btn "  type="button">-->
+<!--                                   + Add more Slots-->
+<!--                                   </button>-->
+<br>
+                                      <br>
+                                        <div>
+                                      <label><b>Monday</b></label>
+
+                                                                          {% for i in monday_schedule1 %}
+                                                                          {% if i.availability == "available" %}
+
+                                                                          <a class="btn dabutton"   onclick="setColor('button21', 'grey')" href="#" >
+
+														  First  {{i.start_time}}
+
+														</a>
+                                             {% endif %}
+                                                                          {%endfor%}
+                                                                          {% for i in monday_schedule2 %}
+                                               {% if i.availability == "available" %}
+                                                                          <a class="btn dabutton"   onclick="setColor('button21', 'grey')" href="#">
+
+															 Second  {{i.start_time}}
+														</a>
+                                             {% endif %}
+                                                                          {%endfor%}
+                                                                         {% for i in monday_schedule3 %}
+                                              {% if i.availability == "available" %}
+                                                                          <a class="btn dabutton"   onclick="setColor('button21', 'grey')" href="#">
+
+															 Third   {{i.start_time}}
+														</a>
+                                              {% endif %}
+                                                                          {%endfor%}
+                                      </div>
+                                      <div>
+                                      <label><b>Tuesday</b></label>
+
+                                                                          {% for i in tuesday_schedule1 %}
+                                             {% if i.availability == "available" %}
+                                                                          <a class="btn dabutton"   onclick="setColor('button21', 'grey')" href="#">
+														  First  {{i.start_time}}
+														</a>
+                                          {% endif %}
+                                                                          {%endfor%}
+                                                                          {% for i in tuesday_schedule2 %}
+                                             {% if i.availability == "available" %}
+                                                                          <a class="btn dabutton"   onclick="setColor('button21', 'grey')" href="#">
+
+															Second    {{i.start_time}}
+														</a>
+                                          {% endif %}
+                                                                          {%endfor%}
+                                                                         {% for i in tuesday_schedule3 %}
+                                             {% if i.availability == "available" %}
+                                                                          <a class="btn dabutton"   onclick="setColor('button21', 'grey')" href="#">
+
+															 Third   {{i.start_time}}
+														</a>
+                                          {% endif %}
+                                                                          {%endfor%}
+                                      </div>
+                                      <div>
+                                      <label><b>Wednesday</b></label>
+                                                  {% for i in wednesday_schedule1 %}
+                                             {% if i.availability == "available" %}
+                                                                          <a class="btn dabutton"   onclick="setColor('button21', 'grey')" href="#">
+														  First  {{i.start_time}}
+														</a>
+                                          {% endif %}
+                                                                          {%endfor%}
+                                                                          {% for i in wednesday_schedule2 %}
+                                             {% if i.availability == "available" %}
+                                                                          <a class="btn dabutton"   onclick="setColor('button21', 'grey')" href="#">
+
+															 Second   {{i.start_time}}
+														</a>
+                                          {% endif %}
+                                                                          {%endfor%}
+                                                                         {% for i in wednesday_schedule3 %}
+                                             {% if i.availability == "available" %}
+                                                                          <a class="btn dabutton"   onclick="setColor('button21', 'grey')" href="#">
+
+															 Third   {{i.start_time}}
+														</a>
+                                          {% endif %}
+                                                                          {%endfor%}
+                                          </div>
+                                              <div>
+                                      <label><b>Thursday</b></label>
+                                                    {% for i in thursday_schedule1 %}
+                                                     {% if i.availability == "available" %}
+                                                                          <a class="btn dabutton"   onclick="setColor('button21', 'grey')" href="#">
+														  First slot {{i.start_time}}
+														</a>
+                                                  {% endif %}
+                                                                          {%endfor%}
+                                                                          {% for i in thursday_schedule2 %}
+                                                     {% if i.availability == "available" %}
+                                                                          <a class="btn dabutton"   onclick="setColor('button21', 'grey')" href="#">
+
+															 Second    {{i.start_time}}
+														</a>
+                                                  {% endif %}
+                                                                          {%endfor%}
+                                                                         {% for i in thursday_schedule3 %}
+                                                     {% if i.availability == "available" %}
+                                                                          <a class="btn dabutton"   onclick="setColor('button21', 'grey')" href="#">
+
+															 Third   {{i.start_time}}
+														</a>
+                                                  {% endif %}
+                                                                          {%endfor%}
+                                                  </div>
+                                                      <div>
+                                      <label><b>Friday</b></label>
+                                                            {% for i in friday_schedule1 %}
+                                                             {% if i.availability == "available" %}
+                                                                          <a class="btn dabutton"   onclick="setColor('button21', 'grey')" href="#">
+														  First {{i.start_time}}
+														</a>
+                                                          {% endif %}
+                                                                          {%endfor%}
+                                                                          {% for i in friday_schedule2 %}
+                                                             {% if i.availability == "available" %}
+                                                                          <a class="btn dabutton"   onclick="setColor('button21', 'grey')" href="#">
+
+															 Second   {{i.start_time}}
+														</a>
+                                                          {% endif %}
+                                                                          {%endfor%}
+                                                                         {% for i in friday_schedule3 %}
+                                                             {% if i.availability == "available" %}
+                                                                          <a class="btn dabutton"   onclick="setColor('button21', 'grey')" href="#">
+
+															 Third   {{i.start_time}}
+														</a>
+                                                          {% endif %}
+                                                                          {%endfor%}
+                                                          </div>
+                                                              <div>
+                                      <label><b>Saturday</b></label>
+                                                                    {% for i in saturday_schedule1 %}
+                                                                     {% if i.availability == "available" %}
+                                                                          <a class="btn dabutton"   onclick="setColor('button21', 'grey')" href="#">
+														  First  {{i.start_time}}
+														</a>
+                                                                  {% endif %}
+                                                                          {%endfor%}
+                                                                          {% for i in saturday_schedule2 %}
+                                                                     {% if i.availability == "available" %}
+                                                                          <a class="btn dabutton"   onclick="setColor('button21', 'grey')" href="#">
+
+															 Second    {{i.start_time}}
+														</a>
+                                                                  {% endif %}
+                                                                          {%endfor%}
+                                                                         {% for i in saturday_schedule3 %}
+                                                                     {% if i.availability == "available" %}
+                                                                          <a class="btn dabutton"   onclick="setColor('button21', 'grey')" href="#">
+
+															 Third   {{i.start_time}}
+														</a>
+                                                                  {% endif %}
+                                                                          {%endfor%}
+                                                                  </div>
+                                                                      <div>
+                                      <label><b>Sunday
+                                      </b></label>
+                                                                          {% for i in sunday_schedule1 %}
+                                                                             {% if i.availability == "available" %}
+                                                                          <a class="btn dabutton"   onclick="setColor('button21', 'grey')" href="#">
+														  First  {{i.start_time}}
+														</a>
+                                                                          {% endif %}
+                                                                          {%endfor%}
+                                                                          {% for i in sunday_schedule2 %}
+                                                                             {% if i.availability == "available" %}
+                                                                          <a class="btn dabutton"   onclick="setColor('button21', 'grey')" href="#">
+
+															 Second   {{i.start_time}}
+														</a>
+                                                                          {% endif %}
+                                                                          {%endfor%}
+                                                                         {% for i in sunday_schedule3 %}
+                                                                             {% if i.availability == "available" %}
+                                                                          <a class="btn dabutton"   onclick="setColor('button21', 'grey')" href="#">
+
+															 Third   {{i.start_time}}
+														</a>
+                                                                          {% endif %}
+                                                                          {%endfor%}
+                                  </div>
+                                 </div>
+                                 </div>
+                                </form>
+                               </div>
+                              </div>
+                             </div>
+                            </div>
+                        <!-- panel content end -->
+                        <!-- panel end -->
+                        </div>
+                    </div>
+
+
+
+
+
+
+
+
+
+
+
+                              </div>
+                            </div><!-- .col -->
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+
+
+
+
+<!--footer-->
+
+
+
+         <div class="row">
+                            <div class="col-md-12">
+                                <div class="copyright">
+                                    <p>Copyright © 2020 WeDoctor's. All rights reserved. </p>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+        </div>
+
+
+    <script src="{% static 'others/vendor/jquery-3.2.1.min.js' %}"></script>
+    <!-- Bootstrap JS-->
+    <script src="{% static 'others/vendor/bootstrap-4.1/popper.min.js' %}"></script>
+    <script src="{% static 'others/vendor/bootstrap-4.1/bootstrap.min.js' %}"></script>
+    <!-- Vendor JS       -->
+    <script src="{% static 'others/vendor/slick/slick.min.js' %}">
+    </script>
+    <script src="{% static 'others/vendor/wow/wow.min.js' %}"></script>
+    <script src="{% static 'others/vendor/animsition/animsition.min.js' %}"></script>
+    <script src="{% static 'others/vendor/bootstrap-progressbar/bootstrap-progressbar.min.js' %}">
+    </script>
+    <script src="{% static 'others/vendor/counter-up/jquery.waypoints.min.js' %}"></script>
+    <script src="{% static 'others/vendor/counter-up/jquery.counterup.min.js' %}">
+    </script>
+    <script src="{% static 'others/vendor/circle-progress/circle-progress.min.js' %}"></script>
+    <script src="{% static 'others/vendor/perfect-scrollbar/perfect-scrollbar.js' %}"></script>
+    <script src="{% static 'others/vendor/chartjs/Chart.bundle.min.js' %}"></script>
+    <script src="{% static 'others/vendor/select2/select2.min.js' %}"></script>
+
+    <!-- full calendar requires moment along jquery which is included above -->
+<!--    <script src="{% static 'others/vendor/fullcalendar-3.10.0/lib/moment.min.js' %}"></script>-->
+<!--    <script src="{% static 'others/vendor/fullcalendar-3.10.0/fullcalendar.js' %}"></script>-->
+
+    <!-- Main JS-->
+    <script src="{% static 'others/js/main.js' %}"></script>
+
+<!--    <script type="text/javascript">-->
+<!--$(function() {-->
+<!--  // for now, there is something adding a click handler to 'a'-->
+<!--  var tues = moment().day(2).hour(19);-->
+
+<!--  // build trival night events for example data-->
+<!--  var events = [-->
+<!--    {-->
+<!--      title: "Special Conference",-->
+<!--      start: moment().format('YYYY-MM-DD'),-->
+<!--      url: '#'-->
+<!--    },-->
+<!--&lt;!&ndash;    {&ndash;&gt;-->
+<!--&lt;!&ndash;      title: "Doctor Appt",&ndash;&gt;-->
+<!--&lt;!&ndash;      start: moment().hour(9).add(2, 'days').toISOString(),&ndash;&gt;-->
+<!--&lt;!&ndash;      url: '#'&ndash;&gt;-->
+<!--&lt;!&ndash;    }&ndash;&gt;-->
+
+<!--  ];-->
+
+<!--  var trivia_nights = []-->
+
+<!--  for(var i = 1; i <= 4; i++) {-->
+<!--    var n = tues.clone().add(i, 'weeks');-->
+<!--    console.log("isoString: " + n.toISOString());-->
+<!--&lt;!&ndash;    trivia_nights.push({&ndash;&gt;-->
+<!--&lt;!&ndash;      title: 'Trival Night @ Pub XYZ',&ndash;&gt;-->
+<!--&lt;!&ndash;      start: n.toISOString(),&ndash;&gt;-->
+<!--&lt;!&ndash;      allDay: false,&ndash;&gt;-->
+<!--&lt;!&ndash;      url: '#'&ndash;&gt;-->
+<!--&lt;!&ndash;    });&ndash;&gt;-->
+<!--  }-->
+
+<!--  // setup a few events-->
+<!--  $('#calendar').fullCalendar({-->
+<!--    header: {-->
+<!--      left: 'prev,next today',-->
+<!--      center: 'title',-->
+<!--      right: 'month,agendaWeek,agendaDay,listWeek'-->
+<!--    },-->
+<!--    events: events.concat(trivia_nights)-->
+<!--  });-->
+<!--});-->
+<!--    </script>-->
+
+
+
+
+<!--appointment-->
+ <script src="{% static 'doctor_schedule/js/jquery.js ' %}"></script>
+
+        <!-- Bootstrap Core JavaScript -->
+        <script src="{% static 'doctor_schedule/js/bootstrap.min.js' %}"></script>
+        <script src="{% static 'doctor_schedule/js/clock/bootstrap-clockpicker.js' %}"></script>
+        <!-- Latest compiled and minified JavaScript -->
+         <!-- script for jquery datatable start-->
+        <!-- Include Date Range Picker -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+
+<script>
+    $(document).ready(function(){
+        var date_input=$('input[name="date"]'); //our date input has the name "date"
+        var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+        date_input.datepicker({
+            format: 'yyyy/mm/dd',
+            container: container,
+            todayHighlight: true,
+            autoclose: true,
+        })
+    })
+</script>
+<script type="text/javascript">
+    $('.clockpicker').clockpicker();
+</script>
+ <script type="text/javascript">
+$(function() {
+$(".delete").click(function(){
+var element = $(this);
+var id = element.attr("id");
+var info = 'id=' + id;
+if(confirm("Are you sure you want to delete this?"))
+{
+ $.ajax({
+   type: "POST",
+   url: "deleteschedule.php",
+   data: info,
+   success: function(){
+ }
+});
+  $(this).parent().parent().fadeOut(300, function(){ $(this).remove();});
+ }
+return false;
+});
+});
+</script>
+<script type="text/javascript">
+            /*
+            Please consider that the JS part isn't production ready at all, I just code it to show the concept of merging filters and titles together !
+            */
+            $(document).ready(function(){
+                $('.filterable .btn-filter').click(function(){
+                    var $panel = $(this).parents('.filterable'),
+                    $filters = $panel.find('.filters input'),
+                    $tbody = $panel.find('.table tbody');
+                    if ($filters.prop('disabled') == true) {
+                        $filters.prop('disabled', false);
+                        $filters.first().focus();
+                    } else {
+                        $filters.val('').prop('disabled', true);
+                        $tbody.find('.no-result').remove();
+                        $tbody.find('tr').show();
+                    }
+                });
+
+                $('.filterable .filters input').keyup(function(e){
+                    /* Ignore tab key */
+                    var code = e.keyCode || e.which;
+                    if (code == '9') return;
+                    /* Useful DOM data and selectors */
+                    var $input = $(this),
+                    inputContent = $input.val().toLowerCase(),
+                    $panel = $input.parents('.filterable'),
+                    column = $panel.find('.filters th').index($input.parents('th')),
+                    $table = $panel.find('.table'),
+                    $rows = $table.find('tbody tr');
+                    /* Dirtiest filter function ever ;) */
+                    var $filteredRows = $rows.filter(function(){
+                        var value = $(this).find('td').eq(column).text().toLowerCase();
+                        return value.indexOf(inputContent) === -1;
+                    });
+                    /* Clean previous no-result if exist */
+                    $table.find('tbody .no-result').remove();
+                    /* Show all rows, hide filtered ones (never do that outside of a demo ! xD) */
+                    $rows.show();
+                    $filteredRows.hide();
+                    /* Prepend no-result row if all rows are filtered */
+                    if ($filteredRows.length === $rows.length) {
+                        $table.find('tbody').prepend($('<tr class="no-result text-center"><td colspan="'+ $table.find('.filters th').length +'">No result found</td></tr>'));
+                    }
+                });
+            });
+        </script>
+
+
+</body>
+
+</html>
+<!-- end document-->

@@ -1,0 +1,1443 @@
+
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <title>Edit Profile</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="{% static 'images/dill3.png' %}" rel="icon">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,600,700" rel="stylesheet">
+
+    <link rel="stylesheet" href="{% static 'css/open-iconic-bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+
+
+
+
+
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
+<!--      symptoms wali jquery-->
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <link rel="stylesheet" href="{% static 'css/aos.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/ionicons.min.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/bootstrap-datepicker.css' %}">
+    <link rel="stylesheet" href="{% static 'css/jquery.timepicker.css' %}">
+
+
+    <link rel="stylesheet" href="{% static 'css/flaticon.css' %}">
+    <link rel="stylesheet" href="{% static 'css/icomoon.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+
+
+<!--      styling-->
+
+       <style type="text/css">
+    	body{
+background-image: url({% static 'images/ajeeb.jpg' %});
+}
+.view-account{
+background:#FFFFFF;
+margin-top:20px;
+}
+.view-account .pro-label {
+font-size: 13px;
+padding: 4px 5px;
+position: relative;
+top: -5px;
+margin-left: 10px;
+display: inline-block
+}
+
+.view-account .side-bar {
+padding-bottom: 30px
+}
+
+.view-account .side-bar .user-info {
+text-align: center;
+margin-bottom: 15px;
+padding: 30px;
+color: #616670;
+border-bottom: 1px solid #f3f3f3
+}
+
+.view-account .side-bar .user-info .img-profile {
+width: 120px;
+height: 120px;
+margin-bottom: 15px
+}
+
+.view-account .side-bar .user-info .meta li {
+margin-bottom: 10px
+}
+
+.view-account .side-bar .user-info .meta li span {
+display: inline-block;
+width: 100px;
+margin-right: 5px;
+text-align: right
+}
+
+.view-account .side-bar .user-info .meta li a {
+color: #616670
+}
+
+.view-account .side-bar .user-info .meta li.activity {
+color: #a2a6af
+}
+
+.view-account .side-bar .side-menu {
+text-align: center
+}
+
+.view-account .side-bar .side-menu .nav {
+display: inline-block;
+margin: 0 auto
+}
+
+.view-account .side-bar .side-menu .nav>li {
+font-size: 14px;
+margin-bottom: 0;
+border-bottom: none;
+display: inline-block;
+float: left;
+margin-right: 15px;
+margin-bottom: 15px
+}
+
+.view-account .side-bar .side-menu .nav>li:last-child {
+margin-right: 0
+}
+
+.view-account .side-bar .side-menu .nav>li>a {
+display: inline-block;
+color: #9499a3;
+padding: 5px;
+border-bottom: 2px solid transparent
+}
+
+.view-account .side-bar .side-menu .nav>li>a:hover {
+color: #616670;
+background: none
+}
+
+.view-account .side-bar .side-menu .nav>li.active a {
+color: #40babd;
+border-bottom: 2px solid #40babd;
+background: none;
+border-right: none
+}
+
+.theme-2 .view-account .side-bar .side-menu .nav>li.active a {
+color: #6dbd63;
+border-bottom-color: #6dbd63
+}
+
+.theme-3 .view-account .side-bar .side-menu .nav>li.active a {
+color: #497cb1;
+border-bottom-color: #497cb1
+}
+
+.theme-4 .view-account .side-bar .side-menu .nav>li.active a {
+color: #ec6952;
+border-bottom-color: #ec6952
+}
+
+.view-account .side-bar .side-menu .nav>li .icon {
+display: block;
+font-size: 24px;
+margin-bottom: 5px
+}
+
+.view-account .content-panel {
+padding: 30px
+}
+
+.view-account .content-panel .title {
+margin-bottom: 15px;
+margin-top: 0;
+font-size: 18px
+}
+
+.view-account .content-panel .fieldset-title {
+padding-bottom: 15px;
+border-bottom: 1px solid #eaeaf1;
+margin-bottom: 30px;
+color: #616670;
+font-size: 16px
+}
+
+.view-account .content-panel .avatar .figure img {
+float: right;
+width: 64px
+}
+
+.view-account .content-panel .content-header-wrapper {
+position: relative;
+margin-bottom: 30px
+}
+
+.view-account .content-panel .content-header-wrapper .actions {
+position: absolute;
+right: 0;
+top: 0
+}
+
+.view-account .content-panel .content-utilities {
+position: relative;
+margin-bottom: 30px
+}
+
+.view-account .content-panel .content-utilities .btn-group {
+margin-right: 5px;
+margin-bottom: 15px
+}
+
+.view-account .content-panel .content-utilities .fa {
+font-size: 16px;
+margin-right: 0
+}
+
+.view-account .content-panel .content-utilities .page-nav {
+position: absolute;
+right: 0;
+top: 0
+}
+
+.view-account .content-panel .content-utilities .page-nav .btn-group {
+margin-bottom: 0
+}
+
+.view-account .content-panel .content-utilities .page-nav .indicator {
+color: #a2a6af;
+margin-right: 5px;
+display: inline-block
+}
+
+.view-account .content-panel .mails-wrapper .mail-item {
+position: relative;
+padding: 10px;
+border-bottom: 1px solid #f3f3f3;
+color: #616670;
+overflow: hidden
+}
+
+.view-account .content-panel .mails-wrapper .mail-item>div {
+float: left
+}
+
+.view-account .content-panel .mails-wrapper .mail-item .icheck {
+background-color: #fff
+}
+
+.view-account .content-panel .mails-wrapper .mail-item:hover {
+background: #f9f9fb
+}
+
+.view-account .content-panel .mails-wrapper .mail-item:nth-child(even) {
+background: #fcfcfd
+}
+
+.view-account .content-panel .mails-wrapper .mail-item:nth-child(even):hover {
+background: #f9f9fb
+}
+
+.view-account .content-panel .mails-wrapper .mail-item a {
+color: #616670
+}
+
+.view-account .content-panel .mails-wrapper .mail-item a:hover {
+color: #494d55;
+text-decoration: none
+}
+
+.view-account .content-panel .mails-wrapper .mail-item .checkbox-container,
+.view-account .content-panel .mails-wrapper .mail-item .star-container {
+display: inline-block;
+margin-right: 5px
+}
+
+.view-account .content-panel .mails-wrapper .mail-item .star-container .fa {
+color: #a2a6af;
+font-size: 16px;
+vertical-align: middle
+}
+
+.view-account .content-panel .mails-wrapper .mail-item .star-container .fa.fa-star {
+color: #f2b542
+}
+
+.view-account .content-panel .mails-wrapper .mail-item .star-container .fa:hover {
+color: #868c97
+}
+
+.view-account .content-panel .mails-wrapper .mail-item .mail-to {
+display: inline-block;
+margin-right: 5px;
+min-width: 120px
+}
+
+.view-account .content-panel .mails-wrapper .mail-item .mail-subject {
+display: inline-block;
+margin-right: 5px
+}
+
+.view-account .content-panel .mails-wrapper .mail-item .mail-subject .label {
+margin-right: 5px
+}
+
+.view-account .content-panel .mails-wrapper .mail-item .mail-subject .label:last-child {
+margin-right: 10px
+}
+
+.view-account .content-panel .mails-wrapper .mail-item .mail-subject .label a,
+.view-account .content-panel .mails-wrapper .mail-item .mail-subject .label a:hover {
+color: #fff
+}
+
+.view-account .content-panel .mails-wrapper .mail-item .mail-subject .label-color-1 {
+background: #f77b6b
+}
+
+.view-account .content-panel .mails-wrapper .mail-item .mail-subject .label-color-2 {
+background: #58bbee
+}
+
+.view-account .content-panel .mails-wrapper .mail-item .mail-subject .label-color-3 {
+background: #f8a13f
+}
+
+.view-account .content-panel .mails-wrapper .mail-item .mail-subject .label-color-4 {
+background: #ea5395
+}
+
+.view-account .content-panel .mails-wrapper .mail-item .mail-subject .label-color-5 {
+background: #8a40a7
+}
+
+.view-account .content-panel .mails-wrapper .mail-item .time-container {
+display: inline-block;
+position: absolute;
+right: 10px;
+top: 10px;
+color: #a2a6af;
+text-align: left
+}
+
+.view-account .content-panel .mails-wrapper .mail-item .time-container .attachment-container {
+display: inline-block;
+color: #a2a6af;
+margin-right: 5px
+}
+
+.view-account .content-panel .mails-wrapper .mail-item .time-container .time {
+display: inline-block;
+text-align: right
+}
+
+.view-account .content-panel .mails-wrapper .mail-item .time-container .time.today {
+font-weight: 700;
+color: #494d55
+}
+
+.drive-wrapper {
+padding: 15px;
+background: #f5f5f5;
+overflow: hidden
+}
+
+.drive-wrapper .drive-item {
+width: 130px;
+margin-right: 15px;
+display: inline-block;
+float: left
+}
+
+.drive-wrapper .drive-item:hover {
+box-shadow: 0 1px 5px rgba(0, 0, 0, .1);
+z-index: 1
+}
+
+.drive-wrapper .drive-item-inner {
+padding: 15px
+}
+
+.drive-wrapper .drive-item-title {
+margin-bottom: 15px;
+max-width: 100px;
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis
+}
+
+.drive-wrapper .drive-item-title a {
+color: #494d55
+}
+
+.drive-wrapper .drive-item-title a:hover {
+color: #40babd
+}
+
+.theme-2 .drive-wrapper .drive-item-title a:hover {
+color: #6dbd63
+}
+
+.theme-3 .drive-wrapper .drive-item-title a:hover {
+color: #497cb1
+}
+
+.theme-4 .drive-wrapper .drive-item-title a:hover {
+color: #ec6952
+}
+
+.drive-wrapper .drive-item-thumb {
+width: 100px;
+height: 80px;
+margin: 0 auto;
+color: #616670
+}
+
+.drive-wrapper .drive-item-thumb a {
+-webkit-opacity: .8;
+-moz-opacity: .8;
+opacity: .8
+}
+
+.drive-wrapper .drive-item-thumb a:hover {
+-webkit-opacity: 1;
+-moz-opacity: 1;
+opacity: 1
+}
+
+.drive-wrapper .drive-item-thumb .fa {
+display: inline-block;
+font-size: 36px;
+margin: 0 auto;
+margin-top: 20px
+}
+
+.drive-wrapper .drive-item-footer .utilities {
+margin-bottom: 0
+}
+
+.drive-wrapper .drive-item-footer .utilities li:last-child {
+padding-right: 0
+}
+
+.drive-list-view .name {
+width: 60%
+}
+
+.drive-list-view .name.truncate {
+max-width: 100px;
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis
+}
+
+.drive-list-view .type {
+width: 15px
+}
+
+.drive-list-view .date,
+.drive-list-view .size {
+max-width: 60px;
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis
+}
+
+.drive-list-view a {
+color: #494d55
+}
+
+.drive-list-view a:hover {
+color: #40babd
+}
+
+.theme-2 .drive-list-view a:hover {
+color: #6dbd63
+}
+
+.theme-3 .drive-list-view a:hover {
+color: #497cb1
+}
+
+.theme-4 .drive-list-view a:hover {
+color: #ec6952
+}
+
+.drive-list-view td.date,
+.drive-list-view td.size {
+color: #a2a6af
+}
+
+@media (max-width:767px) {
+.view-account .content-panel .title {
+    text-align: center
+}
+.view-account .side-bar .user-info {
+    padding: 0
+}
+.view-account .side-bar .user-info .img-profile {
+    width: 60px;
+    height: 60px
+}
+.view-account .side-bar .user-info .meta li {
+    margin-bottom: 5px
+}
+.view-account .content-panel .content-header-wrapper .actions {
+    position: static;
+    margin-bottom: 30px
+}
+.view-account .content-panel {
+    padding: 0
+}
+.view-account .content-panel .content-utilities .page-nav {
+    position: static;
+    margin-bottom: 15px
+}
+.drive-wrapper .drive-item {
+    width: 100px;
+    margin-right: 5px;
+    float: none
+}
+.drive-wrapper .drive-item-thumb {
+    width: auto;
+    height: 54px
+}
+.drive-wrapper .drive-item-thumb .fa {
+    font-size: 24px;
+    padding-top: 0
+}
+.view-account .content-panel .avatar .figure img {
+    float: none;
+    margin-bottom: 15px
+}
+.view-account .file-uploader {
+    margin-bottom: 15px
+}
+.view-account .mail-subject {
+    max-width: 100px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis
+}
+.view-account .content-panel .mails-wrapper .mail-item .time-container {
+    position: static
+}
+.view-account .content-panel .mails-wrapper .mail-item .time-container .time {
+    width: auto;
+    text-align: left
+}
+}
+
+@media (min-width:768px) {
+.view-account .side-bar .user-info {
+    padding: 0;
+    padding-bottom: 15px
+}
+.view-account .mail-subject .subject {
+    max-width: 200px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis
+}
+}
+
+@media (min-width:992px) {
+.view-account .content-panel {
+    min-height: 800px;
+    border-left: 1px solid #f3f3f7;
+    margin-left: 200px
+}
+.view-account .mail-subject .subject {
+    max-width: 280px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis
+}
+.view-account .side-bar {
+    position: absolute;
+    width: 200px;
+    min-height: 600px
+}
+.view-account .side-bar .user-info {
+    margin-bottom: 0;
+    border-bottom: none;
+    padding: 30px
+}
+.view-account .side-bar .user-info .img-profile {
+    width: 120px;
+    height: 120px
+}
+.view-account .side-bar .side-menu {
+    text-align: left
+}
+.view-account .side-bar .side-menu .nav {
+    display: block
+}
+.view-account .side-bar .side-menu .nav>li {
+    display: block;
+    float: none;
+    font-size: 14px;
+    border-bottom: 1px solid #f3f3f7;
+    margin-right: 0;
+    margin-bottom: 0
+}
+.view-account .side-bar .side-menu .nav>li>a {
+    display: block;
+    color: #9499a3;
+    padding: 10px 15px;
+    padding-left: 30px
+}
+.view-account .side-bar .side-menu .nav>li>a:hover {
+    background: #f9f9fb
+}
+.view-account .side-bar .side-menu .nav>li.active a {
+    background: #f9f9fb;
+    border-right: 4px solid #40babd;
+    border-bottom: none
+}
+.theme-2 .view-account .side-bar .side-menu .nav>li.active a {
+    border-right-color: #6dbd63
+}
+.theme-3 .view-account .side-bar .side-menu .nav>li.active a {
+    border-right-color: #497cb1
+}
+.theme-4 .view-account .side-bar .side-menu .nav>li.active a {
+    border-right-color: #ec6952
+}
+
+.view-account .side-bar .side-menu .nav>li .icon {
+    font-size: 24px;
+    vertical-align: middle;
+    text-align: center;
+    width: 40px;
+    display: inline-block
+}
+}
+    </style>
+
+      <script src="https://cdn.jotfor.ms/js/vendor/jquery-1.8.0.min.js?v=3.3.22032" type="text/javascript"></script>
+<script src="https://cdn.jotfor.ms/js/vendor/maskedinput.min.js?v=3.3.22032" type="text/javascript"></script>
+<script src="https://cdn.jotfor.ms/js/vendor/jquery.maskedinput.min.js?v=3.3.22032" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/punycode/1.4.1/punycode.min.js"></script>
+<script src="https://cdn.jotfor.ms/static/prototype.forms.js" type="text/javascript"></script>
+<script src="https://cdn.jotfor.ms/static/jotform.forms.js?3.3.22032" type="text/javascript"></script>
+
+<script type="text/javascript">
+	JotForm.init(function(){
+      JotForm.setPhoneMaskingValidator( 'input_5_full', '(###) ###-####' );
+      setTimeout(function() {
+          $('input_225').hint('ex: myname@example.com');
+       }, 20);
+if (window.JotForm && JotForm.accessible) $('input_119').setAttribute('tabindex',0);
+if (window.JotForm && JotForm.accessible) $('input_118').setAttribute('tabindex',0);
+	JotForm.newDefaultTheme = true;
+	JotForm.extendsNewTheme = false;
+	JotForm.newPaymentUIForNewCreatedForms = false;
+	JotForm.newPaymentUI = true;
+    /*INIT-END*/
+	});
+
+   JotForm.prepareCalculationsOnTheFly([null,{"name":"signUp","qid":"1","text":"Sign Up for Patient","type":"control_head"},{"name":"signUp2","qid":"2","text":"Sign Up","type":"control_button"},{"name":"name","qid":"3","text":"Name","type":"control_fullname"},{"name":"address4","qid":"4","text":"Address:","type":"control_address"},{"name":"contactNumber","qid":"5","text":"Contact Number:","type":"control_phone"},{"name":"dateOf","qid":"6","text":"Date of Birth","type":"control_birthdate"},null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,{"name":"clickTo75","qid":"75","text":"","type":"control_text"},null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,{"name":"clickTo108","qid":"108","text":"","type":"control_text"},null,null,null,null,null,null,null,null,null,{"name":"heightinches118","qid":"118","text":"Height (inches)","type":"control_textbox"},{"name":"weightkg","qid":"119","text":"Weight (kg)","type":"control_textbox"},null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,{"name":"email","qid":"225","subLabel":"example@example.com","text":"E-mail","type":"control_email"},null,null,null,null,null,{"name":"sex","qid":"231","text":"Sex","type":"control_dropdown"},null,null,null,{"description":"","name":"password","qid":"235","subLabel":"","text":"Password","type":"control_email"},{"description":"","name":"confirmPassword","qid":"236","subLabel":"","text":"Confirm Password","type":"control_email"}]);
+   setTimeout(function() {
+JotForm.paymentExtrasOnTheFly([null,{"name":"signUp","qid":"1","text":"Sign Up for Patient","type":"control_head"},{"name":"signUp2","qid":"2","text":"Sign Up","type":"control_button"},{"name":"name","qid":"3","text":"Name","type":"control_fullname"},{"name":"address4","qid":"4","text":"Address:","type":"control_address"},{"name":"contactNumber","qid":"5","text":"Contact Number:","type":"control_phone"},{"name":"dateOf","qid":"6","text":"Date of Birth","type":"control_birthdate"},null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,{"name":"clickTo75","qid":"75","text":"","type":"control_text"},null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,{"name":"clickTo108","qid":"108","text":"","type":"control_text"},null,null,null,null,null,null,null,null,null,{"name":"heightinches118","qid":"118","text":"Height (inches)","type":"control_textbox"},{"name":"weightkg","qid":"119","text":"Weight (kg)","type":"control_textbox"},null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,{"name":"email","qid":"225","subLabel":"example@example.com","text":"E-mail","type":"control_email"},null,null,null,null,null,{"name":"sex","qid":"231","text":"Sex","type":"control_dropdown"},null,null,null,{"description":"","name":"password","qid":"235","subLabel":"","text":"Password","type":"control_email"},{"description":"","name":"confirmPassword","qid":"236","subLabel":"","text":"Confirm Password","type":"control_email"}]);}, 20);
+</script>
+
+
+
+
+
+
+
+  </head>
+  <body>
+
+	  <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+	    <div class="container">
+             <img src="{% static 'images/dill3.png' %} ">
+	      <a class="navbar-brand"  href="{% url 'doctors' %}">We<span>Doctor's</span></a>
+	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+	        <span class="oi oi-menu"></span> Menu
+	      </button>
+
+	      <div class="collapse navbar-collapse" id="ftco-nav">
+	        <ul class="navbar-nav ml-auto">
+	          <li class="nav-item "><a href=" {% url 'doctors' %} " class="nav-link" >Home</a></li>
+	          <li class="nav-item "><a href= "{% url 'calendar' %}"  class="nav-link">Set Avaliability</a></li>
+	          <li class="nav-item"><a href="{% url 'mapdoctor' %}" class="nav-link">Maps</a></li>
+	          <li class="nav-item "><a href="{% url 'livecall_doctor' %}" class="nav-link">Live Call</a></li>
+<!--	          <li class="nav-item"><a href="{% url 'blog' %}" class="nav-link">Blog</a></li>-->
+<!--	          <li class="nav-item"><a href="{% url 'mappatient' %}" class="nav-link">Area of Disease</a></li>-->
+<!--				 <li class="nav-item"><a href="#" class="nav-link">Area of Disease</a></li>-->
+<!--	          <li class="nav-item cta"> <a href="{% url 'login' %}" class="nav-link" data-toggle="modal" data-target="#modalRequest"><span>Sign In</span></a></li>-->
+
+            </ul>
+          </div>
+
+			<form  action="/singnout/" method="POST">
+				 {% csrf_token %}
+			 <input type="submit" value="Sign out" class="btn btn-primary">
+				</form>
+	    </div>
+
+      </nav>
+    <!-- END nav -->
+<section class="ftco-section ftco-services">
+
+    <div class="container">
+    <div class="view-account">
+        <section class="module">
+            <div class="module-inner">
+                <div class="side-bar">
+                    <div class="user-info">
+                        {%if not doctor.image %}
+                        <img class="img-profile img-circle img-responsive center-block" src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="">
+                        {%endif%}
+                        {%if doctor.image%}
+                        <img class="img-profile img-circle img-responsive center-block" src="{{doctor.image.url}}" alt="">
+                        {%endif%}
+                        <ul class="meta list list-unstyled">
+
+                            <li class="name">{{doctor.first_name }} {{doctor.last_name}}
+<!--                                <label class="label label-info">UX Designer</label>-->
+                            </li>
+                            <li class="email"><a href="#">{{doctor.email}}</a></li>
+<!--                            <li class="activity">Last logged in: Today at 2:18pm</li>-->
+                        </ul>
+                    </div>
+<!--            		<nav class="side-menu">-->
+<!--        				<ul class="nav">-->
+<!--        					<li class="active"><a href="#"><span class="fa fa-user"></span> Profile</a></li>-->
+<!--        					<li><a href="#"><span class="fa fa-cog"></span> Settings</a></li>-->
+<!--        					<li><a href="#"><span class="fa fa-credit-card"></span> Billing</a></li>-->
+<!--        					<li><a href="#"><span class="fa fa-envelope"></span> Messages</a></li>-->
+
+<!--        					<li><a href="user-drive.html"><span class="fa fa-th"></span> Drive</a></li>-->
+<!--        					<li><a href="#"><span class="fa fa-clock-o"></span> Reminders</a></li>-->
+<!--        				</ul>-->
+<!--        			</nav>-->
+                </div>
+                <div class="content-panel">
+                    <h2 class="title">Doctor Profile</h2>
+                    <form class="form-horizontal"  action="/update_doctor_profile/" method="post" enctype="multipart/form-data" >
+                        {% csrf_token %}
+                        <span class="fieldset">
+                            <h3 class="fieldset-title">Doctor's Personal Information</h3>
+                            <div class="form-group avatar">
+                                <figure class="figure col-md-2 col-sm-3 col-xs-12">
+                                    {%if not doctor.image %}
+                                    <img class="img-rounded img-responsive" src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="">
+                                     {% endif%}
+                                     {%if doctor.image %}
+                                     <img class="img-rounded img-responsive" src="{{doctor.image.url}}" alt="">
+                                    {% endif %}
+
+
+                                </figure>
+
+                                <div class="form-inline col-md-10 col-sm-9 col-xs-12">
+                                    <input type="file" class="file-uploader pull-left" name="profile_image" id="profile_image">
+                                    <button type="submit" class="btn btn-sm btn-default-alt pull-left">Update Image</button>
+                                </div>
+                            </div>
+
+<!--                            First NAme-->
+                            <div>
+                                <span>
+                            <div class="form-group">
+                                <label class="col-md-2 col-sm-3 col-xs-12 control-label">First Name</label>
+                                <div class="col-md-10 col-sm-9 col-xs-12">
+                                    <input onkeypress="return /[a-z]/i.test(event.key)" type="text" class="form-control" value="{{doctor.first_name}}">
+                                </div>
+                            </div>
+                                    </span>
+                                <span>
+<!--                                LAst NAme-->
+                            <div class="form-group">
+                                <label class="col-md-2 col-sm-3 col-xs-12 control-label">Last Name</label>
+                                <div class="col-md-10 col-sm-9 col-xs-12">
+                                    <input onkeypress="return /[a-z]/i.test(event.key)" type="text" class="form-control" value="{{doctor.last_name}}">
+                                </div>
+                            </div>
+                                    </span>
+                                </div>
+<!--                            Date of Birth-->
+                            <div class="form-group">
+                                <label class="col-md-2 col-sm-3 col-xs-12 control-label">Date of Birth  </label>
+                                <span class="form-sub-label-container" style="vertical-align:top">
+              <select name="q6_dateOf[month]" id="input_6_month"  class="form-dropdown validate[required]" data-component="birthdate-month" aria-labelledby="label_6 sublabel_6_month">
+                <option>{{doctor.birth_month}} </option>
+                <option value="January"> January </option>
+                <option value="February"> February </option>
+                <option value="March"> March </option>
+                <option value="April"> April </option>
+                <option value="May"> May </option>
+                <option value="June"> June </option>
+                <option value="July"> July </option>
+                <option value="August"> August </option>
+                <option value="September"> September </option>
+                <option value="October"> October </option>
+                <option value="November"> November </option>
+                <option value="December"> December </option>
+              </select>
+              <label class="form-sub-label" for="input_6_month" id="sublabel_6_month" style="min-height:13px" aria-hidden="false"> Month </label>
+            </span>
+
+
+                                <span class="form-sub-label-container" style="vertical-align:top">
+              <select name="q6_dateOf[day]" id="input_6_day" class="form-dropdown validate[required]" data-component="birthdate-day" aria-labelledby="label_6 sublabel_6_day">
+                 <option>{{doctor.birth_day}} </option>
+                <option value="1"> 1 </option>
+                <option value="2"> 2 </option>
+                <option value="3"> 3 </option>
+                <option value="4"> 4 </option>
+                <option value="5"> 5 </option>
+                <option value="6"> 6 </option>
+                <option value="7"> 7 </option>
+                <option value="8"> 8 </option>
+                <option value="9"> 9 </option>
+                <option value="10"> 10 </option>
+                <option value="11"> 11 </option>
+                <option value="12"> 12 </option>
+                <option value="13"> 13 </option>
+                <option value="14"> 14 </option>
+                <option value="15"> 15 </option>
+                <option value="16"> 16 </option>
+                <option value="17"> 17 </option>
+                <option value="18"> 18 </option>
+                <option value="19"> 19 </option>
+                <option value="20"> 20 </option>
+                <option value="21"> 21 </option>
+                <option value="22"> 22 </option>
+                <option value="23"> 23 </option>
+                <option value="24"> 24 </option>
+                <option value="25"> 25 </option>
+                <option value="26"> 26 </option>
+                <option value="27"> 27 </option>
+                <option value="28"> 28 </option>
+                <option value="29"> 29 </option>
+                <option value="30"> 30 </option>
+                <option value="31"> 31 </option>
+              </select>
+              <label class="form-sub-label" for="input_6_day" id="sublabel_6_day" style="min-height:13px" aria-hidden="false"> Day </label>
+            </span>
+
+
+                                <span class="form-sub-label-container" style="vertical-align:top">
+              <select name="q6_dateOf[year]" id="input_6_year" class="form-dropdown validate[required]" data-component="birthdate-year" aria-labelledby="label_6 sublabel_6_year">
+                  <option>{{doctor.birth_year}} </option>
+                <option value="2020"> 2020 </option>
+                <option value="2019"> 2019 </option>
+                <option value="2018"> 2018 </option>
+                <option value="2017"> 2017 </option>
+                <option value="2016"> 2016 </option>
+                <option value="2015"> 2015 </option>
+                <option value="2014"> 2014 </option>
+                <option value="2013"> 2013 </option>
+                <option value="2012"> 2012 </option>
+                <option value="2011"> 2011 </option>
+                <option value="2010"> 2010 </option>
+                <option value="2009"> 2009 </option>
+                <option value="2008"> 2008 </option>
+                <option value="2007"> 2007 </option>
+                <option value="2006"> 2006 </option>
+                <option value="2005"> 2005 </option>
+                <option value="2004"> 2004 </option>
+                <option value="2003"> 2003 </option>
+                <option value="2002"> 2002 </option>
+                <option value="2001"> 2001 </option>
+                <option value="2000"> 2000 </option>
+                <option value="1999"> 1999 </option>
+                <option value="1998"> 1998 </option>
+                <option value="1997"> 1997 </option>
+                <option value="1996"> 1996 </option>
+                <option value="1995"> 1995 </option>
+                <option value="1994"> 1994 </option>
+                <option value="1993"> 1993 </option>
+                <option value="1992"> 1992 </option>
+                <option value="1991"> 1991 </option>
+                <option value="1990"> 1990 </option>
+                <option value="1989"> 1989 </option>
+                <option value="1988"> 1988 </option>
+                <option value="1987"> 1987 </option>
+                <option value="1986"> 1986 </option>
+                <option value="1985"> 1985 </option>
+                <option value="1984"> 1984 </option>
+                <option value="1983"> 1983 </option>
+                <option value="1982"> 1982 </option>
+                <option value="1981"> 1981 </option>
+                <option value="1980"> 1980 </option>
+                <option value="1979"> 1979 </option>
+                <option value="1978"> 1978 </option>
+                <option value="1977"> 1977 </option>
+                <option value="1976"> 1976 </option>
+                <option value="1975"> 1975 </option>
+                <option value="1974"> 1974 </option>
+                <option value="1973"> 1973 </option>
+                <option value="1972"> 1972 </option>
+                <option value="1971"> 1971 </option>
+                <option value="1970"> 1970 </option>
+                <option value="1969"> 1969 </option>
+                <option value="1968"> 1968 </option>
+                <option value="1967"> 1967 </option>
+                <option value="1966"> 1966 </option>
+                <option value="1965"> 1965 </option>
+                <option value="1964"> 1964 </option>
+                <option value="1963"> 1963 </option>
+                <option value="1962"> 1962 </option>
+                <option value="1961"> 1961 </option>
+                <option value="1960"> 1960 </option>
+                <option value="1959"> 1959 </option>
+                <option value="1958"> 1958 </option>
+                <option value="1957"> 1957 </option>
+                <option value="1956"> 1956 </option>
+                <option value="1955"> 1955 </option>
+                <option value="1954"> 1954 </option>
+                <option value="1953"> 1953 </option>
+                <option value="1952"> 1952 </option>
+                <option value="1951"> 1951 </option>
+                <option value="1950"> 1950 </option>
+                <option value="1949"> 1949 </option>
+                <option value="1948"> 1948 </option>
+                <option value="1947"> 1947 </option>
+                <option value="1946"> 1946 </option>
+                <option value="1945"> 1945 </option>
+                <option value="1944"> 1944 </option>
+                <option value="1943"> 1943 </option>
+                <option value="1942"> 1942 </option>
+                <option value="1941"> 1941 </option>
+                <option value="1940"> 1940 </option>
+                <option value="1939"> 1939 </option>
+                <option value="1938"> 1938 </option>
+                <option value="1937"> 1937 </option>
+                <option value="1936"> 1936 </option>
+                <option value="1935"> 1935 </option>
+                <option value="1934"> 1934 </option>
+                <option value="1933"> 1933 </option>
+                <option value="1932"> 1932 </option>
+                <option value="1931"> 1931 </option>
+                <option value="1930"> 1930 </option>
+                <option value="1929"> 1929 </option>
+                <option value="1928"> 1928 </option>
+                <option value="1927"> 1927 </option>
+                <option value="1926"> 1926 </option>
+                <option value="1925"> 1925 </option>
+                <option value="1924"> 1924 </option>
+                <option value="1923"> 1923 </option>
+                <option value="1922"> 1922 </option>
+                <option value="1921"> 1921 </option>
+                <option value="1920"> 1920 </option>
+              </select>
+              <label class="form-sub-label" for="input_6_year" id="sublabel_6_year" style="min-height:13px" aria-hidden="false"> Year </label>
+            </span>
+
+                            </div>
+
+<!--                            Sex-->
+
+                            <div class="form-group">
+
+                                 <label class="col-md-2 col-sm-3 col-xs-12 control-label" id="label_231" >Sex     </label>
+
+
+          <select    style="width:310px" data-component="dropdown"  aria-labelledby="label_231">
+            <option value=""> {{doctor.sex}}  </option>
+            <option value="Male"> Male </option>
+            <option value="Female"> Female </option>
+            <option value="N/A"> N/A </option>
+          </select>
+</div>
+
+
+<!--Contact number-->
+<div class="form-group">
+<!--                    <li class="form-line jf-required" data-type="control_phone" id="id_5">-->
+        <label class="col-md-2 col-sm-3 col-xs-12 control-label" id="label_5" for="input_5_full">Contact No:</label>
+<!--        <div id="cid_5" class="form-input jf-required" data-layout="half">-->
+<!--          <span class="form-sub-label-container" style="vertical-align:top">-->
+            <input  type="tel" onkeypress="return /[0-9]/i.test(event.key)" maxlength="10"  id="input_5_full" name="q5_contactNumber[full]" data-type="mask-number" class="mask-phone-number form-textbox validate[required, Fill Mask] " style="width:310px" data-masked="true" value="{{doctor.contact_no}}" placeholder="(0000000000)" data-component="phone" aria-labelledby="label_5"  />
+<!--            <label class="form-sub-label is-empty" for="input_5_full" id="sublabel_5_masked" style="min-height:13px" aria-hidden="false">  </label>-->
+<!--          </span>-->
+<!--        </div>-->
+<!--      </li>-->
+
+
+</div>
+
+
+
+
+
+<!--Email-->
+
+<!--                            <div class="form-group">-->
+<!--                                <label class="col-md-2 col-sm-3 col-xs-12 control-label">Last Name</label>-->
+<!--                                <div class="col-md-10 col-sm-9 col-xs-12">-->
+<!--                                    <input type="text" class="form-control" value="Sanders">-->
+<!--                                </div>-->
+<!--                            </div>-->
+ <div class="form-group">
+                                <label class="col-md-2  col-sm-3 col-xs-12 control-label">Email</label>
+                                <div class="col-md-10 col-sm-9 col-xs-12">
+                                    <input type="email" class="form-control" value="{{doctor.email}}">
+
+                                </div>
+                            </div>
+                        </fieldset>
+<!--                            Email-->
+                        <fieldset class="fieldset">
+<!--                            <h3 class="fieldset-title">Contact Info</h3>-->
+
+<!--                            Password-->
+                            <div class="form-group">
+                                <label class="col-md-2  col-sm-3 col-xs-12 control-label">Password </label>
+                                <div class="col-md-10 col-sm-9 col-xs-12">
+                                    <input type="text" class="form-control " value="{{doctor.password}}" >
+<!--                                    <p class="help-block">Your twitter username</p>-->
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2  col-sm-3 col-xs-12 control-label">Confirm Pass</label>
+                                <div class="col-md-10 col-sm-9 col-xs-12">
+                                    <input type="text" class="form-control" value="{{doctor.confirm_password}}">
+<!--                                    <p class="help-block">eg. https://www.linkedin.com/in/yourname</p>-->
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-2  col-sm-3 col-xs-12 control-label">Street Address</label>
+                                <div class="col-md-10 col-sm-9 col-xs-12">
+                                    <input type="text" class="form-control" value="{{doctor.full_address}}" >
+<!--                                    <p class="help-block">eg. https://www.linkedin.com/in/yourname</p>-->
+                                </div>
+                            </div>
+                            <div>
+                                <label class="col-md-2  col-sm-3 col-xs-12 control-label">City</label>
+<!--                                <div class="col-md-10 col-sm-9 col-xs-12">-->
+<!--                                    <input type="text" class="form-control" >-->
+<!--                                    <p class="help-block">eg. https://www.linkedin.com/in/yourname</p>-->
+                                    <select class="form-dropdown" id="input_4_city" name="q4_address4[city]" style="width:310px" data-component="dropdown" aria-labelledby="label_4 sublabel_4_city">
+           <option value="">{{doctor.city}} </option>
+            <option value="Karachi"> Karachi</option>
+            <option value="Lahore"> Lahore</option>
+            <option value="Sialkot City"> Sialkot City</option>
+            <option value="Faisalabad"> Faisalabad</option>
+                   <option value="Rawalpindi"> Rawalpindi</option>
+
+
+  <option value="Peshawar">Peshawar</option>
+<option value="Saidu Sharif">Saidu Sharif</option>
+<option value="Multan">Multan</option>
+<option value="Gujranwala">Gujranwala</option>
+<option value="Islamabad">Islamabad</option>
+<option value="Quetta">Quetta</option>
+<option value="Bahawalpur">Bahawalpur</option>
+<option value="Sargodha">Sargodha</option>
+<option value="New Mirpur">New Mirpur</option>
+<option value="Chiniot">Chiniot</option>
+<option value="Sukkur">Sukkur</option>
+<option value="Larkana">Larkana</option>
+<option value="Shekhupura">Shekhupura</option>
+<option value="Jhang City">Jhang City</option>
+<option value="Rahimyar Khan">Rahimyar Khan</option>
+<option value="Gujrat">Gujrat</option>
+<option value="Kasur">Kasur</option>
+<option value="Mardan">Mardan</option>
+<option value="Mingaora">Mingaora</option>
+<option value="Dera Ghazi Khan">Dera Ghazi Khan</option>
+<option value="Nawabshah">Nawabshah</option>
+<option value="Sahiwal">Sahiwal</option>
+<option value="Mirpur Khas">Mirpur Khas</option>
+<option value="Okara">Okara</option>
+<option value="Mandi Burewala">Mandi Burewala</option>
+<option value="Jacobabad">Jacobabad</option>
+<option value="Saddiqabad">Saddiqabad</option>
+<option value="Kohat">Kohat</option>
+<option value="Muridke">Muridke</option>
+<option value="Muzaffargarh">Muzaffargarh</option>
+<option value="Khanpur">Khanpur</option>
+<option value="Gojra">Gojra</option>
+<option value="Mandi Bahauddin">Mandi Bahauddin</option>
+<option value="Abbottabad">Abbottabad</option>
+<option value="Dadu">Dadu</option>
+<option value="Khuzdar">Khuzdar</option>
+<option value="Pakpattan">Pakpattan</option>
+<option value="Tando Allahyar">Tando Allahyar</option>
+<option value="Vihari">Vihari</option>
+<option value="Jaranwala">Jaranwala</option>
+<option value="Kamalia">Kamalia</option>
+<option value="Kot Addu">Kot Addu</option>
+<option value="Nowshera">Nowshera</option>
+<option value="Swabi">Swabi</option>
+<option value="Dera Ismail Khan">Dera Ismail Khan</option>
+<option value="Chaman">Chaman</option>
+<option value="Charsadda">Charsadda</option>
+<option value="Kandhkot">Kandhkot</option>
+<option value="Hasilpur">Hasilpur</option>
+<option value="Muzaffarabad">Muzaffarabad</option>
+<option value="Mianwali">Mianwali</option>
+<option value="Jalalpur Jattan">Jalalpur Jattan</option>
+<option value="Bhakkar">Bhakkar</option>
+<option value="Zhob">Zhob</option>
+<option value="Kharian">Kharian</option>
+<option value="Mian Channun">Mian Channun</option>
+<option value="Jamshoro">Jamshoro</option>
+<option value="Pattoki">Pattoki</option>
+<option value="Harunabad">Harunabad</option>
+<option value="Toba Tek Singh">Toba Tek Singh</option>
+<option value="Shakargarh">Shakargarh</option>
+<option value="Hujra Shah Muqim">Hujra Shah Muqim</option>
+<option value="Kabirwala">Kabirwala</option>
+<option value="Mansehra">Mansehra</option>
+<option value="Lala Musa">Lala Musa</option>
+<option value="Nankana Sahib">Nankana Sahib</option>
+<option value="Bannu">Bannu</option>
+<option value="Timargara">Timargara</option>
+<option value="Parachinar">Parachinar</option>
+<option value="Gwadar">Gwadar</option>
+<option value="Abdul Hakim">Abdul Hakim</option>
+<option value="Hassan Abdal">Hassan Abdal</option>
+<option value="Tank">Tank</option>
+<option value="Hangu">Hangu</option>
+<option value="Risalpur Cantonment">Risalpur Cantonment</option>
+<option value="Karak">Karak</option>
+<option value="Kundian">Kundian</option>
+<option value="Umarkot">Umarkot</option>
+<option value="Chitral">Chitral</option>
+<option value="Dainyor">Dainyor</option>
+<option value="Kulachi">Kulachi</option>
+<option value="Kotli">Kotli</option>
+<option value="Gilgit">Gilgit</option>
+<option value="Hyderabad City">Hyderabad City</option>
+<option value="Narowal">Narowal</option>
+<option value="Khairpur Mir’s">Khairpur Mir’s</option>
+<option value="Khanewal">Khanewal</option>
+<option value="Jhelum">Jhelum</option>
+<option value="Haripur">Haripur</option>
+<option value="Shikarpur">Shikarpur</option>
+<option value="Rawala Kot">Rawala Kot</option>
+<option value="Hafizabad">Hafizabad</option>
+<option value="Lodhran">Lodhran</option>
+<option value="Malakand">Malakand</option>
+<option value="Attock City">Attock City</option>
+<option value="Batgram">Batgram</option>
+<option value="Matiari">Matiari</option>
+<option value="Ghotki">Ghotki</option>
+<option value="Naushahro Firoz">Naushahro Firoz</option>
+<option value="Alpurai">Alpurai</option>
+<option value="Bagh">Bagh</option>
+<option value="Daggar">Daggar</option>
+<option value="Bahawalnagar">Bahawalnagar</option>
+<option value="Leiah">Leiah</option>
+<option value="Tando Muhammad Khan">Tando Muhammad Khan</option>
+<option value="Chakwal">Chakwal</option>
+<option value="Khushab">Khushab</option>
+<option value="Badin">Badin</option>
+<option value="Lakki">Lakki</option>
+<option value="Rajanpur">Rajanpur</option>
+<option value="Dera Allahyar">Dera Allahyar</option>
+<option value="Shahdad Kot">Shahdad Kot</option>
+<option value="Pishin">Pishin</option>
+<option value="Sanghar">Sanghar</option>
+<option value="Upper Dir">Upper Dir</option>
+<option value="Thatta">Thatta</option>
+<option value="Dera Murad Jamali">Dera Murad Jamali</option>
+<option value="Kohlu">Kohlu</option>
+<option value="Mastung">Mastung</option>
+<option value="Dasu">Dasu</option>
+<option value="Athmuqam">Athmuqam</option>
+<option value="Loralai">Loralai</option>
+<option value="Barkhan">Barkhan</option>
+<option value="Musa Khel Bazar">Musa Khel Bazar</option>
+<option value="Ziarat">Ziarat</option>
+<option value="Gandava">Gandava</option>
+<option value="Sibi">Sibi</option>
+<option value="Dera Bugti">Dera Bugti</option>
+<option value="Eidgah">Eidgah</option>
+<option value="Turbat">Turbat</option>
+<option value="Uthal">Uthal</option>
+<option value="Khuzdar">Khuzdar</option>
+<option value="Chilas">Chilas</option>
+<option value="Kalat">Kalat</option>
+<option value="Panjgur">Panjgur</option>
+<option value="Gakuch">Gakuch</option>
+<option value="Qila Saifullah">Qila Saifullah</option>
+<option value="Kharan">Kharan</option>
+<option value="Aliabad">Aliabad</option>
+<option value="Awaran">Awaran</option>
+<option value="Dalbandin">Dalbandin</option>
+</select>
+<!--                                </div>-->
+                            </div>
+
+<div class="form-group">
+                                <label class="col-md-2 col-sm-3 col-xs-12 control-label">Province</label>
+                                <span class="form-sub-label-container" style="vertical-align:top">
+              <select name="q6_dateOf[month]" id="province" class="form-dropdown validate[required]" data-component="birthdate-month" style="width:310px" aria-labelledby="label_6 sublabel_6_month" >
+                <option>  {{doctor.province}} </option>
+                <option value="January"> Punjab </option>
+                <option value="February"> Balochistan </option>
+                <option value="March"> KPK </option>
+                <option value="April"> Sindh </option>
+
+              </select>
+<!--              <label class="form-sub-label" for="input_6_month" id="sublabel_6_month" style="min-height:13px" aria-hidden="false"> Month </label>-->
+
+                              <br>
+                                <label class="col-md-2  col-sm-3 col-xs-12 control-label"><br>Zipcode</br></label>
+                                <div class="col-md-10 col-sm-9 col-xs-12">
+                                    <input onkeypress="return /[0-9]/i.test(event.key)" minlength="5" maxlength="5" type="tel" class="form-control" value="{{doctor.zip_cod}}" >
+<!--                                    <p class="help-block">eg. https://www.linkedin.com/in/yourname</p>-->
+                                </div>
+                                     </span>
+                            </div>
+
+
+
+                            <div class="form-group">
+                                <label class="col-md-2  col-sm-3 col-xs-12 control-label">Field Of Specialization</label>
+<!--                                <div class="col-md-10 col-sm-9 col-xs-12">-->
+<!--                                    <input type="number" class="form-control" >-->
+<!--                                    <p class="help-block">Your twitter username</p>-->
+                               <select class="form-dropdown " id="input_237" name="input_237" style="width:310px" data-component="dropdown"  aria-labelledby="label_237">
+            <option value=""> {{doctor.spc}} </option>
+            <option value="Drug Reaction"> Drug Reaction </option>
+            <option value="Malaria"> Malaria </option>
+            <option value="Allergy"> Allergy </option>
+            <option value="Hypothyroidism"> Hypothyroidism </option>
+            <option value="Psoriasis"> Psoriasis </option>
+            <option value="GERD"> GERD </option>
+            <option value="Chronic cholestasis"> Chronic cholestasis </option>
+            <option value="hepatitis A"> hepatitis A </option>
+            <option value="Osteoarthristis"> Osteoarthristis </option>
+            <option value="(vertigo) Paroymsal  Positional Vertigo"> (vertigo) Paroymsal Positional Vertigo </option>
+            <option value="Hypoglycemia"> Hypoglycemia </option>
+            <option value="Acne"> Acne </option>
+            <option value="Diabetes "> Diabetes </option>
+            <option value="Impetigo"> Impetigo </option>
+            <option value="Hypertension "> Hypertension </option>
+            <option value="Peptic ulcer diseae"> Peptic ulcer diseae </option>
+            <option value="Dimorphic hemmorhoids(piles)"> Dimorphic hemmorhoids(piles) </option>
+            <option value="Common Cold"> Common Cold </option>
+            <option value="Chicken pox"> Chicken pox </option>
+            <option value="Cervical spondylosis"> Cervical spondylosis </option>
+            <option value="Hyperthyroidism"> Hyperthyroidism </option>
+            <option value="Urinary tract infection"> Urinary tract infection </option>
+            <option value="Varicose veins"> Varicose veins </option>
+            <option value="AIDS"> AIDS </option>
+            <option value="Paralysis (brain hemorrhage)"> Paralysis (brain hemorrhage) </option>
+            <option value="Typhoid"> Typhoid </option>
+            <option value="Hepatitis B"> Hepatitis B </option>
+            <option value="Fungal infection"> Fungal infection </option>
+            <option value="Hepatitis C"> Hepatitis C </option>
+            <option value="Migraine"> Migraine </option>
+            <option value="Bronchial Asthma"> Bronchial Asthma </option>
+            <option value="Alcoholic hepatitis"> Alcoholic hepatitis </option>
+            <option value="Jaundice"> Jaundice </option>
+            <option value="Hepatitis E"> Hepatitis E </option>
+            <option value="Dengue"> Dengue </option>
+            <option value="Hepatitis D"> Hepatitis D </option>
+            <option value="Heart attack"> Heart attack </option>
+            <option value="Pneumonia"> Pneumonia </option>
+            <option value="Arthritis"> Arthritis </option>
+            <option value="Gastroenteritis"> Gastroenteritis </option>
+            <option value="Tuberculosis"> Tuberculosis </option>
+            <option value="">  </option>
+          </select>
+<!--                                </div>-->
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-2  col-sm-3 col-xs-12 control-label">Licence No.</label>
+                                <div class="col-md-10 col-sm-9 col-xs-12">
+                                    <input type="text" onkeypress="return /[0-9]/i.test(event.key)" minlength="5" maxlength="5" class="form-control" value="{{doctor.license}}">
+<!--                                    <p class="help-block">Your twitter username</p>-->
+
+                                </div>
+                            </div>
+                        </fieldset>
+                        <hr>
+                        <div class="form-group">
+                            <div class="col-md-10 col-sm-9 col-xs-12 col-md-push-2 col-sm-push-3 col-xs-push-0">
+                                <input class="btn btn-primary" type="submit" value="Update Profile">
+                            </div>
+                        </div>
+                        </span>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+
+
+
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <footer class="ftco-footer ftco-bg-dark ftco-section">
+      <div class="container">
+        <div class="row mb-5">
+          <div class="col-md-3">
+            <div class="ftco-footer-widget mb-4">
+              <h2 class="ftco-heading-2">WeDoctor's.</h2>
+              <p>WeDoctor's is an online audio/video consultation platform that allows real-time interaction between a doctor and patient. WeDoctor's aims to provide virtual healthcare focusing on convenience and comfort. It is the future of healthcare and obviates barriers to efficiency and access.</p>
+            </div>
+            <ul class="ftco-footer-social list-unstyled float-md-left float-lft ">
+              <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
+              <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
+              <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
+            </ul>
+          </div>
+          <div class="col-md-2">
+            <div class="ftco-footer-widget mb-4 ml-md-5">
+              <h2 class="ftco-heading-2">Quick Links</h2>
+              <ul class="list-unstyled">
+                <li><a href="{% url 'about' %}" class="py-2 d-block">About</a></li>
+<!--                <li><a href="#" class="py-2 d-block">Features</a></li>-->
+<!--                <li><a href="#" class="py-2 d-block">Projects</a></li>-->
+<!--                <li><a href="#" class="py-2 d-block">Blog</a></li>-->
+                <li><a href="{% url 'contact' %}" class="py-2 d-block">Contact</a></li>
+              </ul>
+            </div>
+          </div>
+
+
+
+          <div class="col-md-3">
+            <div class="ftco-footer-widget mb-4">
+            	<h2 class="ftco-heading-2">Office</h2>
+            	<div class="block-23 mb-3">
+	              <ul>
+	                <li><span class="icon icon-map-marker"></span><span class="text">Fast NAtional University of Computer and Emerging Sciences</span></li>
+	                <li><a href="#"><span class="icon icon-phone"></span><span class="text">+92-346-6211392</span></a></li>
+	                <li><a href="#"><span class="icon icon-envelope"></span><span class="text">wedoctors@gmail.com</span></a></li>
+	              </ul>
+	            </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 text-center">
+
+            <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved by WeDoctor's
+  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+
+
+  <!-- loader -->
+  <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="modalRequest" tabindex="-1" role="dialog" aria-labelledby="modalRequestLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <form class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalRequestLabel">Sign In</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form action="#">
+            <div class="form-group">
+              <!-- <label for="appointment_name" class="text-black">Full Name</label> -->
+              <input type="text" class="form-control" id="appointment_email" placeholder="Email" required>
+            </div>
+            <div class="form-group">
+              <!-- <label for="appointment_email" class="text-black">Email</label> -->
+              <input type="password" class="form-control" id="appointment_password" placeholder="Password" required>
+            </div>
+            </form>
+        </div>
+		  <label style="text-align:center;">
+        <input type="checkbox" checked="checked" name="remember" > Remember me
+           </label>
+            <div class="form-group" style="text-align:center;">
+              <input type="submit" value="Sign In" class="btn btn-primary">
+            </div>
+
+	  </form>
+        </div>
+
+      </div>
+
+
+      <script src="{% static 'js/jquery.min.js' %}"></script>
+  <script src="{% static 'js/jquery-migrate-3.0.1.min.js' %}"></script>
+  <script src="{% static 'js/popper.min.js' %}"></script>
+  <script src="{% static 'js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'js/jquery.easing.1.3.js' %}"></script>
+  <script src="{% static 'js/jquery.waypoints.min.js' %}"></script>
+  <script src="{% static 'js/jquery.stellar.min.js' %}"></script>
+  <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+  <script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
+  <script src="{% static 'js/aos.js' %}"></script>
+  <script src="{% static 'js/jquery.animateNumber.min.js' %}"></script>
+  <script src="{% static 'js/bootstrap-datepicker.js' %}"></script>
+  <script src="{% static 'js/jquery.timepicker.min.js' %}"></script>
+  <script src="{% static 'js/scrollax.min.js' %}"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+  <script src="{% static 'js/google-map.js' %}"></script>
+  <script src="{% static 'js/google-map.js' %}"></script>
+  <script src="{% static 'js/main.js' %}"></script>
+<script>
+
+
+    $(document).ready(function() {
+	var max_fields      = 7; //maximum input boxes allowed
+	var wrapper   		= $(".input_fields_wrap"); //Fields wrapper
+	var add_button      = $(".add_field_button"); //Add button ID
+
+	var x = 1; //initlal text box count
+	$(add_button).click(function(e){ //on add input button click
+		e.preventDefault();
+		if(x < max_fields){ //max input box allowed
+			x++; //text box increment
+			$(wrapper).append('<div><input type="text" name="mytext[]"/><a href="#" class="remove_field">Remove</a></div>'); //add input box
+		}
+	});
+
+	$(wrapper).on("click",".remove_field", function(e){ //user click on remove text
+		e.preventDefault(); $(this).parent('div').remove(); x--;
+	})
+});
+</script>
+<script type="text/javascript">
+  var all_spc = document.querySelectorAll("form[id='203270812377453'] .si" + "mple" + "_spc");
+for (var i = 0; i < all_spc.length; i++)
+{
+  all_spc[i].value = "203270812377453-203270812377453";
+}
+  </script>
+
+
+
+
+  </body>
+</html>

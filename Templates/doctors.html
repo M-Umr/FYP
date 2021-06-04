@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <!-- Required meta tags-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="au theme template">
+    <meta name="author" content="Hau Nguyen">
+    <meta name="keywords" content="au theme template">
+<link href="{% static 'images/dill3.png' %}" rel="icon">
+    <!-- Title Page-->
+    <title>Doctor's Profile</title>
+
+        <!-- Fontfaces CSS-->
+    <link href="{% static 'others/css/font-face.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'others/vendor/font-awesome-4.7/css/font-awesome.min.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'others/vendor/font-awesome-5/css/fontawesome-all.min.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'others/vendor/mdi-font/css/material-design-iconic-font.min.css' %}" rel="stylesheet" media="all">
+
+<!--     Bootstrap CSS-->
+    <link href="{% static 'others/vendor/bootstrap-4.1/bootstrap.min.css' %}" rel="stylesheet" media="all">
+
+    <!-- Vendor CSS-->
+    <link href="{% static 'others/vendor/animsition/animsition.min.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'others/vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'others/vendor/wow/animate.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'others/vendor/css-hamburgers/hamburgers.min.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'others/vendor/slick/slick.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'others/vendor/select2/select2.min.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'others/vendor/perfect-scrollbar/perfect-scrollbar.css' %}" rel="stylesheet" media="all">
+
+<!--     Main CSS-->
+    <link href="{% static 'others/css/theme.css' %}" rel="stylesheet" media="all">
+
+</head>
+
+
+<style>
+
+<!--body {font-family: Arial, Helvetica, sans-serif;}-->
+* {box-sizing: border-box;}
+
+/* Button used to open the contact form - fixed at the bottom of the page */
+.open-button {
+<!--  background-color: #555;-->
+  color: white;
+  padding: 18px 30px;
+  border: none;
+  cursor: pointer;
+  opacity: 0.8;
+<!--  position: fixed;-->
+<!--  bottom: 23px;-->
+<!--  right: 28px;-->
+<!--  width: 280px;-->
+}
+
+/* The popup form - hidden by default */
+.form-popup {
+  display: none;
+  position: fixed;
+  bottom: 0;
+<!--  right: 15px;-->
+  border: 3px solid #f1f1f1;
+  z-index: 9;
+}
+
+/* Add styles to the form container */
+.form-container {
+  max-width: 300px;
+  padding: 10px;
+  background-color: white;
+}
+
+/* Full-width input fields */
+.form-container input[type=text] {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  border: none;
+  background: #f1f1f1;
+}
+
+/* When the inputs get focus, do something */
+.form-container input[type=text]:focus, .form-container input[type=password]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+/* Set a style for the submit/login button */
+.form-container .btn {
+  background-color: #04AA6D;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  margin-bottom:10px;
+  opacity: 0.8;
+}
+
+/* Add a red background color to the cancel button */
+.form-container .cancel {
+  background-color: red;
+}
+
+/* Add some hover effects to buttons */
+.form-container .btn:hover, .open-button:hover {
+  opacity: 1;
+}
+</style>
+
+
+
+<body class="animsition">
+{% csrf_token %}
+    <div class="page-wrapper">
+        <!-- HEADER MOBILE-->
+        <header class="header-mobile d-block d-lg-none">
+            <div class="header-mobile__bar">
+                <div class="container-fluid">
+                    <div class="header-mobile-inner">
+                        <a class="logo" >
+                            <img src="{% static 'images/dill3.png' %} ">
+                            <a class="navbar-brand"  href="{% url 'doctors' %}" style="color:black;">We<span><b>Doctor's</b></span></a>
+<!--                            <img src="{% static 'images/avatar.jpg' %}" alt="Hello Dr." />-->
+                        </a>
+                        <button class="hamburger hamburger--slider" type="button">
+                            <span class="hamburger-box">
+                                <span class="hamburger-inner"></span>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <nav class="navbar-mobile">
+                <div class="container-fluid">
+                    <ul class="navbar-mobile__list list-unstyled">
+                        <li class="has-sub">
+                            <a class="js-arrow" href="{% url 'doctors' %}">
+                                <i class="fas fa-tachometer-alt"></i>Home</a>
+                        </li>
+                        <li>
+                            <a  href="{% url 'appointment_requests_doctor' %}">
+                                <i class="fas fa-copy"></i>Appointment Request</a>
+
+                                </li>
+                        <li>
+                            <a href="{% url 'calendar' %}">
+                                <i class="fas fa-calendar-alt"></i>Set Avaliability</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'mapdoctor' %}">
+                                <i class="fas fa-map-marker-alt"></i>Maps</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'prescribe_medicine_livecall' %}">
+                                <i class="fas fa-desktop"></i>Live Call</a>
+                        </li>
+<!--                        <li >-->
+<!--                            <a href="{% url 'my_patients_doctor' %}">-->
+<!--                                <i class="fas fa-chart-bar"></i>My Patients</a>-->
+<!--                        </li>-->
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <!-- END HEADER MOBILE-->
+
+        <!-- MENU SIDEBAR-->
+        <aside class="menu-sidebar d-none d-lg-block">
+            <div class="logo">
+<!--                <a href="#">-->
+                <img src="{% static 'images/dill3.png' %} ">
+                    <a class="navbar-brand"  href="{% url 'doctors' %}" style="color:black;">We<span><b>Doctor's</b></span></a>
+<!--                </a>-->
+            </div>
+            <div class="menu-sidebar__content js-scrollbar1">
+                <nav class="navbar-sidebar">
+                    <ul class="list-unstyled navbar__list">
+                        <li class="active has-sub">
+                            <a class="js-arrow" href="{% url 'doctors' %}">
+                                <i class="fas fa-tachometer-alt"></i>Home</a>
+                        </li>
+                         <li>
+                            <a  href="{% url 'appointment_requests_doctor' %}">
+                                <i class="fas fa-copy"></i>Appointment Request</a>
+
+                                </li>
+                        <li>
+                            <a href="{% url 'calendar' %}">
+                                <i class="fas fa-calendar-alt"></i>Set Avaliability</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'mapdoctor' %}">
+                                <i class="fas fa-map-marker-alt"></i>Maps</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'prescribe_medicine_livecall' %}">
+                                <i class="fas fa-desktop"></i>Live Call</a>
+                        </li>
+<!--                        <li >-->
+<!--                            <a href="{% url 'my_patients_doctor' %}">-->
+<!--                                <i class="fas fa-chart-bar"></i>My Patients</a>-->
+<!--                        </li>-->
+                    </ul>
+                </nav>
+            </div>
+        </aside>
+        <!-- END MENU SIDEBAR-->
+
+        <!-- PAGE CONTAINER-->
+        <div class="page-container">
+            <!-- HEADER DESKTOP-->
+            <header class="header-desktop">
+                <div class="section__content section__content--p30">
+                    <div class="container-fluid">
+                        <div class="header-wrap">
+                            <form class="form-header" action="" method="POST">
+<!--                                <input class="au-input au-input&#45;&#45;xl" type="text" name="search" placeholder="Search for datas &amp; reports..." />-->
+<!--                                <button class="au-btn&#45;&#45;submit" type="submit">-->
+<!--                                    <i class="zmdi zmdi-search"></i>-->
+<!--                                </button>-->
+                            </form>
+                            <div class="header-button">
+                                <div class="noti-wrap">
+
+                                </div>
+
+
+                                <div class="account-wrap">
+                                    <div class="account-item clearfix js-item-menu">
+                                        <div class="image">
+                                            {% if not doctor.image%}
+                                            <img src="{% static 'images/download.png' %}"  />
+                                            {% endif %}
+                                            {% if doctor.image%}
+                                            <img src='/media/{{doctor.image}}'  />
+                                            {% endif %}
+
+                                        </div>
+                                        <div class="content">
+                                            <a class="js-acc-btn" href="#">{{doctor.first_name}} {{doctor.last_name}}</a>
+                                        </div>
+                                        <div class="account-dropdown js-dropdown">
+                                            <div class="info clearfix">
+                                                <div class="image">
+                                                    <a href="#">
+                                                      {% if not doctor.image%}
+                                            <img src="{% static 'images/download.png' %}"  />
+                                            {% endif %}
+                                            {% if doctor.image%}
+                                            <img src='/media/{{doctor.image}}'  />
+                                            {% endif %}
+                                                    </a>
+                                                </div>
+                                                <div class="content">
+                                                    <h5 class="name">
+                                                        <a href="#">{{doctor.first_name}} {{doctor.last_name}}</a>
+                                                    </h5>
+                                                    <span class="email">{{doctor.email}}</span>
+                                                </div>
+                                            </div>
+                                            <div class="account-dropdown__body">
+                                                <div class="account-dropdown__item">
+
+                                                        <button class="zmdi zmdi-account open-button"  onclick="openForm()"> Set Fee</button>
+
+                                                        <div class="form-popup" id="myForm">
+  <form action="#" class="form-container">
+    <h1>Set Consulting Fee</h1>
+
+    <label ><b>Consulting Fee Amount</b></label>
+    <input type="text" placeholder="Enter Amount (PKR)"  required>
+
+
+
+    <button type="submit" class="btn">Save</button>
+    <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+  </form>
+</div>
+
+                                                    <script>
+function openForm() {
+  document.getElementById("myForm").style.display = "block";
+}
+
+function closeForm() {
+  document.getElementById("myForm").style.display = "none";
+}
+</script>
+
+
+                                                </div>
+                                                <div class="account-dropdown__item">
+                                                    <a href="{% url 'update_doctor_profile' %}">
+                                                        <i class="zmdi zmdi-settings"></i>Edit Profile</a>
+                                                </div>
+                                                <div class="account-dropdown__item">
+                                                    <a href="#">
+                                                        <i class="zmdi zmdi-money-box"></i>Earning</a>
+                                                </div>
+                                            </div>
+                                            <div class="account-dropdown__footer">
+                                                <a href="{% url 'user_singnout' %}" method="POST">
+													<form action="/singnout/"  >
+														 {% csrf_token %}
+                                                    <button type="submit" class="zmdi zmdi-power btn "></button> Logout
+												</form></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            <!-- HEADER DESKTOP-->
+
+            <!-- MAIN CONTENT-->
+            <div class="main-content" style="background: url('/static/images/aala.jpg');background-size: 100% ;">
+                <div class="section__content section__content--p30">
+                    <div class="container-fluid">
+<!--                        <div class="row">-->
+<!--                            <div class="col-md-12">-->
+<!--                                <div class="overview-wrap">-->
+<!--                                    <h2 class="title-1">overview</h2>-->
+<!--                                    <button class="au-btn au-btn-icon au-btn&#45;&#45;blue">-->
+<!--                                        <i class="zmdi zmdi-plus"></i>add item</button>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="row m-t-25">-->
+<!--                            <div class="col-sm-6 col-lg-3">-->
+<!--                                <div class="overview-item overview-item&#45;&#45;c1">-->
+<!--                                    <div class="overview__inner">-->
+<!--                                        <div class="overview-box clearfix">-->
+<!--                                            <div class="icon">-->
+<!--                                                <i class="zmdi zmdi-account-o"></i>-->
+<!--                                            </div>-->
+<!--&lt;!&ndash;                                            <div class="text">&ndash;&gt;-->
+<!--&lt;!&ndash;                                                <h2>10368</h2>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                <span>members online</span>&ndash;&gt;-->
+<!--&lt;!&ndash;                                            </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                                        </div>&ndash;&gt;-->
+<!--                                        <div class="overview-chart">-->
+<!--                                            <canvas id="widgetChart1"></canvas>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div class="col-sm-6 col-lg-3">-->
+<!--                                <div class="overview-item overview-item&#45;&#45;c2">-->
+<!--                                    <div class="overview__inner">-->
+<!--                                        <div class="overview-box clearfix">-->
+<!--                                            <div class="icon">-->
+<!--                                                <i class="zmdi zmdi-shopping-cart"></i>-->
+<!--                                            </div>-->
+<!--                                            <div class="text">-->
+<!--                                                <h2>388,688</h2>-->
+<!--                                                <span>items solid</span>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                        <div class="overview-chart">-->
+<!--                                            <canvas id="widgetChart2"></canvas>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div class="col-sm-6 col-lg-3">-->
+<!--                                <div class="overview-item overview-item&#45;&#45;c3">-->
+<!--                                    <div class="overview__inner">-->
+<!--                                        <div class="overview-box clearfix">-->
+<!--                                            <div class="icon">-->
+<!--                                                <i class="zmdi zmdi-calendar-note"></i>-->
+<!--                                            </div>-->
+<!--                                            <div class="text">-->
+<!--                                                <h2>1,086</h2>-->
+<!--                                                <span>this week</span>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                        <div class="overview-chart">-->
+<!--                                            <canvas id="widgetChart3"></canvas>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div class="col-sm-6 col-lg-3">-->
+<!--                                <div class="overview-item overview-item&#45;&#45;c4">-->
+<!--                                    <div class="overview__inner">-->
+<!--                                        <div class="overview-box clearfix">-->
+<!--                                            <div class="icon">-->
+<!--                                                <i class="zmdi zmdi-money"></i>-->
+<!--                                            </div>-->
+<!--                                            <div class="text">-->
+<!--                                                <h2>$1,060,386</h2>-->
+<!--                                                <span>total earnings</span>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                        <div class="overview-chart">-->
+<!--                                            <canvas id="widgetChart4"></canvas>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="row">-->
+<!--                            <div class="col-lg-6">-->
+<!--                                <div class="au-card recent-report">-->
+<!--                                    <div class="au-card-inner">-->
+<!--                                        <h3 class="title-2">recent reports</h3>-->
+<!--                                        <div class="chart-info">-->
+<!--                                            <div class="chart-info__left">-->
+<!--                                                <div class="chart-note">-->
+<!--                                                    <span class="dot dot&#45;&#45;blue"></span>-->
+<!--                                                    <span>products</span>-->
+<!--                                                </div>-->
+<!--                                                <div class="chart-note mr-0">-->
+<!--                                                    <span class="dot dot&#45;&#45;green"></span>-->
+<!--                                                    <span>services</span>-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                            <div class="chart-info__right">-->
+<!--                                                <div class="chart-statis">-->
+<!--                                                    <span class="index incre">-->
+<!--                                                        <i class="zmdi zmdi-long-arrow-up"></i>25%</span>-->
+<!--                                                    <span class="label">products</span>-->
+<!--                                                </div>-->
+<!--                                                <div class="chart-statis mr-0">-->
+<!--                                                    <span class="index decre">-->
+<!--                                                        <i class="zmdi zmdi-long-arrow-down"></i>10%</span>-->
+<!--                                                    <span class="label">services</span>-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                        <div class="recent-report__chart">-->
+<!--                                            <canvas id="recent-rep-chart"></canvas>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div class="col-lg-6">-->
+<!--                                <div class="au-card chart-percent-card">-->
+<!--                                    <div class="au-card-inner">-->
+<!--                                        <h3 class="title-2 tm-b-5">char by %</h3>-->
+<!--                                        <div class="row no-gutters">-->
+<!--                                            <div class="col-xl-6">-->
+<!--                                                <div class="chart-note-wrap">-->
+<!--                                                    <div class="chart-note mr-0 d-block">-->
+<!--                                                        <span class="dot dot&#45;&#45;blue"></span>-->
+<!--                                                        <span>products</span>-->
+<!--                                                    </div>-->
+<!--                                                    <div class="chart-note mr-0 d-block">-->
+<!--                                                        <span class="dot dot&#45;&#45;red"></span>-->
+<!--                                                        <span>services</span>-->
+<!--                                                    </div>-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                            <div class="col-xl-6">-->
+<!--                                                <div class="percent-chart">-->
+<!--                                                    <canvas id="percent-chart"></canvas>-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+                        <div class="row" >
+                            <div class="col-lg-12" >
+<!--                                <img src="{% static 'my_app/example.jpg' %}">-->
+
+                                <div class="card" style="box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); padding: 5px 40px;
+  transition: 0.3s;
+  top:200px;
+">
+<!--  <img src="img_avatar.png" alt="Avatar" style="width:100%">-->
+  <div  style="padding: 5px 40px;">
+   <h1 style="text-align:center" >Welcome {{doctor.first_name}}!</h1>
+
+      <hr>
+<h3 style="text-align:center">Thank you for choosing WeDoctor's </h3>
+      <br>
+    <h5 style="text-align:center">WeDoctor's is designed for controlling your health</h5>
+  </div>
+</div>
+
+<!--                                <div class="table-responsive table&#45;&#45;no-card m-b-40">-->
+<!--                                    <table class="table table-borderless table-striped table-earning">-->
+<!--                                        <thead>-->
+<!--                                            <tr>-->
+<!--                                                <th>Date</th>-->
+<!--                                                <th>Patient ID</th>-->
+<!--                                                <th>Name</th>-->
+<!--                                                <th class="text-right">Location</th>-->
+<!--                                                <th class="text-right">Disease</th>-->
+<!--&lt;!&ndash;                                                <th class="text-right">Medicine</th>&ndash;&gt;-->
+<!--                                            </tr>-->
+<!--                                        </thead>-->
+<!--                                        <tbody>-->
+<!--                                            <tr>-->
+<!--                                                <td>2020-09-29 </td>-->
+<!--                                                <td>1</td>-->
+<!--                                                <td>Waqar Mahmood</td>-->
+<!--                                                <td class="text-right">Sargodha</td>-->
+<!--                                                <td class="text-right">Malaria</td>-->
+<!--&lt;!&ndash;                                                <td class="text-right">Chloroquine.</td>&ndash;&gt;-->
+<!--                                            </tr>-->
+<!--                                            <tr>-->
+<!--                                                <td>2020-09-28 </td>-->
+<!--                                                <td>2</td>-->
+<!--                                                <td>Amir Mehmood</td>-->
+<!--                                                <td class="text-right">Lahore</td>-->
+<!--                                                <td class="text-right">Acne</td>-->
+<!--&lt;!&ndash;                                                <td class="text-right">Retinoids</td>&ndash;&gt;-->
+<!--                                            </tr>-->
+<!--                                            <tr>-->
+<!--                                                <td>2018-09-27 </td>-->
+<!--                                                <td>3</td>-->
+<!--                                                <td>Humaira</td>-->
+<!--                                                <td class="text-right">Faisalabad</td>-->
+<!--                                                <td class="text-right">Chicken pops</td>-->
+<!--&lt;!&ndash;                                                <td class="text-right">Zovirax</td>&ndash;&gt;-->
+<!--                                            </tr>-->
+<!--                                            <tr>-->
+<!--                                                <td>2018-09-26 </td>-->
+<!--                                                <td>4</td>-->
+<!--                                                <td>Ahtisham Ahmad</td>-->
+<!--                                                <td class="text-right">Sialkot</td>-->
+<!--                                                <td class="text-right">Chicken pops</td>-->
+<!--&lt;!&ndash;                                                <td class="text-right">Zovirax</td>&ndash;&gt;-->
+<!--                                            </tr>-->
+<!--&lt;!&ndash;                                            <tr>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                <td>2018-09-25 19:03</td>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                <td>100393</td>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                <td>USB 3.0 Cable</td>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                <td class="text-right">$10.00</td>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                <td class="text-right">3</td>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                <td class="text-right">$30.00</td>&ndash;&gt;-->
+<!--&lt;!&ndash;                                            </tr>&ndash;&gt;-->
+<!--&lt;!&ndash;                                            <tr>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                <td>2018-09-29 05:57</td>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                <td>100392</td>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                <td>Smartwatch 4.0 LTE Wifi</td>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                <td class="text-right">$199.00</td>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                <td class="text-right">6</td>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                <td class="text-right">$1494.00</td>&ndash;&gt;-->
+<!--&lt;!&ndash;                                            </tr>&ndash;&gt;-->
+<!--&lt;!&ndash;                                            <tr>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                <td>2018-09-24 19:10</td>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                <td>100391</td>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                <td>Camera C430W 4k</td>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                <td class="text-right">$699.00</td>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                <td class="text-right">1</td>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                <td class="text-right">$699.00</td>&ndash;&gt;-->
+<!--&lt;!&ndash;                                            </tr>&ndash;&gt;-->
+<!--&lt;!&ndash;                                            <tr>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                <td>2018-09-22 00:43</td>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                <td>100393</td>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                <td>USB 3.0 Cable</td>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                <td class="text-right">$10.00</td>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                <td class="text-right">3</td>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                <td class="text-right">$30.00</td>&ndash;&gt;-->
+<!--&lt;!&ndash;                                            </tr>&ndash;&gt;-->
+<!--                                        </tbody>-->
+<!--                                    </table>-->
+<!--                                </div>-->
+                            </div>
+<!--                            <div class="col-lg-3">-->
+<!--                                <h2 class="title-1 m-b-25">Top Users</h2>-->
+<!--                                <div class="au-card au-card&#45;&#45;bg-blue au-card-top-countries m-b-40">-->
+<!--                                    <div class="au-card-inner">-->
+<!--                                        <div class="table-responsive">-->
+<!--                                            <table class="table table-top-countries">-->
+<!--                                                <tbody>-->
+<!--                                                    <tr>-->
+<!--                                                        <td>Amir Mehmood</td>-->
+<!--&lt;!&ndash;                                                        <td class="text-right">$119,366.96</td>&ndash;&gt;-->
+<!--                                                    </tr>-->
+<!--                                                    <tr>-->
+<!--                                                        <td>Humaira</td>-->
+<!--&lt;!&ndash;                                                        <td class="text-right">$70,261.65</td>&ndash;&gt;-->
+<!--                                                    </tr>-->
+<!--                                                    <tr>-->
+<!--                                                        <td>Ahtisham Ahmad</td>-->
+<!--&lt;!&ndash;                                                        <td class="text-right">$46,399.22</td>&ndash;&gt;-->
+<!--                                                    </tr>-->
+<!--&lt;!&ndash;                                                    <tr>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                        <td>Turkey</td>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                        <td class="text-right">$35,364.90</td>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                    </tr>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                    <tr>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                        <td>Germany</td>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                        <td class="text-right">$20,366.96</td>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                    </tr>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                    <tr>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                        <td>France</td>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                        <td class="text-right">$10,366.96</td>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                    </tr>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                    <tr>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                        <td>Australia</td>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                        <td class="text-right">$5,366.96</td>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                    </tr>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                    <tr>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                        <td>Italy</td>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                        <td class="text-right">$1639.32</td>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                    </tr>&ndash;&gt;-->
+<!--                                                </tbody>-->
+<!--                                            </table>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+                        </div>
+<!--                        <div class="row">-->
+<!--                            <div class="col-lg-6">-->
+<!--                                <div class="au-card au-card&#45;&#45;no-shadow au-card&#45;&#45;no-pad m-b-40">-->
+<!--                                    <div class="au-card-title" style="background-image:url('images/bg-title-01.jpg');">-->
+<!--                                        <div class="bg-overlay bg-overlay&#45;&#45;blue"></div>-->
+<!--                                        <h3>-->
+<!--                                            <i class="zmdi zmdi-account-calendar"></i>Appointment Requests</h3>-->
+<!--&lt;!&ndash;                                        <button class="au-btn-plus">&ndash;&gt;-->
+<!--&lt;!&ndash;                                            <i class="zmdi zmdi-plus"></i>&ndash;&gt;-->
+<!--&lt;!&ndash;                                        </button>&ndash;&gt;-->
+<!--                                    </div>-->
+<!--                                    <div class="au-task js-list-load">-->
+<!--                                        <div class="au-task__title">-->
+<!--                                            <p>Tasks for Doctor NAme</p>-->
+<!--                                        </div>-->
+<!--                                        <div class="au-task-list js-scrollbar3">-->
+<!--                                            <div class="au-task__item au-task__item&#45;&#45;danger">-->
+<!--                                                <div class="au-task__item-inner">-->
+<!--                                                    <h5 class="task">-->
+<!--                                                        <a href="#">Zoha has sent you the appointment request</a>-->
+<!--                                                    </h5>-->
+<!--                                                    <span class="time">10:00 AM</span>-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                            <div class="au-task__item au-task__item&#45;&#45;warning">-->
+<!--                                                <div class="au-task__item-inner">-->
+<!--                                                    <h5 class="task">-->
+<!--                                                        <a href="#">Nimra sent you appointment request</a>-->
+<!--                                                    </h5>-->
+<!--                                                    <span class="time">11:00 AM</span>-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--&lt;!&ndash;                                            <div class="au-task__item au-task__item&#45;&#45;primary">&ndash;&gt;-->
+<!--&lt;!&ndash;                                                <div class="au-task__item-inner">&ndash;&gt;-->
+<!--&lt;!&ndash;                                                    <h5 class="task">&ndash;&gt;-->
+<!--&lt;!&ndash;                                                        <a href="#">Meeting about plan for Admin Template 2018</a>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                    </h5>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                    <span class="time">02:00 PM</span>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                                            </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                                            <div class="au-task__item au-task__item&#45;&#45;success">&ndash;&gt;-->
+<!--&lt;!&ndash;                                                <div class="au-task__item-inner">&ndash;&gt;-->
+<!--&lt;!&ndash;                                                    <h5 class="task">&ndash;&gt;-->
+<!--&lt;!&ndash;                                                        <a href="#">Create new task for Dashboard</a>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                    </h5>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                    <span class="time">03:30 PM</span>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                                            </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                                            <div class="au-task__item au-task__item&#45;&#45;danger js-load-item">&ndash;&gt;-->
+<!--&lt;!&ndash;                                                <div class="au-task__item-inner">&ndash;&gt;-->
+<!--&lt;!&ndash;                                                    <h5 class="task">&ndash;&gt;-->
+<!--&lt;!&ndash;                                                        <a href="#">Meeting about plan for Admin Template 2018</a>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                    </h5>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                    <span class="time">10:00 AM</span>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                                            </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                                            <div class="au-task__item au-task__item&#45;&#45;warning js-load-item">&ndash;&gt;-->
+<!--&lt;!&ndash;                                                <div class="au-task__item-inner">&ndash;&gt;-->
+<!--&lt;!&ndash;                                                    <h5 class="task">&ndash;&gt;-->
+<!--&lt;!&ndash;                                                        <a href="#">Create new task for Dashboard</a>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                    </h5>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                    <span class="time">11:00 AM</span>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                                            </div>&ndash;&gt;-->
+<!--                                        </div>-->
+<!--                                        <div class="au-task__footer">-->
+<!--                                            <button class="au-btn au-btn-load js-load-btn">load more</button>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div class="col-lg-6">-->
+<!--                                <div class="au-card au-card&#45;&#45;no-shadow au-card&#45;&#45;no-pad m-b-40">-->
+<!--                                    <div class="au-card-title" style="background-image:url('images/bg-title-02.jpg');">-->
+<!--                                        <div class="bg-overlay bg-overlay&#45;&#45;blue"></div>-->
+<!--                                        <h3>-->
+<!--                                            <i class="zmdi zmdi-comment-text"></i>New Messages</h3>-->
+<!--&lt;!&ndash;                                        <button class="au-btn-plus">&ndash;&gt;-->
+<!--&lt;!&ndash;                                            <i class="zmdi zmdi-plus"></i>&ndash;&gt;-->
+<!--&lt;!&ndash;                                        </button>&ndash;&gt;-->
+<!--                                    </div>-->
+<!--                                    <div class="au-inbox-wrap js-inbox-wrap">-->
+<!--                                        <div class="au-message js-list-load">-->
+<!--                                            <div class="au-message__noti">-->
+<!--                                                <p>You Have-->
+<!--                                                    <span>2</span>-->
+
+<!--                                                    new messages-->
+<!--                                                </p>-->
+<!--                                            </div>-->
+<!--                                            <div class="au-message-list">-->
+<!--                                                <div class="au-message__item unread">-->
+<!--                                                    <div class="au-message__item-inner">-->
+<!--                                                        <div class="au-message__item-text">-->
+<!--                                                            <div class="avatar-wrap">-->
+<!--                                                                <div class="avatar">-->
+<!--                                                                    <img src=" {% static 'images/avatar_01.jpg' %}" alt="Waqar">-->
+<!--                                                                </div>-->
+<!--                                                            </div>-->
+<!--                                                            <div class="text">-->
+<!--                                                                <h5 class="name">Waqar</h5>-->
+<!--                                                                <p>Sent you symptoms</p>-->
+<!--                                                            </div>-->
+<!--                                                        </div>-->
+<!--                                                        <div class="au-message__item-time">-->
+<!--                                                            <span>12 Min ago</span>-->
+<!--                                                        </div>-->
+<!--                                                    </div>-->
+<!--                                                </div>-->
+<!--                                                <div class="au-message__item unread">-->
+<!--                                                    <div class="au-message__item-inner">-->
+<!--                                                        <div class="au-message__item-text">-->
+<!--                                                            <div class="avatar-wrap online">-->
+<!--                                                                <div class="avatar">-->
+<!--                                                                    <img src="{% static 'images/avatar_02.png' %}" alt="Ahtisham Ahmad">-->
+<!--                                                                </div>-->
+<!--                                                            </div>-->
+<!--                                                            <div class="text">-->
+<!--                                                                <h5 class="name">Ahtisham Ahmad</h5>-->
+<!--                                                                <p>Sent you symptoms</p>-->
+<!--                                                            </div>-->
+<!--                                                        </div>-->
+<!--                                                        <div class="au-message__item-time">-->
+<!--                                                            <span>11:00 PM</span>-->
+<!--                                                        </div>-->
+<!--                                                    </div>-->
+<!--                                                </div>-->
+<!--&lt;!&ndash;                                                <div class="au-message__item">&ndash;&gt;-->
+<!--&lt;!&ndash;                                                    <div class="au-message__item-inner">&ndash;&gt;-->
+<!--&lt;!&ndash;                                                        <div class="au-message__item-text">&ndash;&gt;-->
+<!--&lt;!&ndash;                                                            <div class="avatar-wrap online">&ndash;&gt;-->
+<!--&lt;!&ndash;                                                                <div class="avatar">&ndash;&gt;-->
+<!--&lt;!&ndash;                                                                    <img src="images/icon/avatar-04.jpg" alt="Michelle Sims">&ndash;&gt;-->
+<!--&lt;!&ndash;                                                                </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                            </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                            <div class="text">&ndash;&gt;-->
+<!--&lt;!&ndash;                                                                <h5 class="name">Michelle Sims</h5>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                                <p>Lorem ipsum dolor sit amet</p>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                            </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                        </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                        <div class="au-message__item-time">&ndash;&gt;-->
+<!--&lt;!&ndash;                                                            <span>Yesterday</span>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                        </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                    </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                <div class="au-message__item">&ndash;&gt;-->
+<!--&lt;!&ndash;                                                    <div class="au-message__item-inner">&ndash;&gt;-->
+<!--&lt;!&ndash;                                                        <div class="au-message__item-text">&ndash;&gt;-->
+<!--&lt;!&ndash;                                                            <div class="avatar-wrap">&ndash;&gt;-->
+<!--&lt;!&ndash;                                                                <div class="avatar">&ndash;&gt;-->
+<!--&lt;!&ndash;                                                                    <img src="images/icon/avatar-05.jpg" alt="Michelle Sims">&ndash;&gt;-->
+<!--&lt;!&ndash;                                                                </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                            </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                            <div class="text">&ndash;&gt;-->
+<!--&lt;!&ndash;                                                                <h5 class="name">Michelle Sims</h5>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                                <p>Purus feugiat finibus</p>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                            </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                        </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                        <div class="au-message__item-time">&ndash;&gt;-->
+<!--&lt;!&ndash;                                                            <span>Sunday</span>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                        </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                    </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                <div class="au-message__item js-load-item">&ndash;&gt;-->
+<!--&lt;!&ndash;                                                    <div class="au-message__item-inner">&ndash;&gt;-->
+<!--&lt;!&ndash;                                                        <div class="au-message__item-text">&ndash;&gt;-->
+<!--&lt;!&ndash;                                                            <div class="avatar-wrap online">&ndash;&gt;-->
+<!--&lt;!&ndash;                                                                <div class="avatar">&ndash;&gt;-->
+<!--&lt;!&ndash;                                                                    <img src="images/icon/avatar-04.jpg" alt="Michelle Sims">&ndash;&gt;-->
+<!--&lt;!&ndash;                                                                </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                            </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                            <div class="text">&ndash;&gt;-->
+<!--&lt;!&ndash;                                                                <h5 class="name">Michelle Sims</h5>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                                <p>Lorem ipsum dolor sit amet</p>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                            </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                        </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                        <div class="au-message__item-time">&ndash;&gt;-->
+<!--&lt;!&ndash;                                                            <span>Yesterday</span>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                        </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                    </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                <div class="au-message__item js-load-item">&ndash;&gt;-->
+<!--&lt;!&ndash;                                                    <div class="au-message__item-inner">&ndash;&gt;-->
+<!--&lt;!&ndash;                                                        <div class="au-message__item-text">&ndash;&gt;-->
+<!--&lt;!&ndash;                                                            <div class="avatar-wrap">&ndash;&gt;-->
+<!--&lt;!&ndash;                                                                <div class="avatar">&ndash;&gt;-->
+<!--&lt;!&ndash;                                                                    <img src="images/icon/avatar-05.jpg" alt="Michelle Sims">&ndash;&gt;-->
+<!--&lt;!&ndash;                                                                </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                            </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                            <div class="text">&ndash;&gt;-->
+<!--&lt;!&ndash;                                                                <h5 class="name">Michelle Sims</h5>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                                <p>Purus feugiat finibus</p>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                            </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                        </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                        <div class="au-message__item-time">&ndash;&gt;-->
+<!--&lt;!&ndash;                                                            <span>Sunday</span>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                        </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                    </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                </div>&ndash;&gt;-->
+<!--                                            </div>-->
+<!--                                            <div class="au-message__footer">-->
+<!--                                                <button class="au-btn au-btn-load js-load-btn">load more</button>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--&lt;!&ndash;                                        <div class="au-chat">&ndash;&gt;-->
+<!--&lt;!&ndash;                                            <div class="au-chat__title">&ndash;&gt;-->
+<!--&lt;!&ndash;                                                <div class="au-chat-info">&ndash;&gt;-->
+<!--&lt;!&ndash;                                                    <div class="avatar-wrap online">&ndash;&gt;-->
+<!--&lt;!&ndash;                                                        <div class="avatar avatar&#45;&#45;small">&ndash;&gt;-->
+<!--&lt;!&ndash;                                                            <img src="images/icon/avatar-02.jpg" alt="John Smith">&ndash;&gt;-->
+<!--&lt;!&ndash;                                                        </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                    </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                    <span class="nick">&ndash;&gt;-->
+<!--&lt;!&ndash;                                                        <a href="#">John Smith</a>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                    </span>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                                            </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                                            <div class="au-chat__content">&ndash;&gt;-->
+<!--&lt;!&ndash;                                                <div class="recei-mess-wrap">&ndash;&gt;-->
+<!--&lt;!&ndash;                                                    <span class="mess-time">12 Min ago</span>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                    <div class="recei-mess__inner">&ndash;&gt;-->
+<!--&lt;!&ndash;                                                        <div class="avatar avatar&#45;&#45;tiny">&ndash;&gt;-->
+<!--&lt;!&ndash;                                                            <img src="images/icon/avatar-02.jpg" alt="John Smith">&ndash;&gt;-->
+<!--&lt;!&ndash;                                                        </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                        <div class="recei-mess-list">&ndash;&gt;-->
+<!--&lt;!&ndash;                                                            <div class="recei-mess">Lorem ipsum dolor sit amet, consectetur adipiscing elit non iaculis</div>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                            <div class="recei-mess">Donec tempor, sapien ac viverra</div>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                        </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                    </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                <div class="send-mess-wrap">&ndash;&gt;-->
+<!--&lt;!&ndash;                                                    <span class="mess-time">30 Sec ago</span>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                    <div class="send-mess__inner">&ndash;&gt;-->
+<!--&lt;!&ndash;                                                        <div class="send-mess-list">&ndash;&gt;-->
+<!--&lt;!&ndash;                                                            <div class="send-mess">Lorem ipsum dolor sit amet, consectetur adipiscing elit non iaculis</div>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                        </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                    </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                                            </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                                            <div class="au-chat-textfield">&ndash;&gt;-->
+<!--&lt;!&ndash;                                                <form class="au-form-icon">&ndash;&gt;-->
+<!--&lt;!&ndash;                                                    <input class="au-input au-input&#45;&#45;full au-input&#45;&#45;h65" type="text" placeholder="Type a message">&ndash;&gt;-->
+<!--&lt;!&ndash;                                                    <button class="au-input-icon">&ndash;&gt;-->
+<!--&lt;!&ndash;                                                        <i class="zmdi zmdi-camera"></i>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                    </button>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                </form>&ndash;&gt;-->
+<!--&lt;!&ndash;                                            </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                                        </div>&ndash;&gt;-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="row">-->
+<!--                            <div class="col-md-12">-->
+<!--                                <div class="copyright">-->
+<!--                                    <p>Copyright © 2020 WeDoctor's. All rights reserved.</p>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+                    </div>
+                </div>
+            </div>
+<!--                                            <div class="copyright">-->
+                                    <p style="text-align:center">Copyright © 2020 WeDoctor's. All rights reserved.</p>
+
+            <!-- END MAIN CONTENT-->
+            <!-- END PAGE CONTAINER-->
+        </div>
+
+    </div>
+
+    <!-- Jquery JS-->
+    <script src="{% static 'others/vendor/jquery-3.2.1.min.js' %}"></script>
+    <!-- Bootstrap JS-->
+    <script src="{% static 'others/vendor/bootstrap-4.1/popper.min.js' %}"></script>
+    <script src="{% static 'others/vendor/bootstrap-4.1/bootstrap.min.js' %}"></script>
+    <!-- Vendor JS       -->
+    <script src="{% static 'others/vendor/slick/slick.min.js' %}">
+    </script>
+    <script src="{% static 'others/vendor/wow/wow.min.js' %}"></script>
+    <script src="{% static 'others/vendor/animsition/animsition.min.js' %}"></script>
+    <script src="{% static 'others/vendor/bootstrap-progressbar/bootstrap-progressbar.min.js' %}">
+    </script>
+    <script src="{% static 'others/vendor/counter-up/jquery.waypoints.min.js' %}"></script>
+    <script src="{% static 'others/vendor/counter-up/jquery.counterup.min.js' %}">
+    </script>
+    <script src="{% static 'others/vendor/circle-progress/circle-progress.min.js' %}"></script>
+    <script src="{% static 'others/vendor/perfect-scrollbar/perfect-scrollbar.js' %}"></script>
+    <script src="{% static 'others/vendor/chartjs/Chart.bundle.min.js' %}"></script>
+    <script src="{% static 'others/vendor/select2/select2.min.js' %}">
+    </script>
+
+    <!-- Main JS-->
+    <script src="{% static 'others/js/main.js' %}"></script>
+
+</body>
+
+</html>
+<!-- end document-->

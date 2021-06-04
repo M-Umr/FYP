@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <!-- Required meta tags-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="au theme template">
+    <meta name="author" content="Hau Nguyen">
+    <meta name="keywords" content="au theme template">
+<link href="{% static 'images/dill3.png' %}" rel="icon">
+
+    <!-- Title Page-->
+    <title>Prescription</title>
+
+    <!-- Fontfaces CSS-->
+    <link href="{% static 'others/css/font-face.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'others/vendor/font-awesome-4.7/css/font-awesome.min.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'others/vendor/font-awesome-5/css/fontawesome-all.min.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'others/vendor/mdi-font/css/material-design-iconic-font.min.css' %}" rel="stylesheet" media="all">
+
+    <!-- Bootstrap CSS-->
+    <link href="{% static 'others/vendor/bootstrap-4.1/bootstrap.min.css' %}" rel="stylesheet" media="all">
+
+    <!-- Vendor CSS-->
+    <link href="{% static 'others/vendor/animsition/animsition.min.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'others/vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'others/vendor/wow/animate.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'others/vendor/css-hamburgers/hamburgers.min.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'others/vendor/slick/slick.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'others/vendor/select2/select2.min.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'others/vendor/perfect-scrollbar/perfect-scrollbar.css' %}" rel="stylesheet" media="all">
+
+    <!-- FullCalendar -->
+    <link href="{% static 'others/vendor/fullcalendar-3.10.0/fullcalendar.css' %}" rel='stylesheet' media="all" />
+
+    <!-- Main CSS-->
+    <link href="{% static 'others/css/theme.css' %}" rel="stylesheet" media="all">
+
+    <style type="text/css">
+    /* force class color to override the bootstrap base rule
+       NOTE: adding 'url: #' to calendar makes this unneeded
+     */
+    .fc-event, .fc-event:hover {
+          color: #fff !important;
+          text-decoration: none;
+    }
+
+
+
+
+
+
+
+
+input{
+border: 3px solid black; width:100%x;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+    </style>
+
+</head>
+
+<!-- animsition overrides all click events on clickable things like a,
+      since calendar doesn't add href's be default,
+      it leads to odd behaviors like loading 'undefined'
+      moving the class to menus lead to only the menu having the effect -->
+<body class="animsition">
+{% csrf_token %}
+    <div class="page-wrapper">
+        <!-- HEADER MOBILE-->
+        <header class="header-mobile d-block d-lg-none">
+            <div class="header-mobile__bar">
+                <div class="container-fluid">
+                    <div class="header-mobile-inner">
+
+                        <a class="logo" >
+                             <img src="{% static 'images/dill3.png' %} ">
+                             <a class="navbar-brand"  href="{% url 'doctors' %}" style="color:black;">We<span><b>Doctor's</b></span></a>
+<!--                            <img src="images/icon/logo.png" alt="CoolAdmin" />-->
+                        </a>
+                        <button class="hamburger hamburger--slider" type="button">
+                            <span class="hamburger-box">
+                                <span class="hamburger-inner"></span>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <nav class="navbar-mobile">
+                <div class="container-fluid">
+                    <ul class="navbar-mobile__list list-unstyled">
+                        <li class="has-sub">
+                            <a class="js-arrow" href="{% url 'doctors' %}">
+                                <i class="fas fa-tachometer-alt"></i>Home</a>
+<li>
+                            <a  href="{% url 'appointment_requests_doctor' %}">
+                                <i class="fas fa-copy"></i>Appointment Request</a>
+
+                                </li>
+                            <a href="{% url 'calendar' %}">
+                                <i class="fas fa-calendar-alt"></i>Set Avaliability</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'mapdoctor' %}">
+                                <i class="fas fa-map-marker-alt"></i>Maps</a>
+                        </li>
+                         <li >
+                            <a href="{% url 'livecall_doctor' %}">
+                                <i class="fas fa-desktop"></i>Live Call</a>
+                        </li>
+                        <li class="active">
+                            <a href="{% url 'prescription' %}">
+                                <i class="far fa-check-square"></i>Prescribe Medicine</a>
+                        </li>
+                         <li >
+                            <a href="{% url 'my_patients_doctor' %}">
+                                <i class="fas fa-chart-bar"></i>My Patients</a>
+                        </li>
+<!--                        <li class="has-sub">-->
+<!--                            <a class="js-arrow" href="#">-->
+<!--                                <i class="fas fa-copy"></i>Pages</a>-->
+<!--                            <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">-->
+<!--                                <li>-->
+<!--                                    <a href="login.html">Login</a>-->
+<!--                                </li>-->
+<!--                                <li>-->
+<!--                                    <a href="register.html">Register</a>-->
+<!--                                </li>-->
+<!--                                <li>-->
+<!--                                    <a href="forget-pass.html">Forget Password</a>-->
+<!--                                </li>-->
+<!--                            </ul>-->
+<!--                        </li>-->
+<!--                        <li class="has-sub">-->
+<!--                            <a class="js-arrow" href="#">-->
+<!--                                <i class="fas fa-desktop"></i>UI Elements</a>-->
+<!--                            <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">-->
+<!--                                <li>-->
+<!--                                    <a href="button.html">Button</a>-->
+<!--                                </li>-->
+<!--                                <li>-->
+<!--                                    <a href="badge.html">Badges</a>-->
+<!--                                </li>-->
+<!--                                <li>-->
+<!--                                    <a href="tab.html">Tabs</a>-->
+<!--                                </li>-->
+<!--                                <li>-->
+<!--                                    <a href="card.html">Cards</a>-->
+<!--                                </li>-->
+<!--                                <li>-->
+<!--                                    <a href="alert.html">Alerts</a>-->
+<!--                                </li>-->
+<!--                                <li>-->
+<!--                                    <a href="progress-bar.html">Progress Bars</a>-->
+<!--                                </li>-->
+<!--                                <li>-->
+<!--                                    <a href="modal.html">Modals</a>-->
+<!--                                </li>-->
+<!--                                <li>-->
+<!--                                    <a href="switch.html">Switchs</a>-->
+<!--                                </li>-->
+<!--                                <li>-->
+<!--                                    <a href="grid.html">Grids</a>-->
+<!--                                </li>-->
+<!--                                <li>-->
+<!--                                    <a href="fontawesome.html">Fontawesome Icon</a>-->
+<!--                                </li>-->
+<!--                                <li>-->
+<!--                                    <a href="typo.html">Typography</a>-->
+<!--                                </li>-->
+<!--                            </ul>-->
+<!--                        </li>-->
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <!-- END HEADER MOBILE-->
+
+        <!-- MENU SIDEBAR-->
+        <aside class="menu-sidebar d-none d-lg-block">
+            <div class="logo">
+                <a >
+                    <img src="{% static 'images/dill3.png' %} ">
+                     <a class="navbar-brand"  href="{% url 'doctors' %}" style="color:black;">We<span><b>Doctor's</b></span></a>
+<!--                    <img src="images/icon/logo.png" alt="Cool Admin" />-->
+                </a>
+            </div>
+            <div class="menu-sidebar__content js-scrollbar1">
+                <nav class="navbar-sidebar">
+                    <ul class="list-unstyled navbar__list">
+                        <li class="has-sub">
+                            <a class="js-arrow" href="{% url 'doctors' %}">
+                                <i class="fas fa-tachometer-alt"></i>Home</a>
+
+                        </li>
+<!--                        <li>-->
+<!--                            <a href="chart.html">-->
+<!--                                <i class="fas fa-chart-bar"></i>Charts</a>-->
+<!--                        </li>-->
+<!--                        <li>-->
+<!--                            <a href="table.html">-->
+<!--                                <i class="fas fa-table"></i>Tables</a>-->
+<!--                        </li>-->
+<!--                        <li>-->
+<!--                            <a href="form.html">-->
+<!--                                <i class="far fa-check-square"></i>Forms</a>-->
+<!--                        </li>-->
+                        <li>
+                            <a  href="{% url 'appointment_requests_doctor' %}">
+                                <i class="fas fa-copy"></i>Appointment Request</a>
+
+                                </li>
+                        <li >
+                            <a href="{% url 'calendar' %}">
+                                <i class="fas fa-calendar-alt"></i>Set Avaliability</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'mapdoctor' %}">
+                                <i class="fas fa-map-marker-alt"></i>Maps</a>
+                        </li>
+                        <li >
+                            <a href="{% url 'livecall_doctor' %}">
+                                <i class="fas fa-desktop"></i>Live Call</a>
+                        </li>
+                        <li class="active">
+                            <a href="{% url 'prescription' %}">
+                                <i class="far fa-check-square"></i>Prescribe Medicine</a>
+                        </li>
+                         <li >
+                            <a href="{% url 'my_patients_doctor' %}">
+                                <i class="fas fa-chart-bar"></i>My Patients</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </aside>
+        <!-- END MENU SIDEBAR-->
+
+        <!-- PAGE CONTAINER-->
+        <div class="page-container">
+            <!-- HEADER DESKTOP-->
+            <header class="header-desktop">
+                <div class="section__content section__content--p30">
+                    <div class="container-fluid">
+                        <div class="header-wrap">
+                            <form class="form-header" action="" method="POST">
+<!--                                <input class="au-input au-input&#45;&#45;xl" type="text" name="search" placeholder="Search for datas &amp; reports..." />-->
+<!--                                <button class="au-btn&#45;&#45;submit" type="submit">-->
+<!--                                    <i class="zmdi zmdi-search"></i>-->
+<!--                                </button>-->
+                            </form>
+                            <div class="header-button">
+                                <div class="account-wrap">
+                                    <div class="account-item clearfix js-item-menu">
+                                        <div class="image">
+                                             {% if not doctor.image%}
+                                            <img src="{% static 'images/download.png' %}"  />
+                                            {% endif %}
+                                            {% if doctor.image%}
+                                            <img src='/media/{{doctor.image}}'  />
+                                            {% endif %}
+                                        </div>
+                                        <div class="content">
+                                            <a class="js-acc-btn" href="#">{{doctor.first_name}} {{doctor.last_name}}</a>
+                                        </div>
+                                        <div class="account-dropdown js-dropdown">
+                                            <div class="info clearfix">
+                                                <div class="image">
+                                                    <a href="#">
+                                                         {% if not doctor.image%}
+                                            <img src="{% static 'images/download.png' %}"  />
+                                            {% endif %}
+                                            {% if doctor.image%}
+                                            <img src='/media/{{doctor.image}}'  />
+                                            {% endif %}
+                                                    </a>
+                                                </div>
+                                                <div class="content">
+                                                    <h5 class="name">
+                                                        <a href="#">{{doctor.first_name}} {{doctor.last_name}}</a>
+                                                    </h5>
+                                                    <span class="email">{{doctor.email}}</span>
+                                                </div>
+                                            </div>
+                                            <div class="account-dropdown__body">
+                                                <div class="account-dropdown__item">
+                                                    <a href="{% url 'doctors' %}">
+                                                        <i class="zmdi zmdi-account"></i>Account</a>
+                                                </div>
+                                                <div class="account-dropdown__item">
+                                                    <a href="{% url 'update_doctor_profile' %}">
+                                                        <i class="zmdi zmdi-settings"></i>Edit Profile</a>
+                                                </div>
+                                                <div class="account-dropdown__item">
+                                                    <a href="#">
+                                                        <i class="zmdi zmdi-money-box"></i>Earning</a>
+                                                </div>
+                                            </div>
+                                            <div class="account-dropdown__footer">
+                                                <a href="{% url 'user_singnout' %}" method="POST">
+													<form action="/singnout/"  >
+														 {% csrf_token %}
+                                                    <button type="submit" class="zmdi zmdi-power btn "></button>Logout
+												</form></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            <!-- END HEADER DESKTOP-->
+
+            <!-- MAIN CONTENT-->
+            <div class="main-content">
+                <div class="section__content section__content--p30">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col">
+                              <div class="au-card">
+         <div class="panel-body">
+                        <!-- panel content start -->
+ <h4> <a href="{% url 'livecall_doctor' %}">< Back</a> </h4>
+<!-- Profile Widget -->
+							<div class="card widget-profile pat-widget-profile">
+								<div class="card-body">
+									<div class="pro-widget-content">
+										<div class="profile-info-widget">
+
+
+												<div class="patient-details">
+													<h5><b>Patient ID:</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" style="border: 3px solid black; width:100%x" value="{{patient.patient_email}}"></h5>
+<!--													<h5 class="mb-0"><i class="fas fa-map-marker-alt"></i> Patient Location</h5>-->
+												</div>
+											<div class="profile-det-info">
+												<h5><b>Patient Name:</b> <input type="text" style="border: 3px solid black; width:100%x" value="{{patient.patient_first_name}} {{patient.patient_last_name}} "></h5>
+											</div>
+										</div>
+
+<!--										<div class="col-md-7 col-lg-8 col-xl-9">-->
+							<br>
+
+										<div class="card">
+								<div class="card-header">
+									<h4 class="card-title mb-0">Add Prescription</h4>
+								</div>
+<form id="myForm" action="/prescribemedicine/" method="post">
+     {% csrf_token %}
+								<div class="card-body">
+									<div class="row">
+										<div class="col-sm-6">
+											<div class="biller-info">
+												<h4 class="d-block">Dr.{{doctor.first_name}} {{doctor.last_name}}</h4>
+												<span class="d-block text-sm text-muted">{{doctor.spc}}</span>
+												<span class="d-block text-sm text-muted">{{doctor.city}},{{doctor.province}}</span>
+                                                <h4>Disease Name:</h4>
+
+                                                <input list="disease" onkeypress="return /[a-z]/i.test(event.key)" name="disease" id="abc" style="background-color: white;border-radius: 15px;height:45px;width:300px"/></label>
+<datalist id="disease">
+<option value="Allergy"></option>
+<option value="GERD">
+    <option value="Chronic cholestasis">
+<option value="Drug Reaction">
+<option value="Peptic ulcer diseae">
+<option value="AIDS">
+<option value="Diabetes">
+<option value="Gastroenteritis">
+<option value="Bronchial Asthma">
+<option value="Hypertension">
+<option value="Migraine">
+    <option value="Cervical spondylosis">
+<option value="Paralysis (brain hemorrhage)">
+<option value="Jaundice">
+<option value="Malaria">
+<option value="Chicken pox">
+<option value="Dengue">
+<option value="Typhoid">
+<option value="hepatitis A">
+<option value="Hepatitis B">
+<option value="Hepatitis C">
+<option value="Hepatitis D">
+<option value="Hepatitis E">
+<option value="Alcoholic hepatitis">
+<option value="Tuberculosis">
+<option value="Common Cold">
+<option value="Pneumonia">
+<option value="Dimorphic hemmorhoids(piles)">
+<option value="Heart attack">
+<option value="Varicose veins">
+<option value="Hypothyroidism">
+<option value="Hypoglycemia">
+<option value="Osteoarthristis">
+<option value="Arthritis">
+<option value="(vertigo) Paroymsal  Positional Vertigo">
+<option value="Acne">
+<option value="Urinary tract infection">
+<option value="Psoriasis">
+<option value="Impetigo">
+<option value="Fungal infection">
+
+</datalist>
+											</div>
+										</div>
+<!--										<div class="col-sm-6 text-sm-right">-->
+<!--											<div class="billing-info">-->
+<!--												<h4 class="d-block" id="date"></h4>-->
+<!--												<span class="d-block text-muted">#INV0001</span>-->
+<!--											</div>-->
+<!--										</div>-->
+									</div>
+
+
+
+									<!-- Prescription Item -->
+
+
+									<div class="card card-table">
+										<div class="card-body">
+											<div class="table-responsive">
+												<table class="table table-hover table-center">
+												<thead>
+													<tr>
+														<th style="width: 150px">Medicine Name</th>
+														<th >Quantity</th>
+														<th >Days</th>
+														<th style="width: 400px;">Time</th>
+
+													</tr>
+												</thead>
+												<tbody>
+
+												</tbody>
+												</table>
+
+												<div class="input_fields_wrap">
+    <!--<button class="add_field_button" style="background-color: #00CCFF; color: black;"> Add More Fields </button>-->
+    <div><input style="width: 150px" type="text" name="mytext[]" style="width:150px;" onkeypress="return /[a-z]/i.test(event.key)">
+        <input type="hidden" id="patient_email" name="patient_email" value="{{patient.patient_email}}">
+        <input type="hidden" id="doctor_email" name="doctor_email" value="{{patient.doctor_email}}">
+        <input type="hidden" id="appointment_day" name="appointment_day" value="{{patient.appointment_day}}">
+        <input type="hidden" id="appointment_time" name="appointment_time" value="{{patient.appointment_time}}">
+        <input type="hidden" id="date" name="date" value="{{patient.date}}">
+
+        <input style="width: 100px" type="text" style="width:50px;" name="quantity[]" onkeypress="return /[0-9]/i.test(event.key)" minlength="0" maxlength="2">
+        <input style="width: 100px" type="text" style="width:50px;" name="days[]" onkeypress="return /[0-9]/i.test(event.key)" minlength="0" maxlength="2">
+        <input  type="checkbox" value="Morning" name="time"> Morning <input  type="checkbox" value="Afternoon" name="time"> Afternoon <input  type="checkbox" value="Evening" name="time"> Evening <input  type="checkbox" value="Night" name="time"> Night </div>
+</div>
+                                                <hr>
+                                                <b>Instructions:</b>
+                                                <input style="width:100%" name="instructions" id="instructions" type="text">
+											</div>
+										</div>
+									</div>
+									<!-- /Prescription Item -->
+
+									<!-- Signature -->
+									<div class="row">
+										<div class="col-md-12 text-right">
+											<div class="signature-wrap">
+<!--												<div class="signature">-->
+<!--													Click here to sign-->
+<!--												</div>-->
+												<div class="sign-name">
+													<p class="mb-0">( Dr. {{doctor.first_name}} {{doctor.last_name}} )</p>
+<!--													<span class="text-muted">Signature</span>-->
+												</div>
+											</div>
+										</div>
+									</div>
+									<!-- /Signature -->
+
+									<!-- Submit Section -->
+									<div class="row">
+										<div class="col-md-12">
+											<div class="submit-section">
+												<button type="submit" class="btn btn-primary submit-btn">Save</button>
+												<button type="reset" class="btn btn-secondary submit-btn" onclick="resetForm();">Clear</button>
+											</div>
+										</div>
+									</div>
+									<!-- /Submit Section -->
+</form>
+								</div>
+							</div>
+						</div>
+									</div>
+								</div>
+							</div>
+							<!-- /Profile Widget -->
+
+
+
+                        <!-- panel content end -->
+                        <!-- panel end -->
+                        </div>
+                    </div>
+
+
+
+
+
+
+
+
+
+
+
+                              </div>
+                            </div><!-- .col -->
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+
+
+
+
+<!--footer-->
+
+
+
+         <div class="row">
+                            <div class="col-md-12">
+                                <div class="copyright">
+                                    <p>Copyright © 2020 WeDoctor's. All rights reserved. </p>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+        </div>
+
+
+    <script src="{% static 'others/vendor/jquery-3.2.1.min.js' %}"></script>
+    <!-- Bootstrap JS-->
+    <script src="{% static 'others/vendor/bootstrap-4.1/popper.min.js' %}"></script>
+    <script src="{% static 'others/vendor/bootstrap-4.1/bootstrap.min.js' %}"></script>
+    <!-- Vendor JS       -->
+    <script src="{% static 'others/vendor/slick/slick.min.js' %}">
+    </script>
+    <script src="{% static 'others/vendor/wow/wow.min.js' %}"></script>
+    <script src="{% static 'others/vendor/animsition/animsition.min.js' %}"></script>
+    <script src="{% static 'others/vendor/bootstrap-progressbar/bootstrap-progressbar.min.js' %}">
+    </script>
+    <script src="{% static 'others/vendor/counter-up/jquery.waypoints.min.js' %}"></script>
+    <script src="{% static 'others/vendor/counter-up/jquery.counterup.min.js' %}">
+    </script>
+    <script src="{% static 'others/vendor/circle-progress/circle-progress.min.js' %}"></script>
+    <script src="{% static 'others/vendor/perfect-scrollbar/perfect-scrollbar.js' %}"></script>
+    <script src="{% static 'others/vendor/chartjs/Chart.bundle.min.js' %}"></script>
+    <script src="{% static 'others/vendor/select2/select2.min.js' %}"></script>
+
+    <!-- full calendar requires moment along jquery which is included above -->
+<!--    <script src="{% static 'others/vendor/fullcalendar-3.10.0/lib/moment.min.js' %}"></script>-->
+<!--    <script src="{% static 'others/vendor/fullcalendar-3.10.0/fullcalendar.js' %}"></script>-->
+
+    <!-- Main JS-->
+    <script src="{% static 'others/js/main.js' %}"></script>
+
+<!--    <script type="text/javascript">-->
+<!--$(function() {-->
+<!--  // for now, there is something adding a click handler to 'a'-->
+<!--  var tues = moment().day(2).hour(19);-->
+
+<!--  // build trival night events for example data-->
+<!--  var events = [-->
+<!--    {-->
+<!--      title: "Special Conference",-->
+<!--      start: moment().format('YYYY-MM-DD'),-->
+<!--      url: '#'-->
+<!--    },-->
+<!--&lt;!&ndash;    {&ndash;&gt;-->
+<!--&lt;!&ndash;      title: "Doctor Appt",&ndash;&gt;-->
+<!--&lt;!&ndash;      start: moment().hour(9).add(2, 'days').toISOString(),&ndash;&gt;-->
+<!--&lt;!&ndash;      url: '#'&ndash;&gt;-->
+<!--&lt;!&ndash;    }&ndash;&gt;-->
+
+<!--  ];-->
+
+<!--  var trivia_nights = []-->
+
+<!--  for(var i = 1; i <= 4; i++) {-->
+<!--    var n = tues.clone().add(i, 'weeks');-->
+<!--    console.log("isoString: " + n.toISOString());-->
+<!--&lt;!&ndash;    trivia_nights.push({&ndash;&gt;-->
+<!--&lt;!&ndash;      title: 'Trival Night @ Pub XYZ',&ndash;&gt;-->
+<!--&lt;!&ndash;      start: n.toISOString(),&ndash;&gt;-->
+<!--&lt;!&ndash;      allDay: false,&ndash;&gt;-->
+<!--&lt;!&ndash;      url: '#'&ndash;&gt;-->
+<!--&lt;!&ndash;    });&ndash;&gt;-->
+<!--  }-->
+
+<!--  // setup a few events-->
+<!--  $('#calendar').fullCalendar({-->
+<!--    header: {-->
+<!--      left: 'prev,next today',-->
+<!--      center: 'title',-->
+<!--      right: 'month,agendaWeek,agendaDay,listWeek'-->
+<!--    },-->
+<!--    events: events.concat(trivia_nights)-->
+<!--  });-->
+<!--});-->
+<!--    </script>-->
+
+
+
+
+<!--appointment-->
+ <script src="{% static 'doctor_schedule/js/jquery.js ' %}"></script>
+
+        <!-- Bootstrap Core JavaScript -->
+        <script src="{% static 'doctor_schedule/js/bootstrap.min.js' %}"></script>
+        <script src="{% static 'doctor_schedule/js/clock/bootstrap-clockpicker.js' %}"></script>
+        <!-- Latest compiled and minified JavaScript -->
+         <!-- script for jquery datatable start-->
+        <!-- Include Date Range Picker -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+    <script>
+function resetForm() {
+    document.getElementById("myForm").reset();
+}
+</script>
+	<script>
+		$(document).ready(function() {
+	var max_fields      = 20; //maximum input boxes allowed
+	var wrapper   		= $(".input_fields_wrap"); //Fields wrapper
+	var add_button      = $(".add_field_button"); //Add button ID
+
+	var x = 1; //initlal text box count
+	$(add_button).click(function(e){ //on add input button click
+		e.preventDefault();
+		if(x < max_fields){ //max input box allowed
+			x++; //text box increment
+			$(wrapper).append('<div><input type="text" style="width:150px;" name="mytext[]"onkeypress="return /[a-z]/i.test(event.key)" />   <input type="text" style="width:50px;" name="quantity[]" onkeypress="return /[0-9]/i.test(event.key)" minlength="0" maxlength="2"/>  <input type="numbers" style="width:50px;" name="days[]" onkeypress="return /[0-9]/i.test(event.key)" minlength="0" maxlength="2"/> <input type="checkbox" name="time" value="Morning".{{x}}/> Morning <input type="checkbox" name="time" value="Afternoon[x]"/> Afternoon <input type="checkbox" name="time" value="Evening"/> Evening <input type="checkbox" name="time" value="Night"/> Night <a href="#" class="remove_field" style="color:red;">Remove</a></div>'); //add input box
+		}
+	});
+
+	$(wrapper).on("click",".remove_field", function(e){ //user click on remove text
+		e.preventDefault(); $(this).parent('div').remove(); x--;
+	})
+});
+
+
+
+	</script>
+
+
+</body>
+
+</html>
+<!-- end document-->

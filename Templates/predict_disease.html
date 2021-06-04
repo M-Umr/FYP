@@ -1,0 +1,1520 @@
+
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <title>Predict Disease</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!--<link href="{% static 'images/dill.png' %}" rel="icon">-->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,600,700" rel="stylesheet">
+ <link href="{% static 'images/dill3.png' %}" rel="icon">
+    <link rel="stylesheet" href="{% static 'css/open-iconic-bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
+<!--      symptoms wali jquery-->
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <link rel="stylesheet" href="{% static 'css/aos.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/ionicons.min.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/bootstrap-datepicker.css' %}">
+    <link rel="stylesheet" href="{% static 'css/jquery.timepicker.css' %}">
+<!--w3 schools-->
+	  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<!--end w3 schools-->
+
+    <link rel="stylesheet" href="{% static 'css/flaticon.css' %}">
+    <link rel="stylesheet" href="{% static 'css/icomoon.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+  </head>
+  <style>
+      .hidden {
+display: none;
+}
+.marg{
+margin-left: 325px;
+}
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+  color:white;
+}
+
+  </style>
+  <body>
+
+	  <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+	    <div class="container">
+             <img src="{% static 'images/dill3.png' %} ">
+	      <a class="navbar-brand"  href="{% url 'patientprofile' %}">We<span>Doctor's</span></a>
+	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+	        <span class="oi oi-menu"></span> Menu
+	      </button>
+
+	      <div class="collapse navbar-collapse" id="ftco-nav">
+	        <ul class="navbar-nav ml-auto">
+	          <li class="nav-item "><a href=" {% url 'patientprofile' %} " class="nav-link">Home</a></li>
+                <li class="nav-item  "><a href= "{% url 'patient_dashboard' %}"  class="nav-link">Dashboard</a></li>
+<!--	          <li class="nav-item "><a href= "{% url 'updateprofile' %}"  class="nav-link">Profile</a></li>-->
+	          <li class="nav-item"><a href="{% url 'makeappointment' %}" class="nav-link">Make an Appointment</a></li>
+	          <li class="nav-item active"><a href="{% url 'predictdisease' %}" class="nav-link">Predict Disease</a></li>
+<!--                <li class="nav-item"><a href="{% url 'livecall_patient' %}" class="nav-link">Live Call</a></li>-->
+<!--	          <li class="nav-item"><a href="{% url 'blog' %}" class="nav-link">Blog</a></li>-->
+	          <li class="nav-item"><a href="{% url 'mappatient' %}" class="nav-link">Area of Disease</a></li>
+<!--				 <li class="nav-item"><a href="#" class="nav-link">Area of Disease</a></li>-->
+<!--	          <li class="nav-item cta"> <a href="{% url 'login' %}" class="nav-link" data-toggle="modal" data-target="#modalRequest"><span>Sign In</span></a></li>-->
+
+<li class="w3-dropdown-hover">
+    <button  class="w3-button " style="border-radius:30px;background-color:#0066FF;color:white" ><img src="{% static 'images/settings.png' %} " style="height:25px;width:25px;">&nbsp;&nbsp;Setting</button>
+    <div class="w3-dropdown-content w3-bar-block w3-border" style="border-radius:20px;background-color:#0066FF">
+      <a href="{% url 'updateprofile' %}" class="w3-bar-item w3-button" style="border-radius:30px;color:white;background-color:#0066FF">Edit Profile</a>
+<!--      <a href="#" class="w3-bar-item w3-button">Link 2</a>-->
+      <form  action="/singnout/" method="POST" style="border-radius:30px;background-color:#0066FF;color:white">
+				 {% csrf_token %}
+
+			 <input type="submit"  value="Sign out" class="btn w3-bar-item w3-button " style="border-radius:30px;background-color:#0066FF;color:white">
+				</form>
+    </div>
+  </li>
+<!--	          <li class="nav-item cta"> <a href="{% url 'login' %}" class="nav-link" data-toggle="modal" data-target="#modalRequest"><span>Sign In</span></a></li>-->
+			</ul>
+	      </div>
+
+	    </div>
+
+
+
+
+
+      </nav>
+    <!-- END nav -->
+
+<!--    <section class="home-slider owl-carousel">-->
+<!--      <div class="slider-item" style="background-image: url({% static 'images/larki12.jpg' %});">-->
+<!--        <div class="overlay"></div>-->
+<!--        <div class="container">-->
+<!--          <div class="row slider-text align-items-center" data-scrollax-parent="true">-->
+<!--            <div class="col-md-6 col-sm-12 ftco-animate" data-scrollax=" properties: { translateY: '70%' }">-->
+<!--              <h1 class="mb-4" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">WeDoctor is designed for you to take control of your health</h1>-->
+<!--              <p class="mb-4" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">WeDoctor has come- up with a solution to accommodate as much patients as possible.</p>-->
+<!--              <p data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><a href=" #" class="btn btn-primary px-4 py-3">Predict Disease</a></p>-->
+<!--&lt;!&ndash;           <p data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><a href="{% url 'signupfordoctor' %}" class="btn btn-primary px-4 py-3">Sign Up For Doctor</a></p>&ndash;&gt;-->
+
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+
+<!--      <div class="slider-item" style="background-image: url({% static 'images/bacha12.jpg' %});">-->
+<!--        <div class="overlay"></div>-->
+<!--        <div class="container">-->
+<!--          <div class="row slider-text align-items-center" data-scrollax-parent="true">-->
+<!--            <div class="col-md-6 col-sm-12 ftco-animate" data-scrollax=" properties: { translateY: '70%' }">-->
+<!--              <h1 class="mb-4" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Your Personal Doctor, Online</h1>-->
+<!--              <p class="mb-4">Partnering you with a doctor who really gets to know you, listens to you, and has time for you. Aligned with your life..</p>-->
+<!--              <p><a href="#" class="btn btn-primary px-4 py-3">Predict Disease</a></p>-->
+<!--&lt;!&ndash;				<p><a href="{% url 'signupfordoctor' %}" class="btn btn-primary px-4 py-3">Sign Up As Doctor</a></p>&ndash;&gt;-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </section>-->
+
+
+
+    <section class="ftco-section ftco-services" style="background:black">
+      <div class="container">
+      	<div class="row justify-content-center  pb-5">
+          <div class="col-md-7 text-center heading-section ftco-animate">
+              <br><br>
+
+            <h2 class="mb-2"  >Are You facing any symptoms?</h2>
+              <h2 class="mb-2" >Please enter minimun 4 symptoms</h2>
+          </div>
+        </div>
+      </div>
+    </section>
+<section class="ftco-section " style="background:black">
+      <div class="container">
+      	<div class="row justify-content-center mb-5 pb-5">
+          <div class="col-md-7 text-center heading-section ftco-animate">
+<div class="input_fields_wrap" >
+     <form action="/detect_disease/"  method="POST" >
+        {% csrf_token %}
+                     <div class="input_fields_wrap">
+                         <label style="color:#00CCFF; "><span style="font-size:20px" >Enter your symptom:</span>
+<input list="fourth_symptom" onkeypress="return /[a-z]/i.test(event.key)" name="fourth_symptom" id="abc" style="background-color: white;border-radius: 15px;height:45px;width:300px"/></label>
+<datalist id="fourth_symptom">
+<option value="itching"></option>
+<option value="skin_rash">
+    <option value="nodal_skin_eruptions">
+<option value="continuous_sneezing">
+<option value="shivering">
+<option value="chills">
+<option value="joint_pain">
+<option value="stomach_pain">
+<option value="ulcers_on_tongue">
+<option value="muscle_wasting">
+<option value="vomiting">
+    <option value="lethargy">
+<option value="burning_micturition">
+<option value="spotting_ urination">
+<option value="fatigue">
+<option value="weight_gain">
+<option value="anxiety">
+<option value="cold_hands_and_feets">
+<option value="mood_swings">
+<option value="weight_loss">
+<option value="restlessness">
+<option value="patches_in_throat">
+<option value="irregular_sugar_level">
+<option value="cough">
+<option value="high_fever">
+<option value="sunken_eyes">
+<option value="breathlessness">
+<option value="sweating">
+<option value="dehydration">
+<option value="indigestion">
+<option value="headache">
+<option value="yellowish_skin">
+<option value="dark_urine">
+<option value="nausea">
+<option value="loss_of_appetite">
+<option value="pain_behind_the_eyes">
+<option value="back_pain">
+<option value="constipation">
+<option value="abdominal_pain">
+<option value="diarrhoea">
+<option value="mild_fever">
+<option value="yellow_urine">
+<option value="yellowing_of_eyes">
+<option value="acute_liver_failure">
+<option value="fluid_overload">
+<option value="swelling_of_stomach">
+<option value="swelled_lymph_nodes">
+<option value="blurred_and_distorted_vision">
+<option value="phlegm">
+<option value="throat_irritation">
+<option value="redness_of_eyes">
+<option value="sinus_pressure">
+<option value="runny_nose">
+<option value="congestion">
+<option value="chest_pain">
+<option value="weakness_in_limbs">
+<option value="fast_heart_rate">
+<option value="pain_during_bowel_movements">
+<option value="pain_in_anal_region">
+<option value="bloody_stool">
+<option value="irritation_in_anus">
+<option value="neck_pain">
+<option value="dizziness">
+<option value="cramps">
+<option value="bruising">
+<option value="obesity">
+<option value="swollen_legs">
+<option value="swollen_blood_vessels">
+<option value="puffy_face_and_eyes">
+<option value="enlarged_thyroid">
+<option value="brittle_nails">
+<option value="swollen_extremeties">
+<option value="excessive_hunger">
+<option value="extra_marital_contacts">
+<option value="drying_and_tingling_lips">
+<option value="slurred_speech">
+<option value="knee_pain">
+<option value="hip_joint_pain">
+<option value="muscle_weakness">
+<option value="stiff_neck">
+<option value="swelling_joints">
+<option value="movement_stiffness">
+<option value="spinning_movements">
+<option value="loss_of_balance">
+<option value="unsteadiness">
+<option value="weakness_of_one_body_side">
+<option value="loss_of_smell">
+<option value="bladder_discomfort">
+<option value="foul_smell_of urine">
+<option value="continuous_feel_of_urine">
+<option value="passage_of_gases">
+<option value="internal_itching">
+<option value="toxic_look_(typhos)">
+<option value="depression">
+<option value="irritability">
+<option value="muscle_pain">
+<option value="altered_sensorium">
+<option value="red_spots_over_body">
+
+    <option value="malaise">
+<option value="belly_pain">
+<option value="abnormal_menstruation">
+<option value="dischromic _patches">
+<option value="watering_from_eyes">
+<option value="increased_appetite">
+<option value="polyuria">
+<option value="family_history">
+<option value="mucoid_sputum">
+<option value="rusty_sputum">
+<option value="lack_of_concentration">
+<option value="visual_disturbances">
+<option value="receiving_blood_transfusion">
+<option value="receiving_unsterile_injections">
+<option value="coma">
+<option value="stomach_bleeding">
+<option value="distention_of_abdomen">
+<option value="history_of_alcohol_consumption">
+<option value="fluid_overload.1">
+<option value="blood_in_sputum">
+<option value="prominent_veins_on_calf">
+<option value="palpitations">
+<option value="painful_walking">
+<option value="pus_filled_pimples">
+<option value="blackheads">
+<option value="scurring">
+<option value="skin_peeling">
+<option value="silver_like_dusting">
+<option value="small_dents_in_nails">
+<option value="inflammatory_nails">
+<option value="blister">
+<option value="red_sore_around_nose">
+<option value="yellow_crust_ooze">
+<option value="prognosis">
+
+
+</datalist>
+
+                     </div>
+                         <div>
+                              <button   type="Submit" id="abcde" class=" marg hidden btn btn-success">Predict Disease</button>
+<h2 class="mb-2 hidden"  id="abcd" style="font-size:1.2em" ></h2>
+
+                         </div>
+                         <br><br>
+
+        </div>
+   </div>
+            <input type="text" class="hidden" id="four" name="four">
+      </form>
+
+
+
+
+
+
+<button onclick="enterdisease();"  class="btn btn-success " style="width:100px;height:40px;">Add More</button>
+</div>
+          </div>
+
+
+        <script>
+
+
+function enterdisease() {
+
+    var input = document.getElementById("abc").value;
+    if(input=="" || input=='undefined')
+    {
+       var x = document.getElementById("abcd");
+       x.style.display = "block";
+       abcd.innerText = "enter a valid input ";
+
+    }
+    else
+    { diseases.push(input);
+        if (diseases.length <5) {
+            document.getElementById("abc").value="";
+
+            var x = document.getElementById("abcd");
+             x.style.display = "block";
+             if (diseases.length==1)
+             {
+
+             abcd.innerText = diseases;
+             }
+             if (diseases.length==2)
+             {
+
+             abcd.innerText =diseases;
+             }
+              if (diseases.length==3)
+             {
+             abcd.innerText = diseases;
+             }
+               if (diseases.length==4)
+             {
+             abcd.innerText =diseases;
+             var x = document.getElementById("abcde");
+             x.style.display = "block";
+                 document.getElementById("four").value =diseases;
+             }
+
+        }
+        else {
+         abcd.innerText = diseases;
+        document.getElementById("abc").value="";
+        document.getElementById("four").value ="";
+        document.getElementById("four").value =diseases;
+
+        }
+
+    }
+}
+  var diseases = [];
+
+document.getElementById("abcde").addEventListener('click', analyzeText());
+  function analyzeText(){
+   $ajax({
+        type: "POST",
+        url: '{{'detect_disease'}}',
+        data: {csrfmiddlewaretoken: '{{ csrf_token }}',
+              text:diseases},
+        success:  function(response){
+               alert(response);
+           }
+    });
+  }
+
+        </script>
+
+          {% ifequal yes 'yes' %}
+
+    <h1 align="center" style="font-weight:bold;font-family : 'Serif' ; color:#00CCFF; ;margin-top:4%"> <b style="color:grey;font-size: 25px;"> {{percentage}} % of your symptoms are matching<br></b> <b style="color:skyBlue">Pridicted Disease : </b><b style="color:skyBlue"> " {{b}} " </b> </h1>
+ <h1 align="center" style="font-weight:bold;font-family : 'Serif' ;font-size: 20px; color:grey; margin-top:4%">If you are facing these symptoms to {{not_match_symptoms}} than kindly contact to the following doctor</h1>
+        <hr>
+         {% endifequal %}
+              {% ifequal yes 'no' %}
+
+<h1 align="center" style="font-weight:bold;font-family : 'Serif' ; color:#00CCFF; ;margin-top:4%">Disease not pridicted:<b style="color:skyBlue"> Kindly enter correct or more symptoms </b> </h1>
+        <hr>
+         {% endifequal %}
+
+        {% ifequal do 'no' %}
+         <h1 align="center" style="font-weight:bold;font-family : 'monospace' ; color:#00CCFF; ;margin-top:4%">No Doctor found </h1>
+
+        {% endifequal %}
+
+
+    {% ifequal do 'yes' %}
+
+             <div class="container-fluid" style="width:90%;margin-top:3%">{% csrf_token %}
+
+                    <div class="container-fluid">
+                        <h1 align="center" style="font-weight:bold;font-family : 'monospace' ; color:#00CCFF; ;margin-top:4%">You may contact this Doctor </h1>
+                         </div><hr>
+<div style="overflow-x:auto;">
+                                <table id="example" class="display" style="width:100%;font-family: arial, sans-serif;border-collapse: collapse;">
+                                  <thead>
+                                    <tr>
+                                      <th>#</th>
+
+                                      <th>Full Name</th>
+                                      <th>Email</th>
+                                      <th>Contact</th>
+                                      <th>Address</th>
+                                        <th>Book Appointment</th>
+
+                                  </tr>
+                              </thead>
+                              <tbody>
+                              {% for i in doctors %}
+                                <tr>
+                                  <td>{{forloop.counter}}</td>
+
+                                  <td>{{i.first_name}} {{i.last_name}}</td>
+                                  <td>{{i.email}}</td>
+                                  <td>{{i.contact_no}}</td>
+                                  <td>{{i.full_address}}</td>
+                                    <form  action="/bookappointment/" method="POST">
+									  {% csrf_token %}
+
+									  <input type="hidden" id="email" name="email" value="{{i.email}}">
+                                 <td >
+                                     <input type="submit" id="submit" style="background-color: #4CAF50;border: none;color: white;   padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;"  class="btn btn-primary submit-btn" value="Book Appointment">
+
+                                 </td>
+                                    </form>
+                              </tr>
+                              {% endfor %}
+                          </tbody>
+                      </table>
+</div>
+                  </div>
+        {% endifequal %}
+
+
+    </section>
+
+
+<!--    <section class="ftco-section" >-->
+<!--      <div class="container">-->
+<!--      	<div class="row justify-content-center mb-5 pb-5">-->
+<!--          <div class="col-md-7 text-center heading-section ftco-animate">-->
+<!--            <h2 class="mb-3">Select From the following Diseases</h2>-->
+<!--&lt;!&ndash;            <p>A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences</p>&ndash;&gt;-->
+<!--          </div>-->
+<!--        </div>-->
+
+
+
+<!--&lt;!&ndash;Drug Reaction&ndash;&gt;-->
+<!--        <div class="row">-->
+<!--        	<div class="col-lg-3 col-md-6 d-flex mb-sm-4 ftco-animate">-->
+<!--        		<div class="staff">-->
+<!--      				<div class="img mb-4" style=" background-image: url({% static 'images/Drug_Reaction1.jpg' %});"></div>-->
+<!--      				<div class="info text-center">-->
+<!--      					<h3><a href="teacher-single.html">Drug Reaction</a></h3>-->
+<!--&lt;!&ndash;      					<span class="position">Drug Reaction</span>&ndash;&gt;-->
+<!--&lt;!&ndash;      					<div class="text">&ndash;&gt;-->
+<!--&lt;!&ndash;	        				<p></p>&ndash;&gt;-->
+<!--&lt;!&ndash;	        				<ul class="ftco-social">&ndash;&gt;-->
+<!--&lt;!&ndash;			              <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>&ndash;&gt;-->
+<!--&lt;!&ndash;			              <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>&ndash;&gt;-->
+<!--&lt;!&ndash;			              <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>&ndash;&gt;-->
+<!--&lt;!&ndash;			              <li class="ftco-animate"><a href="#"><span class="icon-google-plus"></span></a></li>&ndash;&gt;-->
+<!--&lt;!&ndash;			            </ul>&ndash;&gt;-->
+<!--&lt;!&ndash;	        			</div>&ndash;&gt;-->
+<!--      				</div>-->
+<!--        		</div>-->
+<!--        	</div>-->
+
+
+
+
+<!--&lt;!&ndash;            Malaria&ndash;&gt;-->
+<!--        	<div class="col-lg-3 col-md-6 d-flex mb-sm-4 ftco-animate">-->
+<!--        		<div class="staff">-->
+<!--      				<div class="img mb-4" style="background-image: url({% static 'images/Malaria_1.jpg' %});"></div>-->
+<!--      				<div class="info text-center">-->
+<!--      					<h3><a href="teacher-single.html">Malaria</a></h3>-->
+
+<!--      				</div>-->
+<!--        		</div>-->
+<!--        	</div>-->
+
+
+
+<!--&lt;!&ndash;      Allergy      &ndash;&gt;-->
+<!--        	<div class="col-lg-3 col-md-6 d-flex mb-sm-4 ftco-animate">-->
+<!--        		<div class="staff">-->
+<!--      				<div class="img mb-4" style="background-image: url({% static 'images/Allergy_1.jpg' %});"></div>-->
+<!--      				<div class="info text-center">-->
+<!--      					<h3><a href="teacher-single.html">Allergy</a></h3>-->
+<!--      				</div>-->
+<!--        		</div>-->
+<!--        	</div>-->
+
+
+<!--            &lt;!&ndash;      Hypothyroidism     &ndash;&gt;-->
+<!--        	<div class="col-lg-3 col-md-6 d-flex mb-sm-4 ftco-animate">-->
+<!--        		<div class="staff">-->
+<!--      				<div class="img mb-4" style="background-image: url({% static 'images/Hypothyroidism_1.jpg' %});"></div>-->
+<!--      				<div class="info text-center">-->
+<!--      					<h3><a href="teacher-single.html">Hypothyroidism</a></h3>-->
+<!--      				</div>-->
+<!--        		</div>-->
+<!--        	</div>-->
+
+
+<!--             &lt;!&ndash;      Psoriasis     &ndash;&gt;-->
+<!--        	<div class="col-lg-3 col-md-6 d-flex mb-sm-4 ftco-animate">-->
+<!--        		<div class="staff">-->
+<!--      				<div class="img mb-4" style="background-image: url({% static 'images/Psoriasis_1.jpg' %});"></div>-->
+<!--      				<div class="info text-center">-->
+<!--      					<h3><a href="teacher-single.html">Psoriasis</a></h3>-->
+<!--      				</div>-->
+<!--        		</div>-->
+<!--        	</div>-->
+
+<!--             &lt;!&ndash;      GERD    &ndash;&gt;-->
+<!--        	<div class="col-lg-3 col-md-6 d-flex mb-sm-4 ftco-animate">-->
+<!--        		<div class="staff">-->
+<!--      				<div class="img mb-4" style="background-image: url({% static 'images/GERD_1.jpg' %});"></div>-->
+<!--      				<div class="info text-center">-->
+<!--      					<h3><a href="teacher-single.html">GERD</a></h3>-->
+<!--      				</div>-->
+<!--        		</div>-->
+<!--        	</div>-->
+
+
+<!--                &lt;!&ndash;     Chronic cholestasis    &ndash;&gt;-->
+<!--        	<div class="col-lg-3 col-md-6 d-flex mb-sm-4 ftco-animate">-->
+<!--        		<div class="staff">-->
+<!--      				<div class="img mb-4" style="background-image: url({% static 'images/Chronic_cholestasis_1.jpg' %});"></div>-->
+<!--      				<div class="info text-center">-->
+<!--      					<h3><a href="teacher-single.html">Chronic cholestasis</a></h3>-->
+<!--      				</div>-->
+<!--        		</div>-->
+<!--        	</div>-->
+
+
+
+<!--                &lt;!&ndash;      hepatitis A    &ndash;&gt;-->
+<!--        	<div class="col-lg-3 col-md-6 d-flex mb-sm-4 ftco-animate">-->
+<!--        		<div class="staff">-->
+<!--      				<div class="img mb-4" style="background-image: url({% static 'images/hepatitis_A_1.jpg' %});"></div>-->
+<!--      				<div class="info text-center">-->
+<!--      					<h3><a href="teacher-single.html">hepatitis A</a></h3>-->
+<!--      				</div>-->
+<!--        		</div>-->
+<!--        	</div>-->
+
+
+
+
+<!--                &lt;!&ndash;      Osteoarthristis    &ndash;&gt;-->
+<!--        	<div class="col-lg-3 col-md-6 d-flex mb-sm-4 ftco-animate">-->
+<!--        		<div class="staff">-->
+<!--      				<div class="img mb-4" style="background-image: url({% static 'images/Osteoarthristis_1.jpg' %});"></div>-->
+<!--      				<div class="info text-center">-->
+<!--      					<h3><a href="teacher-single.html">Osteoarthristis</a></h3>-->
+<!--      				</div>-->
+<!--        		</div>-->
+<!--        	</div>-->
+
+
+
+
+<!--                &lt;!&ndash;      (vertigo) Paroymsal  Positional Vertigo    &ndash;&gt;-->
+<!--        	<div class="col-lg-3 col-md-6 d-flex mb-sm-4 ftco-animate">-->
+<!--        		<div class="staff">-->
+<!--					 <img class="img mb-4" src="{% static 'images/(vertigo)_Paroymsal_Positional_Vertigo_1.jpg'%}">-->
+<!--&lt;!&ndash;      				<div class="img mb-4" style="background-image: url({% static 'images/(vertigo)_Paroymsal_Positional_Vertigo_1.jpg'%});"></div>&ndash;&gt;-->
+<!--      				<div class="info text-center">-->
+<!--      					<h3><a href="teacher-single.html">(vertigo) Paroymsal  Positional Vertigo</a></h3>-->
+<!--      				</div>-->
+<!--        		</div>-->
+<!--        	</div>-->
+
+
+
+
+
+<!--                &lt;!&ndash;      Hypoglycemia    &ndash;&gt;-->
+<!--        	<div class="col-lg-3 col-md-6 d-flex mb-sm-4 ftco-animate">-->
+<!--        		<div class="staff">-->
+<!--      				<div class="img mb-4" style="background-image: url({% static 'images/Hypoglycemia_2.jpg' %});"></div>-->
+<!--      				<div class="info text-center">-->
+<!--      					<h3><a href="teacher-single.html">Hypoglycemia</a></h3>-->
+<!--      				</div>-->
+<!--        		</div>-->
+<!--        	</div>-->
+
+
+
+
+<!--                &lt;!&ndash;      Acne  &ndash;&gt;-->
+<!--        	<div class="col-lg-3 col-md-6 d-flex mb-sm-4 ftco-animate">-->
+<!--        		<div class="staff">-->
+<!--      				<div class="img mb-4" style="background-image: url({% static 'images/Acne_1.jpg' %});"></div>-->
+<!--      				<div class="info text-center">-->
+<!--      					<h3><a href="teacher-single.html">Acne</a></h3>-->
+<!--      				</div>-->
+<!--        		</div>-->
+<!--        	</div>-->
+
+
+
+
+<!--                &lt;!&ndash;      Diabetes     &ndash;&gt;-->
+<!--        	<div class="col-lg-3 col-md-6 d-flex mb-sm-4 ftco-animate">-->
+<!--        		<div class="staff">-->
+<!--      				<div class="img mb-4" style="background-image: url({% static 'images/Diabetes_1.jpeg' %});"></div>-->
+<!--      				<div class="info text-center">-->
+<!--      					<h3><a href="teacher-single.html">Diabetes</a></h3>-->
+<!--      				</div>-->
+<!--        		</div>-->
+<!--        	</div>-->
+
+
+
+
+<!--                &lt;!&ndash;      Impetigo  &ndash;&gt;-->
+<!--        	<div class="col-lg-3 col-md-6 d-flex mb-sm-4 ftco-animate">-->
+<!--        		<div class="staff">-->
+<!--      				<div class="img mb-4" style="background-image: url({% static 'images/Impetigo_2.jpg' %});"></div>-->
+<!--      				<div class="info text-center">-->
+<!--      					<h3><a href="teacher-single.html">Impetigo</a></h3>-->
+<!--      				</div>-->
+<!--        		</div>-->
+<!--        	</div>-->
+
+
+
+
+<!--                &lt;!&ndash;      Hypertension     &ndash;&gt;-->
+<!--        	<div class="col-lg-3 col-md-6 d-flex mb-sm-4 ftco-animate">-->
+<!--        		<div class="staff">-->
+<!--      				<div class="img mb-4" style="background-image: url({% static 'images/Hypertension_1.jpg' %});"></div>-->
+<!--      				<div class="info text-center">-->
+<!--      					<h3><a href="teacher-single.html">Hypertension</a></h3>-->
+<!--      				</div>-->
+<!--        		</div>-->
+<!--        	</div>-->
+
+
+
+<!--                &lt;!&ndash;      Peptic ulcer diseae   &ndash;&gt;-->
+<!--        	<div class="col-lg-3 col-md-6 d-flex mb-sm-4 ftco-animate">-->
+<!--        		<div class="staff">-->
+<!--      				<div class="img mb-4" style="background-image: url({% static 'images/Peptic_ulcer_diseae_1.jpg' %});"></div>-->
+<!--      				<div class="info text-center">-->
+<!--      					<h3><a href="teacher-single.html">Peptic ulcer diseae</a></h3>-->
+<!--      				</div>-->
+<!--        		</div>-->
+<!--        	</div>-->
+
+
+<!--                &lt;!&ndash;      Dimorphic hemmorhoids(piles)   &ndash;&gt;-->
+<!--        	<div class="col-lg-3 col-md-6 d-flex mb-sm-4 ftco-animate">-->
+<!--        		<div class="staff">-->
+<!--					 <img class="img mb-4" src="{% static 'images/Dimorphic_hemmorhoids(piles)_1.jpg'%}">-->
+<!--&lt;!&ndash;      				<div class="img mb-4" style="background-image: url({% static 'images/Dimorphic_hemmorhoids(piles)_2.jpg' %});"></div>&ndash;&gt;-->
+<!--      				<div class="info text-center">-->
+<!--      					<h3><a href="teacher-single.html">Dimorphic hemmorhoids(piles)</a></h3>-->
+<!--      				</div>-->
+<!--        		</div>-->
+<!--        	</div>-->
+
+
+<!--                &lt;!&ndash;      Chicken pox   &ndash;&gt;-->
+<!--        	<div class="col-lg-3 col-md-6 d-flex mb-sm-4 ftco-animate">-->
+<!--        		<div class="staff">-->
+<!--      				<div class="img mb-4" style="background-image: url({% static 'images/Chicken_pox_1.jpg' %});"></div>-->
+<!--      				<div class="info text-center">-->
+<!--      					<h3><a href="teacher-single.html">Chicken pox</a></h3>-->
+<!--      				</div>-->
+<!--        		</div>-->
+<!--        	</div>-->
+
+
+
+<!--                &lt;!&ndash;      Common Cold    &ndash;&gt;-->
+<!--        	<div class="col-lg-3 col-md-6 d-flex mb-sm-4 ftco-animate">-->
+<!--        		<div class="staff">-->
+<!--      				<div class="img mb-4" style="background-image: url({% static 'images/Common_Cold_1.jpg' %});"></div>-->
+<!--      				<div class="info text-center">-->
+<!--      					<h3><a href="teacher-single.html">Common Cold</a></h3>-->
+<!--      				</div>-->
+<!--        		</div>-->
+<!--        	</div>-->
+
+
+
+<!--                &lt;!&ndash;      Cervical spondylosis   &ndash;&gt;-->
+<!--        	<div class="col-lg-3 col-md-6 d-flex mb-sm-4 ftco-animate">-->
+<!--        		<div class="staff">-->
+<!--      				<div class="img mb-4" style="background-image: url({% static 'images/Cervical_spondylosis_1.jpg' %});"></div>-->
+<!--      				<div class="info text-center">-->
+<!--      					<h3><a href="teacher-single.html">Cervical spondylosis</a></h3>-->
+<!--      				</div>-->
+<!--        		</div>-->
+<!--        	</div>-->
+
+
+
+<!--                &lt;!&ndash;     Hyperthyroidism    &ndash;&gt;-->
+<!--        	<div class="col-lg-3 col-md-6 d-flex mb-sm-4 ftco-animate">-->
+<!--        		<div class="staff">-->
+<!--      				<div class="img mb-4" style="background-image: url({% static 'images/Hyperthyroidism_1.jpg' %});"></div>-->
+<!--      				<div class="info text-center">-->
+<!--      					<h3><a href="teacher-single.html">Hyperthyroidism</a></h3>-->
+<!--      				</div>-->
+<!--        		</div>-->
+<!--        	</div>-->
+
+
+
+<!--                &lt;!&ndash;      Urinary tract infection   &ndash;&gt;-->
+<!--        	<div class="col-lg-3 col-md-6 d-flex mb-sm-4 ftco-animate">-->
+<!--        		<div class="staff">-->
+<!--      				<div class="img mb-4" style="background-image: url({% static 'images/Urinary_tract_infection_1.jpg' %});"></div>-->
+<!--      				<div class="info text-center">-->
+<!--      					<h3><a href="teacher-single.html">Urinary tract infection</a></h3>-->
+<!--      				</div>-->
+<!--        		</div>-->
+<!--        	</div>-->
+
+
+
+<!--                &lt;!&ndash;     Varicose veins    &ndash;&gt;-->
+<!--        	<div class="col-lg-3 col-md-6 d-flex mb-sm-4 ftco-animate">-->
+<!--        		<div class="staff">-->
+<!--      				<div class="img mb-4" style="background-image: url({% static 'images/Varicose_veins_1.jpg' %});"></div>-->
+<!--      				<div class="info text-center">-->
+<!--      					<h3><a href="teacher-single.html">Varicose veins</a></h3>-->
+<!--      				</div>-->
+<!--        		</div>-->
+<!--        	</div>-->
+
+
+
+<!--			      &lt;!&ndash;     AIDS    &ndash;&gt;-->
+<!--        	<div class="col-lg-3 col-md-6 d-flex mb-sm-4 ftco-animate">-->
+<!--        		<div class="staff">-->
+<!--      				<div class="img mb-4" style="background-image: url({% static 'images/AIDS_1.jpg' %});"></div>-->
+<!--      				<div class="info text-center">-->
+<!--      					<h3><a href="teacher-single.html">AIDS</a></h3>-->
+<!--      				</div>-->
+<!--        		</div>-->
+<!--        	</div>-->
+
+
+<!--			      &lt;!&ndash;     Paralysis (brain hemorrhage)    &ndash;&gt;-->
+<!--        	<div class="col-lg-3 col-md-6 d-flex mb-sm-4 ftco-animate">-->
+<!--        		<div class="staff">-->
+<!--					<img class="img mb-4" src="{% static 'images/Paralysis_(brain hemorrhage)_1.jpg'%}">-->
+<!--&lt;!&ndash;      				<div class="img mb-4" style="background-image: url({% static 'images/Paralysis_(brain hemorrhage)_2.png' %});"></div>&ndash;&gt;-->
+<!--      				<div class="info text-center">-->
+<!--      					<h3><a href="teacher-single.html">Paralysis (brain hemorrhage)</a></h3>-->
+<!--      				</div>-->
+<!--        		</div>-->
+<!--        	</div>-->
+
+
+<!--			      &lt;!&ndash;     Typhoid    &ndash;&gt;-->
+<!--        	<div class="col-lg-3 col-md-6 d-flex mb-sm-4 ftco-animate">-->
+<!--        		<div class="staff">-->
+<!--      				<div class="img mb-4" style="background-image: url({% static 'images/Typhoid_1.jpg' %});"></div>-->
+<!--      				<div class="info text-center">-->
+<!--      					<h3><a href="teacher-single.html">Typhoid</a></h3>-->
+<!--      				</div>-->
+<!--        		</div>-->
+<!--        	</div>-->
+
+
+<!--			      &lt;!&ndash;     Hepatitis B   &ndash;&gt;-->
+<!--        	<div class="col-lg-3 col-md-6 d-flex mb-sm-4 ftco-animate">-->
+<!--        		<div class="staff">-->
+<!--      				<div class="img mb-4" style="background-image: url({% static 'images/Hepatitis_B_1.jpg' %});"></div>-->
+<!--      				<div class="info text-center">-->
+<!--      					<h3><a href="teacher-single.html">Hepatitis B</a></h3>-->
+<!--      				</div>-->
+<!--        		</div>-->
+<!--        	</div>-->
+
+
+<!--			      &lt;!&ndash;     Hepatitis C   &ndash;&gt;-->
+<!--        	<div class="col-lg-3 col-md-6 d-flex mb-sm-4 ftco-animate">-->
+<!--        		<div class="staff">-->
+<!--      				<div class="img mb-4" style="background-image: url({% static 'images/Hepatitis_C_1.jpg' %});"></div>-->
+<!--      				<div class="info text-center">-->
+<!--      					<h3><a href="teacher-single.html">Hepatitis C</a></h3>-->
+<!--      				</div>-->
+<!--        		</div>-->
+<!--        	</div>-->
+
+
+<!--			      &lt;!&ndash;     Migraine    &ndash;&gt;-->
+<!--        	<div class="col-lg-3 col-md-6 d-flex mb-sm-4 ftco-animate">-->
+<!--        		<div class="staff">-->
+<!--      				<div class="img mb-4" style="background-image: url({% static 'images/Migraine_1.jpg' %});"></div>-->
+<!--      				<div class="info text-center">-->
+<!--      					<h3><a href="teacher-single.html">Migraine</a></h3>-->
+<!--      				</div>-->
+<!--        		</div>-->
+<!--        	</div>-->
+
+
+
+<!--			      &lt;!&ndash;     Bronchial Asthma    &ndash;&gt;-->
+<!--        	<div class="col-lg-3 col-md-6 d-flex mb-sm-4 ftco-animate">-->
+<!--        		<div class="staff">-->
+<!--      				<div class="img mb-4" style="background-image: url({% static 'images/Bronchial_Asthma_1.jpg' %});"></div>-->
+<!--      				<div class="info text-center">-->
+<!--      					<h3><a href="teacher-single.html">Bronchial Asthma</a></h3>-->
+<!--      				</div>-->
+<!--        		</div>-->
+<!--        	</div>-->
+
+
+
+<!--			      &lt;!&ndash;     Alcoholic hepatitis   &ndash;&gt;-->
+<!--        	<div class="col-lg-3 col-md-6 d-flex mb-sm-4 ftco-animate">-->
+<!--        		<div class="staff">-->
+<!--      				<div class="img mb-4" style="background-image: url({% static 'images/Alcoholic_hepatitis_1.jpg' %});"></div>-->
+<!--      				<div class="info text-center">-->
+<!--      					<h3><a href="teacher-single.html">Alcoholic hepatitis</a></h3>-->
+<!--      				</div>-->
+<!--        		</div>-->
+<!--        	</div>-->
+
+
+
+<!--			      &lt;!&ndash;    Jaundice    &ndash;&gt;-->
+<!--        	<div class="col-lg-3 col-md-6 d-flex mb-sm-4 ftco-animate">-->
+<!--        		<div class="staff">-->
+<!--      				<div class="img mb-4" style="background-image: url({% static 'images/Jaundice_1.jpg' %});"></div>-->
+<!--      				<div class="info text-center">-->
+<!--      					<h3><a href="teacher-single.html">Jaundice</a></h3>-->
+<!--      				</div>-->
+<!--        		</div>-->
+<!--        	</div>-->
+
+
+
+<!--			      &lt;!&ndash;     Hepatitis E   &ndash;&gt;-->
+<!--        	<div class="col-lg-3 col-md-6 d-flex mb-sm-4 ftco-animate">-->
+<!--        		<div class="staff">-->
+<!--      				<div class="img mb-4" style="background-image: url({% static 'images/Hepatitis_E_1.jpg' %});"></div>-->
+<!--      				<div class="info text-center">-->
+<!--      					<h3><a href="teacher-single.html">Hepatitis E</a></h3>-->
+<!--      				</div>-->
+<!--        		</div>-->
+<!--        	</div>-->
+
+
+
+<!--			      &lt;!&ndash;     Dengue    &ndash;&gt;-->
+<!--        	<div class="col-lg-3 col-md-6 d-flex mb-sm-4 ftco-animate">-->
+<!--        		<div class="staff">-->
+<!--      				<div class="img mb-4" style="background-image: url({% static 'images/Dengue_1.jpg' %});"></div>-->
+<!--      				<div class="info text-center">-->
+<!--      					<h3><a href="teacher-single.html">Dengue</a></h3>-->
+<!--      				</div>-->
+<!--        		</div>-->
+<!--        	</div>-->
+
+
+<!--			      &lt;!&ndash;     Hepatitis D    &ndash;&gt;-->
+<!--        	<div class="col-lg-3 col-md-6 d-flex mb-sm-4 ftco-animate">-->
+<!--        		<div class="staff">-->
+<!--      				<div class="img mb-4" style="background-image: url({% static 'images/Hepatitis_D_1.jpg' %});"></div>-->
+<!--      				<div class="info text-center">-->
+<!--      					<h3><a href="teacher-single.html">Hepatitis D</a></h3>-->
+<!--      				</div>-->
+<!--        		</div>-->
+<!--        	</div>-->
+
+
+<!--			      &lt;!&ndash;     Heart attack    &ndash;&gt;-->
+<!--        	<div class="col-lg-3 col-md-6 d-flex mb-sm-4 ftco-animate">-->
+<!--        		<div class="staff">-->
+<!--      				<div class="img mb-4" style="background-image: url({% static 'images/Heart_attack_1.jpg' %});"></div>-->
+<!--      				<div class="info text-center">-->
+<!--      					<h3><a href="teacher-single.html">Heart attack</a></h3>-->
+<!--      				</div>-->
+<!--        		</div>-->
+<!--        	</div>-->
+
+
+<!--			      &lt;!&ndash;     Pneumonia    &ndash;&gt;-->
+<!--        	<div class="col-lg-3 col-md-6 d-flex mb-sm-4 ftco-animate">-->
+<!--        		<div class="staff">-->
+<!--      				<div class="img mb-4" style="background-image: url({% static 'images/Pneumonia_1.jpg' %});"></div>-->
+<!--      				<div class="info text-center">-->
+<!--      					<h3><a href="teacher-single.html">Pneumonia</a></h3>-->
+<!--      				</div>-->
+<!--        		</div>-->
+<!--        	</div>-->
+
+
+<!--			      &lt;!&ndash;     Arthritis    &ndash;&gt;-->
+<!--        	<div class="col-lg-3 col-md-6 d-flex mb-sm-4 ftco-animate">-->
+<!--        		<div class="staff">-->
+<!--      				<div class="img mb-4" style="background-image: url({% static 'images/Arthritis_1.jpg' %});"></div>-->
+<!--      				<div class="info text-center">-->
+<!--      					<h3><a href="teacher-single.html">Arthritis</a></h3>-->
+<!--      				</div>-->
+<!--        		</div>-->
+<!--        	</div>-->
+
+
+<!--				      &lt;!&ndash;     Gastroenteritis   &ndash;&gt;-->
+<!--        	<div class="col-lg-3 col-md-6 d-flex mb-sm-4 ftco-animate">-->
+<!--        		<div class="staff">-->
+<!--      				<div class="img mb-4" style="background-image: url({% static 'images/Gastroenteritis_1.jpg' %});"></div>-->
+<!--      				<div class="info text-center">-->
+<!--      					<h3><a href="teacher-single.html">Gastroenteritis</a></h3>-->
+<!--      				</div>-->
+<!--        		</div>-->
+<!--        	</div>-->
+
+
+
+<!--				      &lt;!&ndash;     Tuberculosis    &ndash;&gt;-->
+<!--        	<div class="col-lg-3 col-md-6 d-flex mb-sm-4 ftco-animate">-->
+<!--        		<div class="staff">-->
+<!--      				<div class="img mb-4" style="background-image: url({% static 'images/Tuberculosis_1.jpg' %});"></div>-->
+<!--      				<div class="info text-center">-->
+<!--      					<h3><a href="teacher-single.html">Tuberculosis</a></h3>-->
+<!--      				</div>-->
+<!--        		</div>-->
+<!--        	</div>-->
+
+
+
+
+
+<!--      </div>-->
+<!--      </div>-->
+<!--    </section>-->
+
+<!--    <section class="ftco-section ftco-counter img" id="section-counter" style="background-image: url({% static 'images/larkiyaan.jpg' %});" data-stellar-background-ratio="0.5">-->
+<!--    	<div class="container">-->
+<!--    		<div class="row d-flex align-items-center">-->
+<!--    			<div class="col-md-3 aside-stretch py-5">-->
+<!--    				<div class=" heading-section heading-section-white ftco-animate pr-md-4">-->
+<!--	            <h2 class="mb-3">Achievements</h2>-->
+<!--	            <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>-->
+<!--	          </div>-->
+<!--    			</div>-->
+<!--    			<div class="col-md-9 py-5 pl-md-5">-->
+<!--		    		<div class="row">-->
+<!--		          <div class="col-md-3 d-flex justify-content-center counter-wrap ftco-animate">-->
+<!--		            <div class="block-18">-->
+<!--		              <div class="text">-->
+<!--		                <strong class="number" data-number="14">0</strong>-->
+<!--		                <span>Years of Experience</span>-->
+<!--		              </div>-->
+<!--		            </div>-->
+<!--		          </div>-->
+<!--		          <div class="col-md-3 d-flex justify-content-center counter-wrap ftco-animate">-->
+<!--		            <div class="block-18">-->
+<!--		              <div class="text">-->
+<!--		                <strong class="number" data-number="4500">0</strong>-->
+<!--		                <span>Qualified Dentist</span>-->
+<!--		              </div>-->
+<!--		            </div>-->
+<!--		          </div>-->
+<!--		          <div class="col-md-3 d-flex justify-content-center counter-wrap ftco-animate">-->
+<!--		            <div class="block-18">-->
+<!--		              <div class="text">-->
+<!--		                <strong class="number" data-number="4200">0</strong>-->
+<!--		                <span>Happy Smiling Customer</span>-->
+<!--		              </div>-->
+<!--		            </div>-->
+<!--		          </div>-->
+<!--		          <div class="col-md-3 d-flex justify-content-center counter-wrap ftco-animate">-->
+<!--		            <div class="block-18">-->
+<!--		              <div class="text">-->
+<!--		                <strong class="number" data-number="320">0</strong>-->
+<!--		                <span>Patients Per Year</span>-->
+<!--		              </div>-->
+<!--		            </div>-->
+<!--		          </div>-->
+<!--		        </div>-->
+<!--		      </div>-->
+<!--	      </div>-->
+<!--    	</div>-->
+<!--    </section>-->
+
+<!--    <section class="ftco-section">-->
+<!--    	<div class="container">-->
+<!--    		<div class="row justify-content-center mb-5 pb-5">-->
+<!--          <div class="col-md-7 text-center heading-section ftco-animate">-->
+<!--            <h2 class="mb-3">Our Best Pricing</h2>-->
+<!--            <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--    		<div class="row">-->
+<!--        	<div class="col-md-3 ftco-animate">-->
+<!--        		<div class="pricing-entry pb-5 text-center">-->
+<!--        			<div>-->
+<!--	        			<h3 class="mb-4">Basic</h3>-->
+<!--	        			<p><span class="price">$24.50</span> <span class="per">/ session</span></p>-->
+<!--	        		</div>-->
+<!--        			<ul>-->
+<!--        				<li>Diagnostic Services</li>-->
+<!--								<li>Professional Consultation</li>-->
+<!--								<li>Tooth Implants</li>-->
+<!--								<li>Surgical Extractions</li>-->
+<!--								<li>Teeth Whitening</li>-->
+<!--        			</ul>-->
+<!--        			<p class="button text-center"><a href="#" class="btn btn-primary btn-outline-primary px-4 py-3">Order now</a></p>-->
+<!--        		</div>-->
+<!--        	</div>-->
+<!--        	<div class="col-md-3 ftco-animate">-->
+<!--        		<div class="pricing-entry pb-5 text-center">-->
+<!--        			<div>-->
+<!--	        			<h3 class="mb-4">Standard</h3>-->
+<!--	        			<p><span class="price">$34.50</span> <span class="per">/ session</span></p>-->
+<!--	        		</div>-->
+<!--        			<ul>-->
+<!--        				<li>Diagnostic Services</li>-->
+<!--								<li>Professional Consultation</li>-->
+<!--								<li>Tooth Implants</li>-->
+<!--								<li>Surgical Extractions</li>-->
+<!--								<li>Teeth Whitening</li>-->
+<!--        			</ul>-->
+<!--        			<p class="button text-center"><a href="#" class="btn btn-primary btn-outline-primary px-4 py-3">Order now</a></p>-->
+<!--        		</div>-->
+<!--        	</div>-->
+<!--        	<div class="col-md-3 ftco-animate">-->
+<!--        		<div class="pricing-entry active pb-5 text-center">-->
+<!--        			<div>-->
+<!--	        			<h3 class="mb-4">Premium</h3>-->
+<!--	        			<p><span class="price">$54.50</span> <span class="per">/ session</span></p>-->
+<!--	        		</div>-->
+<!--        			<ul>-->
+<!--        				<li>Diagnostic Services</li>-->
+<!--								<li>Professional Consultation</li>-->
+<!--								<li>Tooth Implants</li>-->
+<!--								<li>Surgical Extractions</li>-->
+<!--								<li>Teeth Whitening</li>-->
+<!--        			</ul>-->
+<!--        			<p class="button text-center"><a href="#" class="btn btn-primary btn-outline-primary px-4 py-3">Order now</a></p>-->
+<!--        		</div>-->
+<!--        	</div>-->
+<!--        	<div class="col-md-3 ftco-animate">-->
+<!--        		<div class="pricing-entry pb-5 text-center">-->
+<!--        			<div>-->
+<!--	        			<h3 class="mb-4">Platinum</h3>-->
+<!--	        			<p><span class="price">$89.50</span> <span class="per">/ session</span></p>-->
+<!--	        		</div>-->
+<!--        			<ul>-->
+<!--        				<li>Diagnostic Services</li>-->
+<!--								<li>Professional Consultation</li>-->
+<!--								<li>Tooth Implants</li>-->
+<!--								<li>Surgical Extractions</li>-->
+<!--								<li>Teeth Whitening</li>-->
+<!--        			</ul>-->
+<!--        			<p class="button text-center"><a href="#" class="btn btn-primary btn-outline-primary px-4 py-3">Order now</a></p>-->
+<!--        		</div>-->
+<!--        	</div>-->
+<!--        </div>-->
+<!--    	</div>-->
+<!--    </section>-->
+
+<!--    <section class="ftco-section-parallax">-->
+<!--      <div class="parallax-img d-flex align-items-center">-->
+<!--        <div class="container">-->
+<!--          <div class="row d-flex justify-content-center">-->
+<!--            <div class="col-md-7 text-center heading-section heading-section-white ftco-animate">-->
+<!--              <h2>Subcribe to our Newsletter</h2>-->
+<!--              <p>Far far away, behind the word mountains, far from the diseases Vokalia and Consonantia, there live the blind texts. Separated they live in</p>-->
+<!--              <div class="row d-flex justify-content-center mt-5">-->
+<!--                <div class="col-md-8">-->
+<!--                  <form action="#" class="subscribe-form">-->
+<!--                    <div class="form-group d-flex">-->
+<!--                      <input type="text" class="form-control" placeholder="Enter email address">-->
+<!--                      <input type="submit" value="Subscribe" class="submit px-3">-->
+<!--                    </div>-->
+<!--                  </form>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </section>-->
+
+<!--		<section class="ftco-section testimony-section bg-light">-->
+<!--      <div class="container">-->
+<!--        <div class="row justify-content-center mb-5 pb-3">-->
+<!--          <div class="col-md-7 text-center heading-section ftco-animate">-->
+<!--            <h2 class="mb-2">Testimony</h2>-->
+<!--            <span class="subheading">Our Happy Customer Says</span>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div class="row justify-content-center ftco-animate">-->
+<!--          <div class="col-md-8">-->
+<!--            <div class="carousel-testimony owl-carousel ftco-owl">-->
+<!--              <div class="item">-->
+<!--                <div class="testimony-wrap p-4 pb-5">-->
+<!--                  <div class="user-img mb-5" style=" background-image: url({% static 'images/person_1.jpg' %});">-->
+<!--                    <span class="quote d-flex align-items-center justify-content-center">-->
+<!--                      <i class="icon-quote-left"></i>-->
+<!--                    </span>-->
+<!--                  </div>-->
+<!--                  <div class="text text-center">-->
+<!--                    <p class="mb-5">I was waiting for a telehealth service to launch in Pakistan. It seems to be a good initiative. Hoping for success. Gook luck</p>-->
+<!--                    <p class="name">-Amjad Qureshi</p>-->
+<!--                    <span class="position">Teacher</span>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--              <div class="item">-->
+<!--                <div class="testimony-wrap p-4 pb-5">-->
+<!--                  <div class="user-img mb-5" style="background-image: url({% static 'images/person_2.jpg' %});">-->
+<!--                    <span class="quote d-flex align-items-center justify-content-center">-->
+<!--                      <i class="icon-quote-left"></i>-->
+<!--                    </span>-->
+<!--                  </div>-->
+<!--                  <div class="text text-center">-->
+<!--                    <p class="mb-5">Good to see innovative ideas for promoting quality healthcare in Pakistan. More projects such as this should be introduced. God bless.</p>-->
+<!--                    <p class="name">-Ali Mumtaz</p>-->
+<!--                    <span class="position">Interface Designer</span>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--              <div class="item">-->
+<!--                <div class="testimony-wrap p-4 pb-5">-->
+<!--                  <div class="user-img mb-5" style="background-image: url({% static 'images/person_3.jpg' %});">-->
+<!--                    <span class="quote d-flex align-items-center justify-content-center">-->
+<!--                      <i class="icon-quote-left"></i>-->
+<!--                    </span>-->
+<!--                  </div>-->
+<!--                  <div class="text text-center">-->
+<!--                    <p class="mb-5">Extremely easy to use and the doctors are avaliable 24/7 for any sort of online assistance</p>-->
+<!--                    <p class="name">-Waqar Mahmood</p>-->
+<!--                    <span class="position">UI Designer</span>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--              <div class="item">-->
+<!--                <div class="testimony-wrap p-4 pb-5">-->
+<!--                  <div class="user-img mb-5" style="background-image: url({% static 'images/person_1.jpg' %});">-->
+<!--                    <span class="quote d-flex align-items-center justify-content-center">-->
+<!--                      <i class="icon-quote-left"></i>-->
+<!--                    </span>-->
+<!--                  </div>-->
+<!--                  <div class="text text-center">-->
+<!--                    <p class="mb-5">I have never used such a promt and user friendly telehealth application before. The doctors are extremely competent and qualified.</p>-->
+<!--                    <p class="name">-Daniyal Qureshi</p>-->
+<!--                    <span class="position">Engineer</span>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--              <div class="item">-->
+<!--                <div class="testimony-wrap p-4 pb-5">-->
+<!--                  <div class="user-img mb-5" style="background-image: url({% static 'images/person_1.jpg' %});">-->
+<!--                    <span class="quote d-flex align-items-center justify-content-center">-->
+<!--                      <i class="icon-quote-left"></i>-->
+<!--                    </span>-->
+<!--                  </div>-->
+<!--                  <div class="text text-center">-->
+<!--                    <p class="mb-5">The best app with the best doctors on board. I am a regular user and never faced any issue regarding consultations and payments.</p>-->
+<!--                    <p class="name">-Kamran Masood</p>-->
+<!--                    <span class="position">Tourist</span>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </section>-->
+
+		<section class="ftco-gallery">
+    	<div class="container-wrap">
+    		<div class="row no-gutters">
+					<div class="col-md-3 ftco-animate">
+						<a href="#" class="gallery img d-flex align-items-center" style="background-image: url({% static 'images/gallery-1.jpg' %});">
+							<div class="icon mb-4 d-flex align-items-center justify-content-center">
+    						<span class="icon-search"></span>
+    					</div>
+						</a>
+					</div>
+					<div class="col-md-3 ftco-animate">
+						<a href="#" class="gallery img d-flex align-items-center" style="background-image: url({% static 'images/gallery-2.jpg' %});">
+							<div class="icon mb-4 d-flex align-items-center justify-content-center">
+    						<span class="icon-search"></span>
+    					</div>
+						</a>
+					</div>
+					<div class="col-md-3 ftco-animate">
+						<a href="#" class="gallery img d-flex align-items-center" style="background-image: url({% static 'images/gallery-3.jpg' %});">
+							<div class="icon mb-4 d-flex align-items-center justify-content-center">
+    						<span class="icon-search"></span>
+    					</div>
+						</a>
+					</div>
+					<div class="col-md-3 ftco-animate">
+						<a href="#" class="gallery img d-flex align-items-center" style="background-image: url({% static 'images/gallery-4.jpg' %});">
+							<div class="icon mb-4 d-flex align-items-center justify-content-center">
+    						<span class="icon-search"></span>
+    					</div>
+						</a>
+					</div>
+        </div>
+    	</div>
+    </section>
+
+<!--    <section class="ftco-section">-->
+<!--      <div class="container">-->
+<!--        <div class="row justify-content-center mb-5 pb-3">-->
+<!--          <div class="col-md-7 text-center heading-section ftco-animate">-->
+<!--            <h2 class="mb-2">Latest Blog</h2>-->
+<!--            <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div class="row">-->
+<!--          <div class="col-md-4 ftco-animate">-->
+<!--            <div class="blog-entry">-->
+<!--              <a href="blog-single.html" class="block-20" style="background-image: url({% static 'images/image_1.jpg' %});">-->
+<!--              </a>-->
+<!--              <div class="text d-flex py-4">-->
+<!--                <div class="meta mb-3">-->
+<!--                  <div><a href="#">Sep. 20, 2018</a></div>-->
+<!--                  <div><a href="#">Admin</a></div>-->
+<!--                  <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>-->
+<!--                </div>-->
+<!--                <div class="desc pl-3">-->
+<!--	                <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>-->
+<!--	              </div>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          <div class="col-md-4 ftco-animate">-->
+<!--            <div class="blog-entry" data-aos-delay="100">-->
+<!--              <a href="blog-single.html" class="block-20" style="background-image: url({% static 'images/image_2.jpg' %});">-->
+<!--              </a>-->
+<!--              <div class="text d-flex py-4">-->
+<!--                <div class="meta mb-3">-->
+<!--                  <div><a href="#">Sep. 20, 2018</a></div>-->
+<!--                  <div><a href="#">Admin</a></div>-->
+<!--                  <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>-->
+<!--                </div>-->
+<!--                <div class="desc pl-3">-->
+<!--	                <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>-->
+<!--	              </div>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          <div class="col-md-4 ftco-animate">-->
+<!--            <div class="blog-entry" data-aos-delay="200">-->
+<!--              <a href="blog-single.html" class="block-20" style="background-image: url({% static 'images/image_3.jpg' %});">-->
+<!--              </a>-->
+<!--              <div class="text d-flex py-4">-->
+<!--                <div class="meta mb-3">-->
+<!--                  <div><a href="#">Sep. 20, 2018</a></div>-->
+<!--                  <div><a href="#">Admin</a></div>-->
+<!--                  <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>-->
+<!--                </div>-->
+<!--                <div class="desc pl-3">-->
+<!--	                <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>-->
+<!--	              </div>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </section>-->
+<!--		-->
+<!--		<section class="ftco-quote">-->
+<!--    	<div class="container">-->
+<!--    		<div class="row">-->
+<!--    			<div class="col-md-6 pr-md-5 aside-stretch py-5 choose">-->
+<!--    				<div class="heading-section heading-section-white mb-5 ftco-animate">-->
+<!--	            <h2 class="mb-2">Why WeDoctor?</h2>-->
+<!--	          </div>-->
+<!--	          <div class="ftco-animate">-->
+<!--	          	<p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar. Because there were thousands of bad Commas, wild Question Marks and devious Semikoli</p>-->
+<!--	          	<ul class="un-styled my-5">-->
+<!--	          		<li><span class="icon-check"></span>We offer comfortable and convenient 24/7 healthcare</li>-->
+<!--	          		<li><span class="icon-check"></span>We offer a wide variety of doctors to choose from</li>-->
+<!--	          		<li><span class="icon-check"></span>We save time - No waiting room, no road travel</li>-->
+<!--	          	</ul>-->
+<!--	          </div>-->
+<!--    			</div>-->
+
+<!--				<div id="map" style="height:550px;width:50%;right:100px:"></div>-->
+<!--&lt;!&ndash;    			<div class="col-md-6 py-5 pl-md-5">&ndash;&gt;-->
+<!--&lt;!&ndash;    				<div class="heading-section mb-5 ftco-animate">&ndash;&gt;-->
+<!--&lt;!&ndash;	            <h2 class="mb-2">Get a Free Quote</h2>&ndash;&gt;-->
+<!--&lt;!&ndash;	          </div>&ndash;&gt;-->
+<!--&lt;!&ndash;	          <form action="#" class="ftco-animate">&ndash;&gt;-->
+<!--&lt;!&ndash;	          	<div class="row">&ndash;&gt;-->
+<!--&lt;!&ndash;	          		<div class="col-md-6">&ndash;&gt;-->
+<!--&lt;!&ndash;		              <div class="form-group">&ndash;&gt;-->
+<!--&lt;!&ndash;		                <input type="text" class="form-control" placeholder="Full Name">&ndash;&gt;-->
+<!--&lt;!&ndash;		              </div>&ndash;&gt;-->
+<!--&lt;!&ndash;	              </div>&ndash;&gt;-->
+<!--&lt;!&ndash;	              <div class="col-md-6">&ndash;&gt;-->
+<!--&lt;!&ndash;		              <div class="form-group">&ndash;&gt;-->
+<!--&lt;!&ndash;		                <input type="text" class="form-control" placeholder="Email">&ndash;&gt;-->
+<!--&lt;!&ndash;		              </div>&ndash;&gt;-->
+<!--&lt;!&ndash;	              </div>&ndash;&gt;-->
+<!--&lt;!&ndash;	              <div class="col-md-6">&ndash;&gt;-->
+<!--&lt;!&ndash;	              	<div class="form-group">&ndash;&gt;-->
+<!--&lt;!&ndash;		                <input type="text" class="form-control" placeholder="Phone">&ndash;&gt;-->
+<!--&lt;!&ndash;		              </div>&ndash;&gt;-->
+<!--&lt;!&ndash;		            </div>&ndash;&gt;-->
+<!--&lt;!&ndash;	              <div class="col-md-6">&ndash;&gt;-->
+<!--&lt;!&ndash;	              	<div class="form-group">&ndash;&gt;-->
+<!--&lt;!&ndash;		                <input type="text" class="form-control" placeholder="Website">&ndash;&gt;-->
+<!--&lt;!&ndash;		              </div>&ndash;&gt;-->
+<!--&lt;!&ndash;		            </div>&ndash;&gt;-->
+<!--&lt;!&ndash;		            <div class="col-md-12">&ndash;&gt;-->
+<!--&lt;!&ndash;		              <div class="form-group">&ndash;&gt;-->
+<!--&lt;!&ndash;		                <textarea name="" id="" cols="30" rows="7" class="form-control" placeholder="Message"></textarea>&ndash;&gt;-->
+<!--&lt;!&ndash;		              </div>&ndash;&gt;-->
+<!--&lt;!&ndash;		            </div>&ndash;&gt;-->
+<!--&lt;!&ndash;		            <div class="col-md-12">&ndash;&gt;-->
+<!--&lt;!&ndash;		              <div class="form-group">&ndash;&gt;-->
+<!--&lt;!&ndash;		                <input type="submit" value="Get a Quote" class="btn btn-primary py-3 px-5">&ndash;&gt;-->
+<!--&lt;!&ndash;		              </div>&ndash;&gt;-->
+<!--&lt;!&ndash;	              </div>&ndash;&gt;-->
+<!--&lt;!&ndash;              </div>&ndash;&gt;-->
+<!--&lt;!&ndash;            </form>&ndash;&gt;-->
+<!--    			</div>-->
+<!--    		</div>-->
+<!--    	</div>-->
+<!--    </section>-->
+
+<!--		<div id="map"></div>-->
+
+    <footer class="ftco-footer ftco-bg-dark ftco-section">
+      <div class="container">
+        <div class="row mb-5">
+          <div class="col-md-3">
+            <div class="ftco-footer-widget mb-4">
+              <h2 class="ftco-heading-2">WeDoctor's.</h2>
+              <p>WeDoctor's is an online audio/video consultation platform that allows real-time interaction between a doctor and patient. WeDoctor's aims to provide virtual healthcare focusing on convenience and comfort. It is the future of healthcare and obviates barriers to efficiency and access.</p>
+            </div>
+            <ul class="ftco-footer-social list-unstyled float-md-left float-lft ">
+              <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
+              <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
+              <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
+            </ul>
+          </div>
+          <div class="col-md-2">
+            <div class="ftco-footer-widget mb-4 ml-md-5">
+              <h2 class="ftco-heading-2">Quick Links</h2>
+              <ul class="list-unstyled">
+                <li><a href="{% url 'about' %}" class="py-2 d-block">About</a></li>
+<!--                <li><a href="#" class="py-2 d-block">Features</a></li>-->
+<!--                <li><a href="#" class="py-2 d-block">Projects</a></li>-->
+<!--                <li><a href="#" class="py-2 d-block">Blog</a></li>-->
+                <li><a href="{% url 'contact' %}" class="py-2 d-block">Contact</a></li>
+              </ul>
+            </div>
+          </div>
+<!--          <div class="col-md-4 pr-md-4">-->
+<!--            <div class="ftco-footer-widget mb-4">-->
+<!--              <h2 class="ftco-heading-2">Recent Blog</h2>-->
+<!--              <div class="block-21 mb-4 d-flex">-->
+<!--                <a class="blog-img mr-4" style="background-image: url({% static 'images/image_1.jpg' %});"></a>-->
+<!--                <div class="text">-->
+<!--                  <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about</a></h3>-->
+<!--                  <div class="meta">-->
+<!--                    <div><a href="#"><span class="icon-calendar"></span> Sept 15, 2018</a></div>-->
+<!--                    <div><a href="#"><span class="icon-person"></span> Admin</a></div>-->
+<!--                    <div><a href="#"><span class="icon-chat"></span> 19</a></div>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--              <div class="block-21 mb-4 d-flex">-->
+<!--                <a class="blog-img mr-4" style="background-image: url({% static 'images/image_2.jpg' %});"></a>-->
+<!--&lt;!&ndash;                <div class="text">&ndash;&gt;-->
+<!--&lt;!&ndash;                  <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about</a></h3>&ndash;&gt;-->
+<!--&lt;!&ndash;                  <div class="meta">&ndash;&gt;-->
+<!--&lt;!&ndash;                    <div><a href="#"><span class="icon-calendar"></span> Sept 15, 2018</a></div>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <div><a href="#"><span class="icon-person"></span> Admin</a></div>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <div><a href="#"><span class="icon-chat"></span> 19</a></div>&ndash;&gt;-->
+<!--&lt;!&ndash;                  </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                </div>&ndash;&gt;-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+          <div class="col-md-3">
+            <div class="ftco-footer-widget mb-4">
+            	<h2 class="ftco-heading-2">Office</h2>
+            	<div class="block-23 mb-3">
+	              <ul>
+	                <li><span class="icon icon-map-marker"></span><span class="text">Fast NAtional University of Computer and Emerging Sciences</span></li>
+	                <li><a href="#"><span class="icon icon-phone"></span><span class="text">+92-346-6211392</span></a></li>
+	                <li><a href="#"><span class="icon icon-envelope"></span><span class="text">wedoctors@gmail.com</span></a></li>
+	              </ul>
+	            </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 text-center">
+
+            <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved by WeDoctor's
+  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+
+
+  <!-- loader -->
+  <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="modalRequest" tabindex="-1" role="dialog" aria-labelledby="modalRequestLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <form class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalRequestLabel">Sign In</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form action="#">
+            <div class="form-group">
+              <!-- <label for="appointment_name" class="text-black">Full Name</label> -->
+              <input type="text" class="form-control" id="appointment_email" placeholder="Email" required>
+            </div>
+            <div class="form-group">
+              <!-- <label for="appointment_email" class="text-black">Email</label> -->
+              <input type="password" class="form-control" id="appointment_password" placeholder="Password" required>
+            </div>
+            </form>
+        </div>
+		  <label style="text-align:center;">
+        <input type="checkbox" checked="checked" name="remember" > Remember me
+           </label>
+            <div class="form-group" style="text-align:center;">
+              <input type="submit" value="Sign In" class="btn btn-primary">
+            </div>
+
+	  </form>
+        </div>
+
+      </div>
+
+
+      <script src="{% static 'js/jquery.min.js' %}"></script>
+  <script src="{% static 'js/jquery-migrate-3.0.1.min.js' %}"></script>
+  <script src="{% static 'js/popper.min.js' %}"></script>
+  <script src="{% static 'js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'js/jquery.easing.1.3.js' %}"></script>
+  <script src="{% static 'js/jquery.waypoints.min.js' %}"></script>
+  <script src="{% static 'js/jquery.stellar.min.js' %}"></script>
+  <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+  <script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
+  <script src="{% static 'js/aos.js' %}"></script>
+  <script src="{% static 'js/jquery.animateNumber.min.js' %}"></script>
+  <script src="{% static 'js/bootstrap-datepicker.js' %}"></script>
+  <script src="{% static 'js/jquery.timepicker.min.js' %}"></script>
+  <script src="{% static 'js/scrollax.min.js' %}"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+  <script src="{% static 'js/google-map.js' %}"></script>
+  <script src="{% static 'js/google-map.js' %}"></script>
+  <script src="{% static 'js/main.js' %}"></script>
+<script>
+
+
+
+
+
+
+    $(document).ready(function() {
+     $('.abcd').hide();
+	var max_fields      = 7; //maximum input boxes allowed
+	var wrapper   		= $(".input_fields_wrap"); //Fields wrapper
+	var add_button      = $(".add_field_button"); //Add button ID
+
+	var x = 1; //initlal text box count
+	$(add_button).click(function(e){ //on add input button click
+		e.preventDefault();
+		if(x < max_fields){ //max input box allowed
+			x++; //text box increment
+			$(wrapper).append('<div><input type="text" name="mytext[]"/><a href="#" class="remove_field">Remove</a></div>'); //add input box
+		}
+	});
+
+	$(wrapper).on("click",".remove_field", function(e){ //user click on remove text
+		e.preventDefault(); $(this).parent('div').remove(); x--;
+	})
+
+</script>
+  </body>
+</html>

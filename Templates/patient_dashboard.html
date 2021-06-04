@@ -1,0 +1,578 @@
+
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <title>Predict Disease</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="{% static 'images/dill3.png' %}" rel="icon">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,600,700" rel="stylesheet">
+
+    <link rel="stylesheet" href="{% static 'css/open-iconic-bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+<!--w3 schools-->
+	  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<!--end w3 schools-->
+
+<!--dosri file-->
+
+      <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="au theme template">
+    <meta name="author" content="Hau Nguyen">
+    <meta name="keywords" content="au theme template">
+
+        <!-- Fontfaces CSS-->
+    <link href="{% static 'others/css/font-face.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'others/vendor/font-awesome-4.7/css/font-awesome.min.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'others/vendor/font-awesome-5/css/fontawesome-all.min.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'others/vendor/mdi-font/css/material-design-iconic-font.min.css' %}" rel="stylesheet" media="all">
+
+      <link href="{% static 'others/vendor/bootstrap-4.1/bootstrap.min.css' %}" rel="stylesheet" media="all">
+
+    <!-- Vendor CSS-->
+    <link href="{% static 'others/vendor/animsition/animsition.min.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'others/vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'others/vendor/wow/animate.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'others/vendor/css-hamburgers/hamburgers.min.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'others/vendor/slick/slick.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'others/vendor/select2/select2.min.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'others/vendor/perfect-scrollbar/perfect-scrollbar.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'others/vendor/vector-map/jqvmap.min.css' %}" rel="stylesheet" media="all">
+
+    <!-- Main CSS-->
+    <link href="{% static 'others/css/theme.css' %}" rel="stylesheet" media="all">
+
+
+
+
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
+<!--      symptoms wali jquery-->
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <link rel="stylesheet" href="{% static 'css/aos.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/ionicons.min.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/bootstrap-datepicker.css' %}">
+    <link rel="stylesheet" href="{% static 'css/jquery.timepicker.css' %}">
+
+
+<!--doccure-->
+	  <link rel="stylesheet" href="{% static 'dosra/assets/css/bootstrap.min.css' %}">
+
+		<!-- Fontawesome CSS -->
+		<link rel="stylesheet" href="{% static 'dosra/assets/plugins/fontawesome/css/fontawesome.min.css' %}">
+		<link rel="stylesheet" href="{% static 'dosra/assets/plugins/fontawesome/css/all.min.css' %}">
+
+		<!-- Main CSS -->
+		<link rel="stylesheet" href="{% static 'dosra/assets/css/style.css' %}">
+
+		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!--[if lt IE 9]>
+			<script src="{% static 'dosra/assets/js/html5shiv.min.js' %}"></script>
+			<script src="{% static 'dosra/assets/js/respond.min.js' %}"></script>
+		<![endif]-->
+<!--	  end doccure-->
+
+
+
+
+
+    <link rel="stylesheet" href="{% static 'css/flaticon.css' %}">
+    <link rel="stylesheet" href="{% static 'css/icomoon.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+
+
+
+      <style>
+          body {
+<!--  background-color: black;-->
+background-image: url({% static 'images/livecall_3.jpg' %});
+}
+body{
+  margin:0;
+  padding:0;
+  height:100%
+}
+.black{
+  position:fixed;
+  top:0;
+  background:#333;
+  width:100%;
+  height:50px;
+
+}
+.black ul{
+  list-style-type:none;
+  padding:0;
+}
+
+.black ul li{
+  display:inline-block;
+  width:100px;
+  color:red;
+}
+
+.blue{
+  position:fixed;
+  top:0;
+  background:blue;
+  width:100%;
+  height:50px;
+}
+
+
+
+      </style>
+  </head>
+  <body style="background-image: url({% static 'images/livecall_3.jpg' %});">
+
+	  <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar ">
+	    <div class="container" >
+            <img src="{% static 'images/dill3.png' %} ">
+	      <a class="navbar-brand"  href="{% url 'patientprofile' %}">We<span>Doctor's</span></a>
+	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+	        <span class="oi oi-menu"></span> Menu
+	      </button>
+
+	      <div class="collapse navbar-collapse" id="ftco-nav">
+	        <ul class="navbar-nav ml-auto">
+	          <li class="nav-item "><a href=" {% url 'patientprofile' %} " class="nav-link">Home</a></li>
+				<li class="nav-item active "><a href= "{% url 'patient_dashboard' %}"  class="nav-link">Dashboard</a></li>
+<!--	          <li class="nav-item "><a href= "{% url 'updateprofile' %}"  class="nav-link">Profile</a></li>-->
+	          <li class="nav-item"><a href="{% url 'makeappointment' %}" class="nav-link">Make an Appointment</a></li>
+	          <li class="nav-item "><a href="{% url 'predictdisease' %}" class="nav-link">Predict Disease</a></li>
+<!--                <li class="nav-item"><a href="{% url 'livecall_patient' %}" class="nav-link">Live Call</a></li>-->
+<!--	          <li class="nav-item"><a href="{% url 'blog' %}" class="nav-link">Blog</a></li>-->
+	          <li class="nav-item "><a href="{% url 'mappatient' %}" class="nav-link">Area of Disease</a></li>
+<!--				 <li class="nav-item"><a href="#" class="nav-link">Area of Disease</a></li>-->
+<!--	          <li class="nav-item cta"> <a href="{% url 'login' %}" class="nav-link" data-toggle="modal" data-target="#modalRequest"><span>Sign In</span></a></li>-->
+
+           	<li class="w3-dropdown-hover">
+    		<button  class="w3-button " style="border-radius:30px;background-color:#0066FF;color:white" ><img src="{% static 'images/settings.png' %} " style="height:25px;width:25px;">&nbsp;&nbsp;Setting</button>
+    		<div class="w3-dropdown-content w3-bar-block w3-border" style="border-radius:20px;background-color:#0066FF">
+      		<a href="{% url 'updateprofile' %}" class="w3-bar-item w3-button" style="border-radius:30px;color:white;background-color:#0066FF">Edit Profile</a>
+<!--      <a href="#" class="w3-bar-item w3-button">Link 2</a>-->
+      			<form  action="/singnout/" method="POST" style="border-radius:30px;background-color:#0066FF;color:white">
+				 {% csrf_token %}
+
+			 <input type="submit"  value="Sign out" class="btn w3-bar-item w3-button " style="border-radius:30px;background-color:#0066FF;color:white">
+				</form>
+			</div>
+  			</li>
+<!--	          <li class="nav-item cta"> <a href="{% url 'login' %}" class="nav-link" data-toggle="modal" data-target="#modalRequest"><span>Sign In</span></a></li>-->
+			</ul>
+	      </div>
+
+	    </div>
+
+      </nav>
+    <!-- END nav -->
+
+
+
+<div class="main-content">
+                <div class="section__content ">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-12">
+
+
+<!--doccure-->
+
+								<div class="profile-info-widget">
+										<a href="#" class="booking-doc-img">
+											{% if profile.image %}
+											<img src='/media/{{profile.image}}' alt="User Image">
+											{% endif %}
+										</a>
+<!--										<div class="profile-det-info">-->
+<!--											<h3>Waqar Mahmood</h3>-->
+<!--											<div class="patient-details">-->
+<!--												<h5><i class="fas fa-birthday-cake"></i> 32</h5>-->
+<!--												<h5 class="mb-0"><i class="fas fa-map-marker-alt"></i> Faisalabad</h5>-->
+<!--											</div>-->
+<!--										</div>-->
+									</div>
+<br>
+
+
+<!--								<div class="col-md-7 col-lg-8 col-xl-9">-->
+							<div class="card">
+								<div class="card-body pt-0">
+
+									<!-- Tab Menu -->
+									<nav class="user-tabs mb-4">
+										<ul class="nav nav-tabs nav-tabs-bottom nav-justified">
+											<li class="nav-item">
+												<a class="nav-link active" href="#pat_appointments" data-toggle="tab">Appointments</a>
+											</li>
+											<li class="nav-item">
+												<a class="nav-link" href="#pat_prescriptions" data-toggle="tab">Prescriptions</a>
+											</li>
+
+
+										</ul>
+									</nav>
+									<!-- /Tab Menu -->
+
+									<!-- Tab Content -->
+									<div class="tab-content pt-0">
+
+										<!-- Appointment Tab -->
+										<div id="pat_appointments" class="tab-pane fade show active">
+											<div class="card card-table mb-0">
+												<div class="card-body">
+													<div class="table-responsive">
+														<table class="table table-hover table-center mb-0">
+															<thead>
+																<tr>
+
+																	<th>Doctor</th>
+																	<th>Specialization</th>
+																	<th>Appointment Day</th>
+																	<th>Booking Date</th>
+																	<th>Amount</th>
+																	<th>Appointment Status</th>
+																	<th>Prescription </th>
+																	<th>Live Call</th>
+
+																</tr>
+															</thead>
+															<tbody>
+
+															{% for i in patient %}
+
+																<tr>
+																	<td>
+																			<a href="#" class="avatar avatar-sm mr-2">
+																				<img  class="avatar-img rounded-circle" src='/media/{{i.doctor_image}}' alt="User Image">
+																			</a>
+																		<h2 class="table-avatar">
+																			Dr. {{i.doctor_first_name}} {{i.doctor_last_name}}
+																		</h2>
+																	</td>
+																	<td>{{i.doctor_spec}}</td>
+																	<td>{{i.appointment_day}} <span class="d-block text-info">{{i.appointment_time}}</span></td>
+																	<td>{{i.booking_date}}</td>
+																	<td>{{i.amount}}PKR</td>
+																	{% if i.appointment_status == "pending"%}
+																	<td><span class="badge badge-pill bg-warning-light">Pending</span></td>
+																	{% endif%}
+																	{% if i.appointment_status == "cancelled"%}
+																	<td><span class="badge badge-pill bg-danger-light">Cancelled</span></td>
+																	{% endif%}
+																	{% if i.appointment_status == "accept"%}
+																	<td><span class="badge badge-pill bg-success-light" style="text-align:center">Confirmed</span></td>
+																	{% endif%}
+																	{% if i.appointment_status == "done"%}
+																	<td><span class="badge badge-pill bg-success-light" style="text-align:center">Medicine Prescribed</span></td>
+																	{% endif%}
+																	{% if i.appointment_status == "done"%}
+																	 <td> avaliable</td>
+																	{% endif%}
+																	{% if i.appointment_status != "done"%}
+																	 <td> not avaliable </td>
+																	{% endif%}
+																	{% if i.appointment_link %}
+																	<td>
+																		 <form  action="/livecall_patient/" method="post" style="text-align:center">
+                                                                          {% csrf_token %}
+																		 <input type="hidden" id="appointment_link" name="appointment_link" value="{{i.appointment_link}}">
+																	<input  type="submit" style="border:double;background-color:green;color:white;border-left:100px" class="btn btn-primary submit-btn" value="Live call">
+																			  </form>
+																	</td>
+
+																	{% endif%}
+
+<!--																	<td class="text-right">-->
+<!--																		<div class="table-action">-->
+<!--																			<a href="javascript:void(0);" class="btn btn-sm bg-primary-light">-->
+<!--																				<i class="fas fa-print"></i> Print-->
+<!--																			</a>-->
+<!--																			<a href="javascript:void(0);" class="btn btn-sm bg-info-light">-->
+<!--																				<i class="far fa-eye"></i> View-->
+<!--																			</a>-->
+<!--																		</div>-->
+<!--																	</td>-->
+																</tr>
+
+															{% endfor %}
+
+
+
+
+
+
+
+
+															</tbody>
+														</table>
+													</div>
+												</div>
+											</div>
+										</div>
+										<!-- /Appointment Tab -->
+
+										<!-- Prescription Tab -->
+										<div class="tab-pane fade" id="pat_prescriptions">
+											<div class="card card-table mb-0">
+												<div class="card-body">
+													<div class="table-responsive">
+														<table class="table table-hover table-center mb-0">
+															<thead>
+																<tr>
+																	<th>Date </th>
+																	<th>Name</th>
+																	<th>Created by </th>
+																	<th></th>
+																</tr>
+															</thead>
+															<tbody>
+
+															{% for i in patient %}
+															{% if i.appointment_status == "done"%}
+
+																<tr>
+
+																	<td>{{i.prescription_date}}</td>
+
+																	<td>Prescription 1</td>
+
+																	<td>
+																		<h2 class="table-avatar">
+																			<a href="#" class="avatar avatar-sm mr-2">
+																				<img class="avatar-img rounded-circle" src='/media/{{i.doctor_image}}' alt="User Image">
+																			</a>
+																			<a href="#">Dr.{{i.doctor_first_name}} {{i.doctor_last_name}} <span>{{i.doctor_spec}}</span></a>
+																		</h2>
+																	</td>
+																	<td class="text-right">
+																		<div class="table-action">
+<!--																			<a href="javascript:void(0);" class="btn btn-sm bg-primary-light">-->
+<!--																				<i class="fas fa-print"></i> Print-->
+<!--																			</a>-->
+																			 <form  action="/priscription_invoice/" method="post">
+									                                            {% csrf_token %}
+																				 <input type="hidden" id="patient_email" name="patient_email" value="{{i.patient_email}}">
+																				 <input type="hidden" id="doctor_email" name="doctor_email" value="{{i.doctor_email}}">
+																				 <input type="hidden" id="date" name="date" value="{{i.date}}">
+																				 <input type="hidden" id="appointment_day" name="appointment_day" value="{{i.appointment_day}}">
+
+																				 <input type="hidden" id="appointment_time" name="appointment_time" value="{{i.appointment_time}}">
+
+																			<input type="submit" class="btn btn-sm bg-info-light far fa-eye" value="View Prescription">
+
+																			 </form>
+																		</div>
+																	</td>
+
+																</tr>
+															{%endif%}
+
+															{% endfor %}
+
+
+
+
+
+
+
+
+
+															</tbody>
+														</table>
+													</div>
+												</div>
+											</div>
+										</div>
+										<!-- /Prescription Tab -->
+
+
+
+
+
+									</div>
+									<!-- Tab Content -->
+
+								</div>
+							</div>
+						</div>
+<!--end doccure-->
+
+
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+      <footer class="ftco-footer ftco-bg-dark ftco-section">
+      <div class="container">
+        <div class="row mb-5">
+          <div class="col-md-3">
+            <div class="ftco-footer-widget mb-4">
+              <h2 class="ftco-heading-2">WeDoctor's.</h2>
+              <p>WeDoctor's is an online audio/video consultation platform that allows real-time interaction between a doctor and patient. WeDoctor's aims to provide virtual healthcare focusing on convenience and comfort. It is the future of healthcare and obviates barriers to efficiency and access.</p>
+            </div>
+            <ul class="ftco-footer-social list-unstyled float-md-left float-lft ">
+              <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
+              <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
+              <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
+            </ul>
+          </div>
+          <div class="col-md-2">
+            <div class="ftco-footer-widget mb-4 ml-md-5">
+              <h2 class="ftco-heading-2">Quick Links</h2>
+              <ul class="list-unstyled">
+                <li><a href="{% url 'about' %}" class="py-2 d-block">About</a></li>
+<!--                <li><a href="#" class="py-2 d-block">Features</a></li>-->
+<!--                <li><a href="#" class="py-2 d-block">Projects</a></li>-->
+<!--                <li><a href="#" class="py-2 d-block">Blog</a></li>-->
+                <li><a href="{% url 'contact' %}" class="py-2 d-block">Contact</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="ftco-footer-widget mb-4">
+            	<h2 class="ftco-heading-2">Office</h2>
+            	<div class="block-23 mb-3">
+	              <ul>
+	                <li><span class="icon icon-map-marker"></span><span class="text">Fast NAtional University of Computer and Emerging Sciences</span></li>
+	                <li><a href="#"><span class="icon icon-phone"></span><span class="text">+92-346-6211392</span></a></li>
+	                <li><a href="#"><span class="icon icon-envelope"></span><span class="text">wedoctors@gmail.com</span></a></li>
+	              </ul>
+	            </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 text-center">
+
+            <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved by WeDoctor's
+  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+
+
+  <!-- loader -->
+  <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="modalRequest" tabindex="-1" role="dialog" aria-labelledby="modalRequestLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <form class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalRequestLabel">Sign In</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form action="#">
+            <div class="form-group">
+              <!-- <label for="appointment_name" class="text-black">Full Name</label> -->
+              <input type="text" class="form-control" id="appointment_email" placeholder="Email" required>
+            </div>
+            <div class="form-group">
+              <!-- <label for="appointment_email" class="text-black">Email</label> -->
+              <input type="password" class="form-control" id="appointment_password" placeholder="Password" required>
+            </div>
+            </form>
+        </div>
+		  <label style="text-align:center;">
+        <input type="checkbox" checked="checked" name="remember" > Remember me
+           </label>
+            <div class="form-group" style="text-align:center;">
+              <input type="submit" value="Sign In" class="btn btn-primary">
+            </div>
+
+	  </form>
+        </div>
+
+      </div>
+
+
+      <script src="{% static 'js/jquery.min.js' %}"></script>
+  <script src="{% static 'js/jquery-migrate-3.0.1.min.js' %}"></script>
+  <script src="{% static 'js/popper.min.js' %}"></script>
+  <script src="{% static 'js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'js/jquery.easing.1.3.js' %}"></script>
+  <script src="{% static 'js/jquery.waypoints.min.js' %}"></script>
+  <script src="{% static 'js/jquery.stellar.min.js' %}"></script>
+  <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+  <script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
+  <script src="{% static 'js/aos.js' %}"></script>
+  <script src="{% static 'js/jquery.animateNumber.min.js' %}"></script>
+  <script src="{% static 'js/bootstrap-datepicker.js' %}"></script>
+  <script src="{% static 'js/jquery.timepicker.min.js' %}"></script>
+  <script src="{% static 'js/scrollax.min.js' %}"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+  <script src="{% static 'js/google-map.js' %}"></script>
+  <script src="{% static 'js/google-map.js' %}"></script>
+  <script src="{% static 'js/main.js' %}"></script>
+
+
+
+
+      <script src="{% static 'others/vendor/jquery-3.2.1.min.js' %}"></script>
+    <!-- Bootstrap JS-->
+    <script src="{% static 'others/vendor/bootstrap-4.1/popper.min.js' %}"></script>
+    <script src="{% static 'others/vendor/bootstrap-4.1/bootstrap.min.js' %}"></script>
+    <!-- Vendor JS       -->
+    <script src="{% static 'others/vendor/slick/slick.min.js' %}">
+    </script>
+    <script src="{% static 'others/vendor/wow/wow.min.js' %}"></script>
+    <script src="{% static 'others/vendor/animsition/animsition.min.js' %}"></script>
+    <script src="{% static 'others/vendor/bootstrap-progressbar/bootstrap-progressbar.min.js' %}">
+    </script>
+    <script src="{% static 'others/vendor/counter-up/jquery.waypoints.min.js' %}"></script>
+    <script src="{% static 'others/vendor/counter-up/jquery.counterup.min.js' %}">
+    </script>
+    <script src="{% static 'others/vendor/circle-progress/circle-progress.min.js' %}"></script>
+    <script src="{% static 'others/vendor/perfect-scrollbar/perfect-scrollbar.js' %}"></script>
+    <script src="{% static 'others/vendor/chartjs/Chart.bundle.min.js' %}"></script>
+    <script src="{% static 'others/vendor/select2/select2.min.js' %}">
+    </script>
+<!--doccure-->
+	  <script src="{% static 'dosra/assets/js/jquery.min.js' %}"></script>
+
+		<!-- Bootstrap Core JS -->
+		<script src="{% static 'dosra/assets/js/popper.min.js' %}"></script>
+		<script src="{% static 'dosra/assets/js/bootstrap.min.js' %}"></script>
+
+		<!-- Sticky Sidebar JS -->
+        <script src="{% static 'dosra/assets/plugins/theia-sticky-sidebar/ResizeSensor.js' %}"></script>
+        <script src="{% static 'dosra/assets/plugins/theia-sticky-sidebar/theia-sticky-sidebar.js' %}"></script>
+
+		<!-- Custom JS -->
+		<script src="{% static 'dosra/assets/js/script.js' %}"></script>
+<!--	  end doccure-->
+<script src="{% static 'others/js/main.js' %}"></script>
+  <script>
+
+$(document).ready(function(){
+  $(window).scroll(function(){
+  	var scroll = $(window).scrollTop();
+	  if (scroll > 300) {
+	    $(".black").css("background" , "blue");
+	  }
+
+	  else{
+		  $(".black").css("background" , "#333");
+	  }
+  })
+})
+</script>
+  </body>
+</html>

@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+	{% load static %}
+
+<head>
+		<meta charset="utf-8">
+		<title>Make Appointment</title>
+
+
+
+
+
+
+
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+
+		<!-- Favicons -->
+	<link href="{% static 'images/dill3.png' %}" rel="icon">
+<!--		<link href="{% static 'dosra/assets/img/favicon.png' %}" rel="icon">-->
+
+		<!-- Bootstrap CSS -->
+		<link rel="stylesheet" href="{% static 'dosra/assets/css/bootstrap.min.css' %}">
+
+		<!-- Fontawesome CSS -->
+		<link rel="stylesheet" href="{% static 'dosra/assets/plugins/fontawesome/css/fontawesome.min.css' %}">
+		<link rel="stylesheet" href="{% static 'dosra/assets/plugins/fontawesome/css/all.min.css' %}">
+
+		<!-- Datetimepicker CSS -->
+		<link rel="stylesheet" href="{% static 'dosra/assets/css/bootstrap-datetimepicker.min.css' %}">
+
+		<!-- Select2 CSS -->
+		<link rel="stylesheet" href="{% static 'dosra/assets/plugins/select2/css/select2.min.css' %}">
+
+
+
+
+
+<!--w3 schools-->
+	  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<!--end w3 schools-->
+
+
+		<!-- Fancybox CSS -->
+		<link rel="stylesheet" href="{% static 'dosra/assets/plugins/fancybox/jquery.fancybox.min.css' %}">
+
+		<!-- Main CSS -->
+		<link rel="stylesheet" href="{% static 'dosra/assets/css/style.css' %}">
+
+
+
+
+
+
+
+
+
+
+
+		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!--[if lt IE 9]>
+			<script src="assets/js/html5shiv.min.js' %}"></script>
+			<script src="assets/js/respond.min.js' %}"></script>
+		<![endif]-->
+
+
+	</head>
+	<body>
+
+		<!-- Main Wrapper -->
+		<div class="main-wrapper">
+
+
+
+			<!-- Breadcrumb -->
+			<div class="breadcrumb-bar">
+				<div class="container-fluid">
+					<div class="row align-items-center">
+						<div class="col-md-12 col-12">
+							<nav aria-label="breadcrumb" class="page-breadcrumb">
+								<ol class="breadcrumb">
+									<li class="breadcrumb-item"><a href="#">Home </a></li>
+									<li class="breadcrumb-item active" aria-current="page">Invoice View</li>
+								</ol>
+							</nav>
+                            <h2 class="breadcrumb-title"><a href= "{% url 'patient_dashboard' %}" style="color:white;">< Back </a></h2>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- /Breadcrumb -->
+
+			<!-- Page Content -->
+			<div class="content">
+				<div class="container-fluid">
+
+					<div class="row">
+						<div class="col-lg-8 offset-lg-2">
+							<div class="invoice-content">
+								<div class="invoice-item">
+									<div class="row">
+										<div class="col-md-6">
+											<div class="invoice-logo">
+
+                            <img src="{% static 'images/dill3.png' %} ">
+                            <a class="navbar-brand"   style="color:black;">We<span><b>Doctor's</b></span></a>
+<!--                            <img src="{% static 'images/avatar.jpg' %}" alt="Hello Dr." />-->
+
+											</div>
+										</div>
+										<div class="col-md-6">
+											<p class="invoice-details">
+                                                <button onclick="window.print()"  class="btn btn-sm bg-primary-light">
+																				<i class="fas fa-print"></i> Print
+																			</button>
+                                                <br>
+												<strong>Patient ID:</strong> {{prescription.patient_email}} <br>
+												<strong>Issued:</strong> {{prescription.prescription_date}}
+											</p>
+										</div>
+									</div>
+								</div>
+
+								<!-- Invoice Item -->
+								<div class="invoice-item">
+									<div class="row">
+										<div class="col-md-6">
+											<div class="invoice-info">
+												<strong class="customer-text">Invoice From</strong>
+												<p class="invoice-details invoice-details-two">
+													Dr. {{prescription.doctor_first_name}} {{prescription.doctor_last_name}}<br>
+
+												</p>
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="invoice-info invoice-info2">
+												<strong class="customer-text">Invoice To</strong>
+												<p class="invoice-details">
+													{{prescription.patient_first_name}} {{prescription.patient_last_name}}  <br>
+													{{prescription.patient_city}} {{prescription.patient_province}}<br>
+
+												</p>
+											</div>
+										</div>
+									</div>
+								</div>
+								<!-- /Invoice Item -->
+
+								<!-- Invoice Item -->
+								<div class="invoice-item">
+									<div class="row">
+										<div class="col-md-12">
+											<div class="invoice-info">
+												<strong class="customer-text">Disease:</strong>
+												<p class="invoice-details invoice-details-two">
+													{{prescription.disease}}<br>
+
+												</p>
+											</div>
+										</div>
+									</div>
+								</div>
+								<!-- /Invoice Item -->
+
+								<!-- Invoice Item -->
+								<div class="invoice-item invoice-table-wrap">
+									<div class="row">
+										<div class="col-md-12">
+											<div class="table-responsive">
+												<table class="invoice-table table table-bordered">
+													<thead>
+														<tr>
+															<th style="width: 50px">Medicine</th>
+															<th style="width: 2px">Quantity</th>
+															<th style="width: 2px">Days</th>
+															<th style="width: 350px">Time</th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr>
+															<td>{{prescription.medicine}}</td>
+															<td class="text-center">{{prescription.quantity}}</td>
+															<td class="text-center">{{prescription.days}}</td>
+															<td >
+																 <input type="hidden" id="time" name="time" value="{{prescription.time}}">
+                                                                <input type="checkbox" id="Morning" value="Morning" > Morning
+                                                                <input type="checkbox" id="AfterNoon"  value="AfterNoon" > AfterNoon
+                                                            <input type="checkbox" id="Evening" value="Evening" > Evening
+                                                                <input type="checkbox" id="Night" value="Night" > Night
+
+                                                            </td>
+
+														</tr>
+
+
+
+													</tbody>
+												</table>
+												<br>
+												<b>Instructions:</b>
+												<p style="width:100%" type="text"> {{prescription.instructions}}</p>
+											</div>
+										</div>
+
+									</div>
+								</div>
+								<!-- /Invoice Item -->
+<br>
+								<!-- Invoice Information -->
+								<div class="other-info">
+									<h4 style="text-align:right">Doctor Name</h4>
+                                    <h6 style="text-align:right">Dr. {{prescription.doctor_first_name}} {{prescription.doctor_last_name}}</h6>
+<!--									<p class="text-muted mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus sed dictum ligula, cursus blandit risus. Maecenas eget metus non tellus dignissim aliquam ut a ex. Maecenas sed vehicula dui, ac suscipit lacus. Sed finibus leo vitae lorem interdum, eu scelerisque tellus fermentum. Curabitur sit amet lacinia lorem. Nullam finibus pellentesque libero.</p>-->
+								</div>
+								<!-- /Invoice Information -->
+
+							</div>
+						</div>
+					</div>
+
+				</div>
+
+			</div>
+			<!-- /Page Content -->
+
+
+
+		</div>
+		<!-- /Main Wrapper -->
+
+
+        <script src="{% static 'dosra/assets/js/jquery.min.js' %}"></script>
+
+		<!-- Bootstrap Core JS -->
+		<script src="{% static 'dosra/assets/js/popper.min.js' %}"></script>
+		<script src="{% static 'dosra/assets/js/bootstrap.min.js' %}"></script>
+
+		<!-- Sticky Sidebar JS -->
+        <script src="{% static 'dosra/assets/plugins/theia-sticky-sidebar/ResizeSensor.js' %}"></script>
+        <script src="{% static 'dosra/assets/plugins/theia-sticky-sidebar/theia-sticky-sidebar.js' %}"></script>
+
+		<!-- Select2 JS -->
+		<script src="{% static 'dosra/assets/plugins/select2/js/select2.min.js' %}"></script>
+
+		<!-- Datetimepicker JS -->
+		<script src="{% static 'dosra/assets/js/moment.min.js' %}"></script>
+		<script src="{% static 'dosra/assets/js/bootstrap-datetimepicker.min.js' %}"></script>
+
+		<!-- Fancybox JS -->
+		<script src="{% static 'dosra/assets/plugins/fancybox/jquery.fancybox.min.js' %}"></script>
+
+		<!-- Custom JS -->
+		<script src="{% static 'dosra/assets/js/script.js' %}"></script>
+
+	</body>
+	<script>
+		window.onload = function() {
+  var x = document.getElementById("time").value;
+
+
+
+   var res = x.split(",");
+   var n = res.includes(" 'Afternoon'");
+
+
+
+
+
+
+
+
+
+
+  for (var i = 0; i < res.length; i++) {
+
+  if(res[i]=== "['Morning'")
+  {
+   document.getElementById("Morning").checked = true;
+
+}
+ if(res[i]=== "['AfterNoon'")
+  {
+   document.getElementById("AfterNoon").checked = true;
+
+}
+
+if(res[i]=== "['Evening'")
+  {
+   document.getElementById("Evening").checked = true;
+
+}
+
+if(res[i]=== "['Night'")
+  {
+   document.getElementById("Night").checked = true;
+
+}
+
+
+ if(res[i]=== " 'Morning']")
+  {
+   document.getElementById("Morning").checked = true;
+
+}
+
+ if(res[i]===" 'Afternoon']")
+  {
+
+
+   document.getElementById("AfterNoon").checked = true;
+
+}
+
+if(res[i]=== " 'Evening']")
+  {
+   document.getElementById("Evening").checked = true;
+
+}
+
+if(res[i]=== " 'Night']")
+  {
+   document.getElementById("Night").checked = true;
+
+}
+
+ if(res[i]=== " 'Afternoon'")
+  {
+   document.getElementById("AfterNoon").checked = true;
+
+}
+
+if(res[i]=== " 'Evening'")
+  {
+   document.getElementById("Evening").checked = true;
+
+}
+
+
+
+
+
+
+
+
+}
+
+
+
+
+};
+	</script>
+
+<!-- doccure/invoice-view.html  30 Nov 2019 04:12:20 GMT -->
+</html>

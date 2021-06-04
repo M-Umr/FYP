@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+<head>
+		<meta charset="utf-8">
+		<title>Book Appointment</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+		<!-- Favicons -->
+		<link href="{% static 'images/dill3.png' %}" rel="icon">
+
+		<!-- Bootstrap CSS -->
+		<link rel="stylesheet" href="{% static 'dosra/assets/css/bootstrap.min.css' %}">
+<!--w3 schools-->
+	  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<!--end w3 schools-->
+		<!-- Fontawesome CSS -->
+		<link rel="stylesheet" href="{% static 'dosra/assets/plugins/fontawesome/css/fontawesome.min.css' %}">
+		<link rel="stylesheet" href="{% static 'dosra/assets/plugins/fontawesome/css/all.min.css' %}">
+
+		<!-- Main CSS -->
+		<link rel="stylesheet" href="{% static 'dosra/assets/css/style.css' %}">
+
+		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!--[if lt IE 9]>
+			<script src="{% static 'dosra/assets/js/html5shiv.min.js' %}"></script>
+			<script src="{% static 'dosra/assets/js/respond.min.js' %}"></script>
+		<![endif]-->
+<style>
+.dabutton{
+
+  background-color: #e9e9e9;
+    border: 1px solid #e9e9e9;
+    border-radius: 3px;
+    color: #757575;
+    display: block;
+    font-size: 14px;
+    margin-bottom: 10px;
+    padding: 5px 5px;
+    text-align: center;
+	position: relative;
+	width:100%;
+
+}
+.dabutton.active {
+    background-color:lightgreen;
+color:black;
+    border: 1px solid #e9e9e9;
+    border-radius: 3px;
+<!--    color: #757575;-->
+    display: block;
+    font-size: 14px;
+    margin-bottom: 10px;
+    padding: 5px 5px;
+    text-align: center;
+	position: relative;
+}
+.active{
+  background:green;
+  color:white;
+}
+</style>
+<script>
+    var count = 1;
+    function setColor(btn, color) {
+        var property = document.getElementById(btn);
+        if (count == 0) {
+         property.style.backgroundColor = "#7FFF00"
+<!--            property.style.backgroundColor = "#FFFFFF"-->
+            count = 1;
+        }
+        else {
+            property.style.backgroundColor = "#7FFF00"
+            count = 0;
+        }
+    }
+</script>
+
+
+	</head>
+	<body>
+
+		<!-- Main Wrapper -->
+		<div class="main-wrapper">
+
+			<!-- Header -->
+			<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+	    <div class="container">
+			 <img src="{% static 'images/dill3.png' %} ">
+	      <a class="navbar-brand"  href="{% url 'patientprofile' %}">We<span>Doctor's</span></a>
+	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+	        <span class="oi oi-menu"></span> Menu
+	      </button>
+
+	      <div class="collapse navbar-collapse" id="ftco-nav">
+	        <ul class="navbar-nav ml-auto">
+	          <li class="nav-item "><a href=" {% url 'patientprofile' %} " class="nav-link">Home</a></li>
+				<li class="nav-item "><a href= "{% url 'patient_dashboard' %}"  class="nav-link">Dashboard</a></li>
+<!--	          <li class="nav-item "><a href= "{% url 'updateprofile' %}"  class="nav-link">Profile</a></li>-->
+	          <li class="nav-item active" style="background-color: 	#383838;"><a href="{% url 'makeappointment' %}" class="nav-link">Make an Appointment</a></li>
+	          <li class="nav-item"><a href="{% url 'predictdisease' %}" class="nav-link">Predict Disease</a></li>
+				<li class="nav-item"><a href="{% url 'livecall_patient' %}" class="nav-link">Live Call</a></li>
+<!--	          <li class="nav-item"><a href="{% url 'blog' %}" class="nav-link">Blog</a></li>-->
+	          <li class="nav-item"><a href="{% url 'mappatient' %}" class="nav-link">Area of Disease</a></li>
+<!--				 <li class="nav-item"><a href="#" class="nav-link">Area of Disease</a></li>-->
+<!--	          <li class="nav-item cta"> <a href="{% url 'login' %}" class="nav-link" data-toggle="modal" data-target="#modalRequest"><span>Sign In</span></a></li>-->
+			<li class="w3-dropdown-hover">
+    <button  class="w3-button " style="border-radius:30px;background-color:#0066FF;color:white" ><img src="{% static 'images/settings.png' %} " style="height:25px;width:25px;">&nbsp;&nbsp;Setting</button>
+    <div class="w3-dropdown-content w3-bar-block w3-border" style="border-radius:20px;background-color:#0066FF">
+      <a href="{% url 'updateprofile' %}" class="w3-bar-item w3-button" style="border-radius:30px;color:white;background-color:#0066FF">Edit Profile</a>
+<!--      <a href="#" class="w3-bar-item w3-button">Link 2</a>-->
+      <form  action="/singnout/" method="POST" style="border-radius:30px;background-color:#0066FF;color:white">
+				 {% csrf_token %}
+
+			 <input type="submit"  value="Sign out" class="btn w3-bar-item w3-button " style="border-radius:30px;background-color:#0066FF;color:white">
+				</form>
+    </div>
+  </li>
+<!--	          <li class="nav-item cta"> <a href="{% url 'login' %}" class="nav-link" data-toggle="modal" data-target="#modalRequest"><span>Sign In</span></a></li>-->
+			</ul>
+	      </div>
+
+	    </div>
+
+        </nav>
+
+
+			<!-- /Header -->
+
+			<!-- Breadcrumb -->
+			<div class="breadcrumb-bar" style="background-color:black">
+				<div class="container-fluid">
+					<div class="row align-items-center">
+						<div class="col-md-12 col-12">
+							<nav aria-label="breadcrumb" class="page-breadcrumb">
+								<ol class="breadcrumb">
+
+									<li class="breadcrumb-item"><a href="{% url 'patientprofile' %}">Home</a></li>
+                                    <li class="breadcrumb-item"><a href="{% url 'makeappointment' %}">Make Appointment</a></li>
+
+								</ol>
+							</nav>
+							<h2 class="breadcrumb-title">Book Appointment</h2>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- /Breadcrumb -->
+
+			<!-- Page Content -->
+			<div class="content">
+				<div class="container">
+
+					<div class="row">
+						<div class="col-12">
+
+							<div class="card">
+								<div class="card-body">
+									<div class="booking-doc-info">
+										<a href="#" class="booking-doc-img">
+											 {% if not doctor.image%}
+                                            <img src="/static/images/download.png"  />
+                                            {% endif %}
+                                            {% if doctor.image%}
+                                            <img src='/media/{{doctor.image}}'  />
+                                            {% endif %}
+										</a>
+										<div class="booking-info">
+											<h4><a href="#">Dr. {{doctor.first_name}} {{doctor.last_name}}</a></h4>
+<!--											<div class="rating">-->
+<!--												<i class="fas fa-star filled"></i>-->
+<!--												<i class="fas fa-star filled"></i>-->
+<!--												<i class="fas fa-star filled"></i>-->
+<!--												<i class="fas fa-star filled"></i>-->
+<!--												<i class="fas fa-star"></i>-->
+<!--												<span class="d-inline-block average-rating">35</span>-->
+<!--											</div>-->
+											<p class="text-muted mb-0"><i class="fas fa-map-marker-alt"></i> {{doctor.city}},{{doctor.province}},Pakistan</p>
+									<h1 style="text-align: center;">Select an avaliable slot</h1>
+											<h2 style="background-color:yellow">Time is in 24-Hour Notation</h2>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<!-- Schedule Widget -->
+							<div class="card booking-schedule schedule-widget">
+
+								<!-- Schedule Header -->
+								<div class="schedule-header">
+									<div class="row">
+										<div class="col-md-12">
+
+											<!-- Day Slot -->
+											<div class="day-slot">
+												<ul>
+<!--													<li class="left-arrow">-->
+<!--														<a href="#">-->
+<!--															<i class="fa fa-chevron-left"></i>-->
+<!--														</a>-->
+<!--													</li>-->
+													<li>
+														<span>Mon</span>
+
+{% for i in monday_schedule %}
+														      {% if i.availability == "available" %}
+ <button type="button " class="button-school dabutton" value="Monday">{{i.start_time}}</button>
+														{% endif %}
+{% endfor %}
+<!--														<span class="slot-date">11 Nov <small class="slot-year">2020</small></span>-->
+													</li>
+													<li>
+														<span>Tue</span>
+														{% for i in tuesday_schedule %}
+														{% if i.availability == "available" %}
+ <button type="button " class="button-school dabutton" value="Tuesday">{{i.start_time}}</button>
+														{% endif %}
+{% endfor %}
+<!--
+													<span class="slot-date">12 Nov <small class="slot-year">2020</small></span>-->
+													</li>
+													<li>
+														<span>Wed</span>
+																										{% for i in wednesday_schedule %}
+														{% if i.availability == "available" %}
+ <button type="button " class="button-school dabutton" value="Wednesday">{{i.start_time}}</button>
+														{% endif %}
+{% endfor %}
+<!--														<span class="slot-date">13 Nov <small class="slot-year">2020</small></span>-->
+													</li>
+													<li>
+														<span>Thu</span>
+														{% for i in thursday_schedule %}
+														{% if i.availability == "available" %}
+ <button type="button " class="button-school dabutton" value="Thursday">{{i.start_time}}</button>
+														{% endif %}
+{% endfor %}
+<!--														<span class="slot-date">14 Nov <small class="slot-year">2020</small></span>-->
+													</li>
+													<li>
+														<span>Fri</span>
+														{% for i in friday_schedule %}
+														{% if i.availability == "available" %}
+ <button type="button " class="button-school dabutton" value="Friday">{{i.start_time}}</button>
+														{% endif %}
+{% endfor %}
+<!--														<span class="slot-date">15 Nov <small class="slot-year">2020</small></span>-->
+													</li>
+													<li>
+														<span>Sat</span>
+														{% for i in saturday_schedule %}
+														{% if i.availability == "available" %}
+ <button type="button " class="button-school dabutton" value="Saturday">{{i.start_time}}</button>
+														{% endif %}
+{% endfor %}
+<!--														<span class="slot-date">16 Nov <small class="slot-year">2020</small></span>-->
+													</li>
+													<li>
+														<span>Sun</span>
+														{% for i in sunday_schedule %}
+														{% if i.availability == "available" %}
+ <button type="button " class="button-school dabutton" value="Sunday">{{i.start_time}}</button>
+														{% endif %}
+{% endfor %}
+<!--														<span class="slot-date">17 Nov <small class="slot-year">2020</small></span>-->
+													</li>
+<!--													<li class="right-arrow">-->
+<!--														<a href="#">-->
+<!--															<i class="fa fa-chevron-right"></i>-->
+<!--														</a>-->
+<!--													</li>-->
+												</ul>
+											</div>
+											<!-- /Day Slot -->
+
+										</div>
+									</div>
+								</div>
+								<!-- /Schedule Header -->
+
+
+
+
+
+
+
+
+								<!-- Schedule Content -->
+
+								<!-- /Schedule Content -->
+
+
+							<!-- /Schedule Widget -->
+
+							<!-- Submit Section -->
+
+							<div class="submit-section proceed-btn text-right">
+								  <form  action="/payment/" method="POST">
+									  {% csrf_token %}
+									  <input type="hidden" id="time" name="time">
+									  <input type="hidden" id="day" name="day">
+									  <input type="hidden" id="doctor" name="doctor" value="{{doctor.email}}">
+								<input type="submit" id="submit" class="btn btn-primary submit-btn" value="Select Slot">
+								  </form>
+
+							</div>
+							<!-- /Submit Section -->
+
+						</div>
+					</div>
+				</div>
+
+			</div>
+			<!-- /Page Content -->
+
+			<!-- Footer -->
+				<footer class="ftco-footer ftco-bg-dark ftco-section" style="background-color:black">
+      <div class="container">
+        <div class="row mb-5">
+          <div class="col-md-3">
+            <div class="ftco-footer-widget mb-4">
+              <h2 class="ftco-heading-2" style="color:white">WeDoctor's.</h2>
+              <p style="color:white">WeDoctor's is an online audio/video consultation platform that allows real-time interaction between a doctor and patient. WeDoctor aims to provide virtual healthcare focusing on convenience and comfort. It is the future of healthcare and obviates barriers to efficiency and access.</p>
+            </div>
+            <ul class="ftco-footer-social list-unstyled float-md-left float-lft ">
+              <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
+              <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
+              <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
+            </ul>
+          </div>
+          <div class="col-md-2">
+            <div class="ftco-footer-widget mb-4 ml-md-5">
+              <h2 class="ftco-heading-2" style="color:white">Quick Links</h2>
+              <ul class="list-unstyled">
+                <li><a href="{% url 'about' %}" class="py-2 d-block" style="color:white">About</a></li>
+<!--                <li><a href="#" class="py-2 d-block">Features</a></li>-->
+<!--                <li><a href="#" class="py-2 d-block">Projects</a></li>-->
+<!--                <li><a href="#" class="py-2 d-block">Blog</a></li>-->
+                <li><a href="{% url 'contact' %}" class="py-2 d-block" style="color:white">Contact</a></li>
+              </ul>
+            </div>
+          </div>
+<!--          <div class="col-md-4 pr-md-4">-->
+<!--            <div class="ftco-footer-widget mb-4">-->
+<!--              <h2 class="ftco-heading-2">Recent Blog</h2>-->
+<!--              <div class="block-21 mb-4 d-flex">-->
+<!--                <a class="blog-img mr-4" style="background-image: url({% static 'images/image_1.jpg' %});"></a>-->
+<!--                <div class="text">-->
+<!--                  <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about</a></h3>-->
+<!--                  <div class="meta">-->
+<!--                    <div><a href="#"><span class="icon-calendar"></span> Sept 15, 2018</a></div>-->
+<!--                    <div><a href="#"><span class="icon-person"></span> Admin</a></div>-->
+<!--                    <div><a href="#"><span class="icon-chat"></span> 19</a></div>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--              <div class="block-21 mb-4 d-flex">-->
+<!--                <a class="blog-img mr-4" style="background-image: url({% static 'images/image_2.jpg' %});"></a>-->
+<!--&lt;!&ndash;                <div class="text">&ndash;&gt;-->
+<!--&lt;!&ndash;                  <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about</a></h3>&ndash;&gt;-->
+<!--&lt;!&ndash;                  <div class="meta">&ndash;&gt;-->
+<!--&lt;!&ndash;                    <div><a href="#"><span class="icon-calendar"></span> Sept 15, 2018</a></div>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <div><a href="#"><span class="icon-person"></span> Admin</a></div>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <div><a href="#"><span class="icon-chat"></span> 19</a></div>&ndash;&gt;-->
+<!--&lt;!&ndash;                  </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                </div>&ndash;&gt;-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+          <div class="col-md-3">
+            <div class="ftco-footer-widget mb-4">
+            	<h2 class="ftco-heading-2" style="color:white">Office</h2>
+            	<div class="block-23 mb-3">
+	              <ul>
+	                <li><span class="icon icon-map-marker"></span><span class="text" style="color:white">Fast NAtional University of Computer and Emerging Sciences</span></li>
+	                <li><a href="#"><span class="icon icon-phone"></span><span class="text" style="color:white">+92-346-6211392</span></a></li>
+	                <li><a href="#"><span class="icon icon-envelope"></span><span class="text" style="color:white">wedoctors@gmail.com</span></a></li>
+	              </ul>
+	            </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 text-center" style="color:white">
+
+            <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved by WeDoctor's
+  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+          </div>
+        </div>
+      </div>
+    </footer>
+			<!-- /Footer -->
+
+
+
+
+
+               <!-- loader -->
+<!--  <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>-->
+
+  <!-- Modal -->
+  <div class="modal fade" id="modalRequest" tabindex="-1" role="dialog" aria-labelledby="modalRequestLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <form class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalRequestLabel">Sign In</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form action="#">
+            <div class="form-group">
+              <!-- <label for="appointment_name" class="text-black">Full Name</label> -->
+              <input type="text" class="form-control" id="appointment_email" placeholder="Email" required>
+            </div>
+            <div class="form-group">
+              <!-- <label for="appointment_email" class="text-black">Email</label> -->
+              <input type="password" class="form-control" id="appointment_password" placeholder="Password" required>
+            </div>
+		  </form>
+		</div>
+		  <label style="text-align:center;">
+        <input type="checkbox" checked="checked" name="remember" > Remember me
+      </label>
+            <div class="form-group" style="text-align:center;">
+              <input type="submit" value="Sign In" class="btn btn-primary">
+            </div>
+
+	  </form>
+        </div>
+
+      </div>
+
+		</div>
+
+
+
+
+		<!-- /Main Wrapper -->
+
+		<!-- jQuery -->
+		<script src="{% static 'dosra/assets/js/jquery.min.js' %}"></script>
+
+		<!-- Bootstrap Core JS -->
+		<script src="{% static 'dosra/assets/js/popper.min.js' %}"></script>
+		<script src="{% static 'dosra/assets/js/bootstrap.min.js' %}"></script>
+
+		<!-- Custom JS -->
+		<script src="{% static 'dosra/assets/js/script.js' %}"></script>
+
+<script>
+
+
+
+	var links = document.getElementsByClassName('changeable');
+
+function changeColor(e) {
+    e.target.style.color = e.target.style.color ? null : 'green';
+    console.log("jkj");
+
+}
+for (var i = 0; i < links.length; i++) {
+    links[i].addEventListener('click', changeColor);
+
+}
+</script>
+			<script type="text/javascript">
+  document.addEventListener("DOMContentLoaded", function(event) {
+     document.getElementById('submit').style.visibility = 'hidden';
+  });
+</script>
+
+<script>
+
+$(function(){
+    $('.button-school').click(function() {
+
+         $('#day').val($(this).val());
+          $('#time').val($(this).html());
+           document.getElementById('submit').style.visibility = 'visible';
+
+    });
+});
+
+
+	jQuery(function($) {
+  $('.button-school').click(function() {
+    $('.button-school').not(this).removeClass('active').html(function() {
+
+
+      return $(this).html().replace('SELECTED', 'SELECT');
+    });
+
+    $(this).addClass('active').html(jQuery(this).html().replace('SELECT', 'SELECTED'));
+  });
+});
+	</script>
+
+			<script>
+
+
+<!--   $(document).ready(function(){$(':button').click(function(){-->
+<!--   alert($('button').text());-->
+
+<!--   });})-->
+
+<!--   $(document).ready(function() {-->
+<!--    $("form").submit(function() {-->
+<!--        var val = $("button[type=submit][clicked=true]").val();-->
+<!--         console.log(val);-->
+<!--        // DO WORK-->
+<!--    });-->
+<!--    $("form button[type=submit]").click(function() {-->
+<!--        $("button[type=submit]", $(this).parents("form")).removeAttr("clicked");-->
+<!--        $(this).attr("clicked", "true");-->
+<!--    });-->
+<!--});-->
+			</script>
+</body>
+
+
+
+
+
+
+
+<!-- doccure/booking.html  30 Nov 2020 04:12:16 GMT -->
+</html>

@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <!-- Required meta tags-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="au theme template">
+    <meta name="author" content="Hau Nguyen">
+    <meta name="keywords" content="au theme template">
+<link href="{% static 'images/dill3.png' %}" rel="icon">
+    <!-- Title Page-->
+    <title>Appointment Requests</title>
+
+    <!-- Fontfaces CSS-->
+    <link href="{% static 'others/css/font-face.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'others/vendor/font-awesome-4.7/css/font-awesome.min.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'others/vendor/font-awesome-5/css/fontawesome-all.min.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'others/vendor/mdi-font/css/material-design-iconic-font.min.css' %}" rel="stylesheet" media="all">
+
+
+
+		<!-- Main CSS -->
+<!--		<link rel="stylesheet" href="{% static 'dosra/assets/css/style.css' %}">-->
+
+
+
+
+    <!-- Bootstrap CSS-->
+    <link href="{% static 'others/vendor/bootstrap-4.1/bootstrap.min.css' %}" rel="stylesheet" media="all">
+
+    <!-- Vendor CSS-->
+    <link href="{% static 'others/vendor/animsition/animsition.min.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'others/vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'others/vendor/wow/animate.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'others/vendor/css-hamburgers/hamburgers.min.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'others/vendor/slick/slick.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'others/vendor/select2/select2.min.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'others/vendor/perfect-scrollbar/perfect-scrollbar.css' %}" rel="stylesheet" media="all">
+
+    <!-- FullCalendar -->
+    <link href="{% static 'others/vendor/fullcalendar-3.10.0/fullcalendar.css' %}" rel='stylesheet' media="all" />
+
+    <!-- Main CSS-->
+    <link href="{% static 'others/css/theme.css' %}" rel="stylesheet" media="all">
+
+<style>
+<!--body {font-family: Arial, Helvetica, sans-serif;}-->
+* {box-sizing: border-box;}
+
+/* Button used to open the contact form - fixed at the bottom of the page */
+.open-button {
+<!--  background-color: #555;-->
+  color: white;
+  padding: 18px 30px;
+  border: none;
+  cursor: pointer;
+  opacity: 0.8;
+<!--  position: fixed;-->
+<!--  bottom: 23px;-->
+<!--  right: 28px;-->
+<!--  width: 280px;-->
+}
+
+/* The popup form - hidden by default */
+.form-popup {
+  display: none;
+  position: fixed;
+  bottom: 0;
+<!--  right: 15px;-->
+  border: 3px solid #f1f1f1;
+  z-index: 9;
+}
+
+/* Add styles to the form container */
+.form-container {
+  max-width: 300px;
+  padding: 10px;
+  background-color: white;
+}
+
+/* Full-width input fields */
+.form-container input[type=text] {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  border: none;
+  background: #f1f1f1;
+}
+
+/* When the inputs get focus, do something */
+.form-container input[type=text]:focus, .form-container input[type=password]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+/* Set a style for the submit/login button */
+.form-container .btn {
+  background-color: #04AA6D;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  margin-bottom:10px;
+  opacity: 0.8;
+}
+
+/* Add a red background color to the cancel button */
+.form-container .cancel {
+  background-color: red;
+}
+
+/* Add some hover effects to buttons */
+.form-container .btn:hover, .open-button:hover {
+  opacity: 1;
+}
+</style>
+
+
+    <style type="text/css">
+
+
+.profile-info-widget {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+    text-align: left;
+}
+.profile-info-widget .booking-doc-img {
+    margin-right: 15px;
+}
+.profile-info-widget .booking-doc-img img {
+    border-radius: 4px;
+    height: 90px;
+    width: 90px;
+    object-fit: cover;
+}
+.profile-det-info {
+	overflow: hidden;
+}
+.profile-det-info h3 {
+	font-size: 17px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.patient-details h5 {
+    color: #757575;
+    font-size: 13px;
+    font-weight: normal;
+    margin-bottom: 8px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.patient-details h5 i {
+	width: 18px;
+}
+.card {
+		margin-bottom: 0.9375rem;
+	}
+	.card-body {
+		padding: 1.25rem;
+	}
+	.card-header {
+		padding: .75rem 1.25rem;
+	}
+	.card-footer {
+		padding: .75rem 1.25rem;
+	}
+.widget-profile .profile-info-widget .booking-doc-img img {
+    border-radius: 50%;
+    height: 120px;
+    width: 120px;
+}
+.widget-profile.pat-widget-profile .profile-info-widget .booking-doc-img img {
+    border-radius: 50%;
+    height: 100px;
+    width: 100px;
+}
+.contact-card .card-body {
+	padding-bottom: 0.625rem;
+}
+.success-card .card-body {
+	padding: 50px 20px;
+}
+.card-body {
+	padding: 1.5rem;
+}
+.card-table .card-body .table > thead > tr > th {
+    border-top: 0;
+}.card-table .card-body {
+    padding: 0;
+}
+.pat-widget-profile .pro-widget-content {
+	padding: 0 0 20px;
+}
+.pro-widget-content {
+    border-bottom: 1px solid #f0f0f0;
+    padding: 20px;
+    text-align: center;
+}
+.profile-info-widget {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+    text-align: left;
+}
+.profile-info-widget .booking-doc-img {
+    margin-right: 15px;
+}
+.profile-info-widget .booking-doc-img img {
+    border-radius: 4px;
+    height: 90px;
+    width: 90px;
+    object-fit: cover;
+}
+.widget-profile.pat-widget-profile .profile-info-widget .booking-doc-img {
+	padding: 0;
+}
+.widget-profile.pat-widget-profile .profile-info-widget .booking-doc-img img {
+    border-radius: 50%;
+    height: 100px;
+    width: 100px;
+}
+.widget-profile .profile-info-widget {
+	display: block;
+	text-align: center;
+}
+.widget-profile .profile-info-widget .booking-doc-img {
+    display: inline-block;
+    margin: 0 0 15px;
+    width: auto;
+    padding: 8px;
+    background-color: #f7f7f7;
+    border-radius: 50%;
+}
+.widget-profile .profile-info-widget .booking-doc-img img {
+    border-radius: 50%;
+    height: 120px;
+    width: 120px;
+}
+.appointment-list .profile-info-widget {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+    margin-right: auto;
+    text-align: left;
+}
+.appointment-list .profile-info-widget .booking-doc-img img {
+    border-radius: 4px;
+    height: 120px;
+    object-fit: cover;
+    width: 120px;
+}
+.appointment-list .profile-info-widget {
+		-ms-flex-direction: column;
+		flex-direction: column;
+	}
+	.appointment-list .profile-info-widget {
+		text-align: center;
+	}
+	.appointment-list .profile-info-widget .booking-doc-img {
+		margin: 0 0 15px;
+	}
+	.appointment-list .profile-info-widget .booking-doc-img img {
+		border-radius: 50%;
+		height: 100px;
+		width: 100px;
+	}
+	.appointments .appointment-action {
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	align-items: center;
+	display: -webkit-inline-box;
+	display: -ms-inline-flexbox;
+	display: inline-flex;
+}
+.appointment-action a + a {
+	margin-left: 5px;
+}
+.appointment-action a {
+    font-size: 13px;
+}
+.appointments .appointment-action {
+		margin-top: 10px;
+	}
+	.appointments .appointment-action {
+		margin-top: 0;
+	}
+    </style>
+
+</head>
+
+
+<body class="animsition">
+{% csrf_token %}
+    <div class="page-wrapper">
+        <!-- HEADER MOBILE-->
+        <header class="header-mobile d-block d-lg-none">
+            <div class="header-mobile__bar">
+                <div class="container-fluid">
+                    <div class="header-mobile-inner">
+
+                        <a class="logo" >
+                             <img src="{% static 'images/dill3.png' %} ">
+                             <a class="navbar-brand"  href="{% url 'doctors' %}" style="color:black;">We<span><b>Doctor's</b></span></a>
+<!--                            <img src="images/icon/logo.png" alt="CoolAdmin" />-->
+                        </a>
+                        <button class="hamburger hamburger--slider" type="button">
+                            <span class="hamburger-box">
+                                <span class="hamburger-inner"></span>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <nav class="navbar-mobile">
+                <div class="container-fluid">
+                    <ul class="navbar-mobile__list list-unstyled">
+                        <li class="has-sub">
+                            <a class="js-arrow" href="{% url 'doctors' %}">
+                                <i class="fas fa-tachometer-alt"></i>Home</a>
+
+                            <li class="active">
+                            <a  href="{% url 'appointment_requests_doctor' %}">
+                                <i class="fas fa-copy"></i>Appointment Request</a>
+
+                                </li>
+                            <a href="{% url 'calendar' %}">
+                                <i class="fas fa-calendar-alt"></i>Set Avaliability</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'mapdoctor' %}">
+                                <i class="fas fa-map-marker-alt"></i>Maps</a>
+                        </li>
+                         <li >
+                            <a href="{% url 'prescribe_medicine_livecall' %}">
+                                <i class="fas fa-desktop"></i>Live Call</a>
+                        </li>
+<!--                        <li>-->
+<!--                            <a href="{% url 'prescription' %}">-->
+<!--                                <i class="far fa-check-square"></i>Prescribe Medicine</a>-->
+<!--                        </li>-->
+<!--                         <li >-->
+<!--                            <a href="{% url 'my_patients_doctor' %}">-->
+<!--                                <i class="fas fa-chart-bar"></i>My Patients</a>-->
+<!--                        </li>-->
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <!-- END HEADER MOBILE-->
+
+        <!-- MENU SIDEBAR-->
+        <aside class="menu-sidebar d-none d-lg-block">
+            <div class="logo">
+                <a >
+                    <img src="{% static 'images/dill3.png' %} ">
+                     <a class="navbar-brand"  href="{% url 'doctors' %}" style="color:black;">We<span><b>Doctor's</b></span></a>
+<!--                    <img src="images/icon/logo.png" alt="Cool Admin" />-->
+                </a>
+            </div>
+            <div class="menu-sidebar__content js-scrollbar1">
+                <nav class="navbar-sidebar">
+                    <ul class="list-unstyled navbar__list">
+                        <li class="has-sub">
+                            <a class="js-arrow" href="{% url 'doctors' %}">
+                                <i class="fas fa-tachometer-alt"></i>Home</a>
+
+                        </li>
+                        <li class="active">
+                            <a  href="{% url 'appointment_requests_doctor' %}">
+                                <i class="fas fa-copy"></i>Appointment Request</a>
+
+                                </li>
+                        <li >
+                            <a href="{% url 'calendar' %}">
+                                <i class="fas fa-calendar-alt"></i>Set Avaliability</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'mapdoctor' %}">
+                                <i class="fas fa-map-marker-alt"></i>Maps</a>
+                        </li>
+                        <li >
+                            <a href="{% url 'prescribe_medicine_livecall' %}">
+                                <i class="fas fa-desktop"></i>Live Call</a>
+                        </li>
+<!--                        <li>-->
+<!--                            <a href="{% url 'prescription' %}">-->
+<!--                                <i class="far fa-check-square"></i>Prescribe Medicine</a>-->
+<!--                        </li>-->
+<!--                         <li >-->
+<!--                            <a href="{% url 'my_patients_doctor' %}">-->
+<!--                                <i class="fas fa-chart-bar"></i>My Patients</a>-->
+<!--                        </li>-->
+                    </ul>
+                </nav>
+            </div>
+        </aside>
+        <!-- END MENU SIDEBAR-->
+
+        <!-- PAGE CONTAINER-->
+        <div class="page-container">
+            <!-- HEADER DESKTOP-->
+            <header class="header-desktop">
+                <div class="section__content section__content--p30">
+                    <div class="container-fluid">
+                        <div class="header-wrap">
+                            <form class="form-header" action="" method="POST">
+<!--                                <input class="au-input au-input&#45;&#45;xl" type="text" name="search" placeholder="Search for datas &amp; reports..." />-->
+<!--                                <button class="au-btn&#45;&#45;submit" type="submit">-->
+<!--                                    <i class="zmdi zmdi-search"></i>-->
+<!--                                </button>-->
+                            </form>
+                            <div class="header-button">
+                                <div class="account-wrap">
+                                    <div class="account-item clearfix js-item-menu">
+                                        <div class="image">
+                                           {% if not doctor.image%}
+                                            <img src="{% static 'images/download.png' %}"  />
+                                            {% endif %}
+                                            {% if doctor.image%}
+                                            <img src='/media/{{doctor.image}}'  />
+                                            {% endif %}
+                                        </div>
+                                        <div class="content">
+                                            <a class="js-acc-btn" href="#">{{doctor.first_name}} {{doctor.last_name}}</a>
+                                        </div>
+                                        <div class="account-dropdown js-dropdown">
+                                            <div class="info clearfix">
+                                                <div class="image">
+                                                    <a href="#">
+                                                        {% if not doctor.image%}
+                                            <img src="{% static 'images/download.png' %}"  />
+                                            {% endif %}
+                                            {% if doctor.image%}
+                                            <img src='/media/{{doctor.image}}'  />
+                                            {% endif %}
+                                                    </a>
+                                                </div>
+                                                <div class="content">
+                                                    <h5 class="name">
+                                                        <a href="#">{{doctor.first_name}} {{doctor.last_name}}</a>
+                                                    </h5>
+                                                    <span class="email">{{doctor.email}}</span>
+                                                </div>
+                                            </div>
+                                             <div class="account-dropdown__body">
+                                                <div class="account-dropdown__item">
+
+                                                        <button class="zmdi zmdi-account open-button"  onclick="openForm()"> Set Fee</button>
+
+                                                        <div class="form-popup" id="myForm">
+  <form action="#" class="form-container">
+    <h1>Set Consulting Fee</h1>
+
+    <label ><b>Consulting Fee Amount</b></label>
+    <input type="text" placeholder="Enter Amount (PKR)"  required>
+
+
+
+    <button type="submit" class="btn">Save</button>
+    <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+  </form>
+</div>
+
+                                                    <script>
+function openForm() {
+  document.getElementById("myForm").style.display = "block";
+}
+
+function closeForm() {
+  document.getElementById("myForm").style.display = "none";
+}
+</script>
+
+
+                                                </div>
+                                                <div class="account-dropdown__item">
+                                                    <a href="{% url 'update_doctor_profile' %}">
+                                                        <i class="zmdi zmdi-settings"></i>Edit Profile</a>
+                                                </div>
+                                                <div class="account-dropdown__item">
+                                                    <a href="#">
+                                                        <i class="zmdi zmdi-money-box"></i>Earning</a>
+                                                </div>
+                                            </div>
+                                            <div class="account-dropdown__footer">
+                                                <a href="{% url 'user_singnout' %}" method="POST">
+													<form action="/singnout/"  >
+														 {% csrf_token %}
+                                                    <button type="submit" class="zmdi zmdi-power btn "></button> Logout
+												</form></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            <!-- END HEADER DESKTOP-->
+
+            <!-- MAIN CONTENT-->
+            <div class="main-content">
+                <div class="section__content section__content--p30">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col">
+                              <div class="au-card">
+         <div class="panel-body">
+                        <!-- panel content start -->
+                          <h1 style="text-align: center;">Appointments Requests</h1>
+             <br>
+<!--             1st patient-->
+<!--             <div class="col-md-7 col-lg-8 col-xl-9">-->
+             {% for i in patients %}
+
+							<div class="appointments">
+<!-- Appointment List -->
+								<div class="appointment-list">
+									<div class="profile-info-widget">
+
+										<div class="profile-det-info">
+                                            {% if i.appointment_status == "pending"%}
+											<h3><a href="patient-profile.html">{{i.patient_first_name}} {{i.patient_last_name}}</a></h3>
+
+											<div class="patient-details">
+												<h5><i class="far fa-clock"></i> {{i.appointment_day}} {{i.appointment_time}}</h5>
+												<h5><i class="fas fa-map-marker-alt"></i> {{i.patient_city}},{{i.patient_province}} Pakistan</h5>
+												<h5><i class="fas fa-envelope"></i> {{i.patient_email}}</h5>
+												<h5 class="mb-0"><i class="fas fa-phone"></i> +92 {{i.patient_contact_no}}</h5>
+											</div>
+
+
+										</div>
+									</div>
+
+									<div class="appointment-action" >
+                                          <form  action="/patient_medical_history/" method="post">
+                                                    {% csrf_token %}
+                                              <input type="hidden" id="view_patient_email" name="view_patient_email" value="{{i.patient_email}}">
+									  <input type="hidden" id="view_appointment_day" name="view_appointment_day" value="{{i.appointment_day}}">
+                                            <input type="hidden" id="view_appointment_time" name="view_appointment_time" value="{{i.appointment_time}}">
+                                             <input type="hidden" id="view_datetime" name="view_datetime" value="{{i.date}}">
+                                             <br>
+    <pre>                        <input style="color:white;background-color:blue" type="submit" class="btn btn-sm bg-info-light"   value="View Patient History"  > </pre>
+                                          </form>
+
+
+                                        <form  action="/accept_appointment/" method="post">
+                                                    {% csrf_token %}
+                                            <input type="hidden" id="accept_patient_email" name="accept_patient_email" value="{{i.patient_email}}">
+									  <input type="hidden" id="appointment_day" name="appointment_day" value="{{i.appointment_day}}">
+                                            <input type="hidden" id="appointment_time" name="appointment_time" value="{{i.appointment_time}}">
+                                             <input type="hidden" id="datetime" name="datetime" value="{{i.date}}">
+                               <br>
+                                <pre><input type="submit" class="btn btn-sm bg-success-light fas fa-check"  value="Accept Appointment Request"  style="color:white;background-color:green"> </pre>        </form>
+
+<!--                                        <i class="far fa-eye"></i>-->
+                                         <form  action="/cancel_appointment/" method="post">
+                                                    {% csrf_token %}
+                                             <input type="hidden" id="appointmentt_day" name="appointmentt_day" value="{{i.appointment_day}}">
+                                            <input type="hidden" id="appointmentt_time" name="appointmentt_time" value="{{i.appointment_time}}">
+                                             <input type="hidden" id="datettime" name="datettime" value="{{i.date}}">
+                                            <input type="hidden" id="cancel_patient_email" name="cancel_patient_email" value="{{i.patient_email}}">
+                                             <input type="hidden" id="cancel" name="cancel" value="cancel">
+                                     <br>
+                                             <pre><input type="submit" class="btn btn-sm bg-danger-light fas fa-times"  value="Cancel Appointment Request"  style="color:white;background-color:red"></pre>
+
+                                         </form>
+
+									</div>
+                                    {% endif %}
+								</div>
+
+								<!-- /Appointment List -->
+
+             <!-- Appointment List -->
+							<!--	<div class="appointment-list">
+									<div class="profile-info-widget">
+										<a href="patient-profile.html" class="booking-doc-img">
+											<img src="{% static 'images/pak_02.jfif' %}" alt="My image">
+										</a>
+										<div class="profile-det-info">
+											<h3><a href="patient-profile.html">Anam MAhnoor </a></h3>
+											<div class="patient-details">
+												<h5><i class="far fa-clock"></i> 12 Nov 2019, 5.00 PM</h5>
+												<h5><i class="fas fa-map-marker-alt"></i> Faisalabad, Pakistan</h5>
+												<h5><i class="fas fa-envelope"></i> anam@gmail.com</h5>
+												<h5 class="mb-0"><i class="fas fa-phone"></i> +92 828 632 9170</h5>
+											</div>
+										</div>
+									</div>
+									<div class="appointment-action">
+										<a href="{% url 'patient_medical_history' %}" class="btn btn-sm bg-info-light" >
+											<i class="far fa-eye"></i> View
+										</a>
+										<a href="javascript:void(0);" class="btn btn-sm bg-success-light" style="color:green">
+											<i class="fas fa-check" ></i> Accept
+										</a>
+										<a href="javascript:void(0);" class="btn btn-sm bg-danger-light" style="color:red">
+											<i class="fas fa-times"></i> Cancel
+										</a>
+									</div>
+								</div>
+                                -->
+								<!-- /Appointment List -->
+
+
+                            </div>
+
+
+             {% endfor %}
+
+
+
+
+             </div>
+
+                        <!-- panel content end -->
+                        <!-- panel end -->
+                        </div>
+                    </div>
+
+
+
+
+
+
+
+
+
+
+
+                              </div>
+                            </div><!-- .col -->
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+
+
+
+
+<!--footer-->
+
+
+
+         <div class="row">
+                            <div class="col-md-12">
+                                <div class="copyright">
+                                    <p>Copyright © 2020 WeDoctor's. All rights reserved. </p>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+        </div>
+
+
+    <script src="{% static 'others/vendor/jquery-3.2.1.min.js' %}"></script>
+    <!-- Bootstrap JS-->
+    <script src="{% static 'others/vendor/bootstrap-4.1/popper.min.js' %}"></script>
+    <script src="{% static 'others/vendor/bootstrap-4.1/bootstrap.min.js' %}"></script>
+    <!-- Vendor JS       -->
+    <script src="{% static 'others/vendor/slick/slick.min.js' %}">
+    </script>
+    <script src="{% static 'others/vendor/wow/wow.min.js' %}"></script>
+    <script src="{% static 'others/vendor/animsition/animsition.min.js' %}"></script>
+    <script src="{% static 'others/vendor/bootstrap-progressbar/bootstrap-progressbar.min.js' %}">
+    </script>
+    <script src="{% static 'others/vendor/counter-up/jquery.waypoints.min.js' %}"></script>
+    <script src="{% static 'others/vendor/counter-up/jquery.counterup.min.js' %}">
+    </script>
+    <script src="{% static 'others/vendor/circle-progress/circle-progress.min.js' %}"></script>
+    <script src="{% static 'others/vendor/perfect-scrollbar/perfect-scrollbar.js' %}"></script>
+    <script src="{% static 'others/vendor/chartjs/Chart.bundle.min.js' %}"></script>
+    <script src="{% static 'others/vendor/select2/select2.min.js' %}"></script>
+
+
+    <!-- Main JS-->
+    <script src="{% static 'others/js/main.js' %}"></script>
+
+
+<!--appointment-->
+ <script src="{% static 'doctor_schedule/js/jquery.js ' %}"></script>
+
+        <!-- Bootstrap Core JavaScript -->
+        <script src="{% static 'doctor_schedule/js/bootstrap.min.js' %}"></script>
+        <script src="{% static 'doctor_schedule/js/clock/bootstrap-clockpicker.js' %}"></script>
+        <!-- Latest compiled and minified JavaScript -->
+         <!-- script for jquery datatable start-->
+        <!-- Include Date Range Picker -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+
+
+
+</body>
+
+</html>
+<!-- end document-->

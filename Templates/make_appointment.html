@@ -1,0 +1,1069 @@
+<!DOCTYPE html>
+<html lang="en">
+	{% load static %}
+
+<head>
+		<meta charset="utf-8">
+		<title>Make Appointment</title>
+
+
+
+
+
+
+
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+
+		<!-- Favicons -->
+	<link href="{% static 'images/dill3.png' %}" rel="icon">
+<!--		<link href="{% static 'dosra/assets/img/favicon.png' %}" rel="icon">-->
+
+		<!-- Bootstrap CSS -->
+		<link rel="stylesheet" href="{% static 'dosra/assets/css/bootstrap.min.css' %}">
+
+		<!-- Fontawesome CSS -->
+		<link rel="stylesheet" href="{% static 'dosra/assets/plugins/fontawesome/css/fontawesome.min.css' %}">
+		<link rel="stylesheet" href="{% static 'dosra/assets/plugins/fontawesome/css/all.min.css' %}">
+
+		<!-- Datetimepicker CSS -->
+		<link rel="stylesheet" href="{% static 'dosra/assets/css/bootstrap-datetimepicker.min.css' %}">
+
+		<!-- Select2 CSS -->
+		<link rel="stylesheet" href="{% static 'dosra/assets/plugins/select2/css/select2.min.css' %}">
+
+
+
+
+
+<!--w3 schools-->
+	  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<!--end w3 schools-->
+
+
+		<!-- Fancybox CSS -->
+		<link rel="stylesheet" href="{% static 'dosra/assets/plugins/fancybox/jquery.fancybox.min.css' %}">
+
+		<!-- Main CSS -->
+		<link rel="stylesheet" href="{% static 'dosra/assets/css/style.css' %}">
+
+
+
+
+
+
+
+
+
+
+
+		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!--[if lt IE 9]>
+			<script src="assets/js/html5shiv.min.js' %}"></script>
+			<script src="assets/js/respond.min.js' %}"></script>
+		<![endif]-->
+
+	</head>
+	<body>
+
+		<!-- Main Wrapper -->
+
+
+			<!-- Header -->
+
+        <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+	    <div class="container">
+			 <img src="{% static 'images/dill3.png' %} ">
+	      <a class="navbar-brand"  href="{% url 'patientprofile' %}">We<span>Doctor's</span></a>
+	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+	        <span class="oi oi-menu"></span> Menu
+	      </button>
+
+	      <div class="collapse navbar-collapse" id="ftco-nav">
+	        <ul class="navbar-nav ml-auto">
+	          <li class="nav-item "><a href=" {% url 'patientprofile' %} " class="nav-link">Home</a></li>
+				<li class="nav-item "><a href= "{% url 'patient_dashboard' %}"  class="nav-link">Dashboard</a></li>
+<!--	          <li class="nav-item "><a href= "{% url 'updateprofile' %}"  class="nav-link">Profile</a></li>-->
+	          <li class="nav-item active"><a href="{% url 'makeappointment' %}" class="nav-link">Make an Appointment</a></li>
+	          <li class="nav-item"><a href="{% url 'predictdisease' %}" class="nav-link">Predict Disease</a></li>
+<!--				<li class="nav-item"><a href="{% url 'livecall_patient' %}" class="nav-link">Live Call</a></li>-->
+<!--	          <li class="nav-item"><a href="{% url 'blog' %}" class="nav-link">Blog</a></li>-->
+	          <li class="nav-item"><a href="{% url 'mappatient' %}" class="nav-link">Area of Disease</a></li>
+<!--				 <li class="nav-item"><a href="#" class="nav-link">Area of Disease</a></li>-->
+<!--	          <li class="nav-item cta"> <a href="{% url 'login' %}" class="nav-link" data-toggle="modal" data-target="#modalRequest"><span>Sign In</span></a></li>-->
+
+				<li class="w3-dropdown-hover">
+    <button  class="w3-button " style="border-radius:30px;background-color:#0066FF;color:white" ><img src="{% static 'images/settings.png' %} " style="height:25px;width:25px;">&nbsp;&nbsp;Setting</button>
+    <div class="w3-dropdown-content w3-bar-block w3-border" style="border-radius:20px;background-color:#0066FF">
+      <a href="{% url 'updateprofile' %}" class="w3-bar-item w3-button" style="border-radius:30px;color:white;background-color:#0066FF">Edit Profile</a>
+<!--      <a href="#" class="w3-bar-item w3-button">Link 2</a>-->
+      <form  action="/singnout/" method="POST" style="border-radius:30px;background-color:#0066FF;color:white">
+				 {% csrf_token %}
+
+			 <input type="submit"  value="Sign out" class="btn w3-bar-item w3-button " style="border-radius:30px;background-color:#0066FF;color:white">
+				</form>
+    </div>
+  </li>
+<!--	          <li class="nav-item cta"> <a href="{% url 'login' %}" class="nav-link" data-toggle="modal" data-target="#modalRequest"><span>Sign In</span></a></li>-->
+			</ul>
+	      </div>
+
+	    </div>
+
+        </nav>
+
+
+
+			<!-- /Header -->
+<div class="main-wrapper">
+			<!-- Breadcrumb -->
+			<div class="breadcrumb-bar" style="background-color:black">
+				<div class="container-fluid">
+					<div class="row align-items-center">
+						<div class="col-md-8 col-12">
+							<nav aria-label="breadcrumb" class="page-breadcrumb">
+								<ol class="breadcrumb">
+									<li class="breadcrumb-item"><a href="{% url 'patientprofile' %}">Home</a></li>
+									<li class="breadcrumb-item"><a href="{% url 'makeappointment' %}">Make an Appointment</a></li>
+								</ol>
+							</nav>
+<!--							<h2 class="breadcrumb-title">2245 matches found for : Dentist In Bangalore</h2>-->
+						</div>
+						<div class="col-md-4 col-12 d-md-block d-none" >
+<!--							<div class="sort-by">-->
+<!--								<span class="sort-title">Sort by</span>-->
+<!--								<span class="sortby-fliter">-->
+<!--									<select class="select">-->
+<!--										<option>Select</option>-->
+<!--										<option class="sorting">Rating</option>-->
+<!--										<option class="sorting">Popular</option>-->
+<!--										<option class="sorting">Latest</option>-->
+<!--										<option class="sorting">Free</option>-->
+<!--									</select>-->
+<!--								</span>-->
+<!--							</div>-->
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- /Breadcrumb -->
+
+			<!-- Page Content -->
+			<div class="content">
+				<div class="container-fluid">
+
+					<div class="row">
+						<div class="col-md-12 col-lg-4 col-xl-3 theiaStickySidebar">
+
+							 Search Filter
+							<div class="card search-filter">
+								<div class="card-header">
+									<h4 class="card-title mb-0">Search Filter</h4>
+								</div>
+								<div class="card-body">
+								<div class="filter-widget">
+<!--									<div class="cal-icon">-->
+<!--										<input type="text" class="form-control datetimepicker" placeholder="Select Date">-->
+<!--									</div>-->
+								</div>
+<!--								<div class="filter-widget">-->
+<!--									<h4>Gender</h4>-->
+<!--									<div>-->
+<!--										<label class="custom_check">-->
+<!--											<input type="checkbox" name="gender_type" >-->
+<!--											<span class="checkmark"></span> Male Doctor-->
+<!--										</label>-->
+<!--									</div>-->
+<!--									<div>-->
+<!--										<label class="custom_check">-->
+<!--											<input type="checkbox" name="gender_type">-->
+<!--											<span class="checkmark"></span> Female Doctor-->
+<!--										</label>-->
+<!--									</div>-->
+<!--								</div>-->
+								<div class="filter-widget">
+									<h4>Select Specialization</h4>
+									<div>
+										<label class="custom_check">
+											<input type="checkbox" name="select_specialist" >
+											<span class="checkmark"></span> Drug Reaction
+
+										</label>
+									</div>
+									<div>
+										<label class="custom_check">
+											<input type="checkbox" name="select_specialist" >
+											<span class="checkmark"></span>Malaria
+
+										</label>
+									</div>
+									<div>
+										<label class="custom_check">
+											<input type="checkbox" name="select_specialist">
+											<span class="checkmark"></span>Allergy
+
+										</label>
+									</div>
+									<div>
+										<label class="custom_check">
+											<input type="checkbox" name="select_specialist">
+											<span class="checkmark"></span>Hypothyroidism
+
+										</label>
+									</div>
+									<div>
+										<label class="custom_check">
+											<input type="checkbox" name="select_specialist">
+											<span class="checkmark"></span>Psoriasis
+
+										</label>
+									</div>
+									<div>
+										<label class="custom_check">
+											<input type="checkbox" name="select_specialist">
+											<span class="checkmark"></span>GERD
+
+										</label>
+									</div>
+									<div>
+										<label class="custom_check">
+											<input type="checkbox" name="select_specialist">
+											<span class="checkmark"></span>Chronic cholestasis
+
+
+										</label>
+									</div>
+									<div>
+										<label class="custom_check">
+											<input type="checkbox" name="select_specialist">
+											<span class="checkmark"></span>hepatitis A
+
+
+										</label>
+									</div>
+									<div>
+										<label class="custom_check">
+											<input type="checkbox" name="select_specialist">
+											<span class="checkmark"></span>Osteoarthristis
+
+
+										</label>
+									</div>
+									<div>
+										<label class="custom_check">
+											<input type="checkbox" name="select_specialist">
+											<span class="checkmark"></span>(vertigo) Paroymsal  Positional Vertigo
+
+
+										</label>
+									</div>
+									<div>
+										<label class="custom_check">
+											<input type="checkbox" name="select_specialist">
+											<span class="checkmark"></span>Hypoglycemia
+
+
+										</label>
+									</div>
+									<div>
+										<label class="custom_check">
+											<input type="checkbox" name="select_specialist">
+											<span class="checkmark"></span>Acne
+
+
+										</label>
+									</div>
+									<div>
+										<label class="custom_check">
+											<input type="checkbox" name="select_specialist">
+											<span class="checkmark"></span>Diabetes
+
+
+										</label>
+									</div>
+									<div>
+										<label class="custom_check">
+											<input type="checkbox" name="select_specialist">
+											<span class="checkmark"></span>Impetigo
+
+
+										</label>
+									</div>
+									<div>
+										<label class="custom_check">
+											<input type="checkbox" name="select_specialist">
+											<span class="checkmark"></span>Hypertension
+
+
+										</label>
+									</div>
+									<div>
+										<label class="custom_check">
+											<input type="checkbox" name="select_specialist">
+											<span class="checkmark"></span>Peptic ulcer diseae
+
+
+										</label>
+									</div>
+									<div>
+										<label class="custom_check">
+											<input type="checkbox" name="select_specialist">
+											<span class="checkmark"></span>Dimorphic hemmorhoids(piles)
+
+
+										</label>
+									</div>
+									<div>
+										<label class="custom_check">
+											<input type="checkbox" name="select_specialist">
+											<span class="checkmark"></span>Common Cold
+
+
+										</label>
+									</div>
+									<div>
+										<label class="custom_check">
+											<input type="checkbox" name="select_specialist">
+											<span class="checkmark"></span>Chicken pox
+
+
+										</label>
+									</div>
+									<div>
+										<label class="custom_check">
+											<input type="checkbox" name="select_specialist">
+											<span class="checkmark"></span>Cervical spondylosis
+
+
+										</label>
+									</div>
+									<div>
+										<label class="custom_check">
+											<input type="checkbox" name="select_specialist">
+											<span class="checkmark"></span>Hyperthyroidism
+
+
+										</label>
+									</div>
+									<div>
+										<label class="custom_check">
+											<input type="checkbox" name="select_specialist">
+											<span class="checkmark"></span>Urinary tract infection
+
+
+										</label>
+									</div>
+									<div>
+										<label class="custom_check">
+											<input type="checkbox" name="select_specialist">
+											<span class="checkmark"></span>Varicose veins
+
+
+										</label>
+									</div>
+									<div>
+										<label class="custom_check">
+											<input type="checkbox" name="select_specialist">
+											<span class="checkmark"></span>AIDS
+
+
+										</label>
+									</div>
+									<div>
+										<label class="custom_check">
+											<input type="checkbox" name="select_specialist">
+											<span class="checkmark"></span>Paralysis (brain hemorrhage)
+
+
+										</label>
+									</div>
+									<div>
+										<label class="custom_check">
+											<input type="checkbox" name="select_specialist">
+											<span class="checkmark"></span>Typhoid
+
+
+										</label>
+									</div>
+									<div>
+										<label class="custom_check">
+											<input type="checkbox" name="select_specialist">
+											<span class="checkmark"></span>Hepatitis B
+
+
+										</label>
+									</div>
+									<div>
+										<label class="custom_check">
+											<input type="checkbox" name="select_specialist">
+											<span class="checkmark"></span>Fungal infection
+
+
+										</label>
+									</div>
+									<div>
+										<label class="custom_check">
+											<input type="checkbox" name="select_specialist">
+											<span class="checkmark"></span>Hepatitis C
+
+										</label>
+									</div>
+									<div>
+										<label class="custom_check">
+											<input type="checkbox" name="select_specialist">
+											<span class="checkmark"></span>Migraine
+
+										</label>
+									</div>
+									<div>
+										<label class="custom_check">
+											<input type="checkbox" name="select_specialist">
+											<span class="checkmark"></span>Bronchial Asthma
+
+
+										</label>
+									</div>
+									<div>
+										<label class="custom_check">
+											<input type="checkbox" name="select_specialist">
+											<span class="checkmark"></span>Alcoholic hepatitis
+
+
+										</label>
+									</div>
+									<div>
+										<label class="custom_check">
+											<input type="checkbox" name="select_specialist">
+											<span class="checkmark"></span>Jaundice
+
+
+										</label>
+									</div>
+									<div>
+										<label class="custom_check">
+											<input type="checkbox" name="select_specialist">
+											<span class="checkmark"></span>Hepatitis E
+
+
+										</label>
+									</div>
+									<div>
+										<label class="custom_check">
+											<input type="checkbox" name="select_specialist">
+											<span class="checkmark"></span>Dengue
+
+
+										</label>
+									</div>
+									<div>
+										<label class="custom_check">
+											<input type="checkbox" name="select_specialist">
+											<span class="checkmark"></span>Hepatitis D
+
+
+										</label>
+									</div>
+									<div>
+										<label class="custom_check">
+											<input type="checkbox" name="select_specialist">
+											<span class="checkmark"></span>Heart attack
+
+
+
+										</label>
+									</div>
+									<div>
+										<label class="custom_check">
+											<input type="checkbox" name="select_specialist">
+											<span class="checkmark"></span>Pneumonia
+
+
+
+										</label>
+									</div>
+									<div>
+										<label class="custom_check">
+											<input type="checkbox" name="select_specialist">
+											<span class="checkmark"></span>Arthritis
+
+
+
+										</label>
+									</div>
+									<div>
+										<label class="custom_check">
+											<input type="checkbox" name="select_specialist">
+											<span class="checkmark"></span>Gastroenteritis
+
+
+
+										</label>
+									</div>
+									<div>
+										<label class="custom_check">
+											<input type="checkbox" name="select_specialist">
+											<span class="checkmark"></span>Tuberculosis
+
+
+
+
+										</label>
+									</div>
+
+								</div>
+									<div class="btn-search">
+										<button type="button" class="btn btn-block">Search</button>
+									</div>
+								</div>
+							</div>
+							 /Search Filter
+
+						</div>
+
+
+						<div class="col-md-12 col-lg-8 col-xl-6">
+
+							<!-- Doctor Widget -->
+
+
+							<!-- /Doctor Widget -->
+{% for i in doctors %}
+
+                            <div class="card">
+								<div class="card-body">
+									<div class="doctor-widget">
+										<div class="doc-info-left">
+											<div class="doctor-img">
+												<a href="#">
+													{% if not i.image  %}
+													<img style="height:100px"  src="https://bootdey.com/img/Content/avatar/avatar1.png" class="img-fluid" alt="User Image">
+													{% endif %}
+													{% if i.image %}
+													<img style="height:100px" src='/media/{{i.image}}' class="img-fluid" alt="User Image">
+													{% endif%}
+												</a>
+											</div>
+											<div class="doc-info-cont">
+												<h4 class="doc-name"><a href="#">Dr. {{i.first_name }} {{i.last_name }}</a></h4>
+												<p class="doc-speciality">{{i.spc }}</p>
+<!--												<h5 class="doc-department"><img src="assets/img/specialities/specialities-05.png" class="img-fluid" alt="Speciality">Dentist</h5>-->
+<!--												<div class="rating">-->
+<!--													<i class="fas fa-star filled"></i>-->
+<!--													<i class="fas fa-star filled"></i>-->
+<!--													<i class="fas fa-star filled"></i>-->
+<!--													<i class="fas fa-star filled"></i>-->
+<!--													<i class="fas fa-star"></i>-->
+<!--													<span class="d-inline-block average-rating">(17)</span>-->
+<!--												</div>-->
+<!--												<div class="clinic-details">-->
+<!--&lt;!&ndash;													<p class="doc-location"><i class="fas fa-map-marker-alt"></i> {{i.city}},{{i.province}}, Pakistan</p>&ndash;&gt;-->
+
+<!--												</div>-->
+
+											</div>
+										</div>
+										<div class="doc-info-right">
+											<div class="clini-infos">
+												<ul>
+<!--													<li><i class="far fa-thumbs-up"></i> 98%</li>-->
+<!--													<li><i class="far fa-comment"></i> 17 Feedback</li>-->
+													<p class="doc-location"><i class="fas fa-map-marker-alt"></i> {{i.city}},{{i.province}}, Pakistan</p>
+<!--													<li><i class="fas fa-map-marker-alt"></i>{{i.city}},{{i.province}},-->
+<!--														Pakistan </li>-->
+													<li><i class="far fa-money-bill-alt"></i> 2000 PKR  </li>
+												</ul>
+											</div>
+											<div class="clinic-booking">
+												 <form  action="/bookappointment/" method="post">
+                                                    {% csrf_token %}
+                                                    <input type="hidden" id="email" name="email" value="{{i.email}}">
+<!--												<a class="view-pro-btn" href="doctor-profile.html">View Profile</a>-->
+												<input type="submit" class="btn btn-primary submit-btn" value="Book appointment">
+                                                    </form>
+<!--												<a class="view-pro-btn" href="doctor-profile.html">View Profile</a>-->
+
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+
+							{%endfor%}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+							<!-- Doctor Widget -->
+<!--							<div class="card">-->
+<!--								<div class="card-body">-->
+<!--									<div class="doctor-widget">-->
+<!--										<div class="doc-info-left">-->
+<!--											<div class="doctor-img">-->
+<!--												<a href="doctor-profile.html">-->
+<!--													<img src="assets/img/doctors/doctor-thumb-02.jpg" class="img-fluid" alt="User Image">-->
+<!--												</a>-->
+<!--											</div>-->
+<!--											<div class="doc-info-cont">-->
+<!--												<h4 class="doc-name"><a href="doctor-profile.html">Dr. Darren Elder</a></h4>-->
+<!--												<p class="doc-speciality">BDS, MDS - Oral & Maxillofacial Surgery</p>-->
+<!--												<h5 class="doc-department"><img src="assets/img/specialities/specialities-05.png" class="img-fluid" alt="Speciality">Dentist</h5>-->
+<!--												<div class="rating">-->
+<!--													<i class="fas fa-star filled"></i>-->
+<!--													<i class="fas fa-star filled"></i>-->
+<!--													<i class="fas fa-star filled"></i>-->
+<!--													<i class="fas fa-star filled"></i>-->
+<!--													<i class="fas fa-star"></i>-->
+<!--													<span class="d-inline-block average-rating">(35)</span>-->
+<!--												</div>-->
+<!--												<div class="clinic-details">-->
+<!--													<p class="doc-location"><i class="fas fa-map-marker-alt"></i> Newyork, USA</p>-->
+<!--													<ul class="clinic-gallery">-->
+<!--														<li>-->
+<!--															<a href="assets/img/features/feature-01.jpg" data-fancybox="gallery">-->
+<!--																<img src="assets/img/features/feature-01.jpg" alt="Feature">-->
+<!--															</a>-->
+<!--														</li>-->
+<!--														<li>-->
+<!--															<a href="assets/img/features/feature-02.jpg" data-fancybox="gallery">-->
+<!--																<img  src="assets/img/features/feature-02.jpg" alt="Feature">-->
+<!--															</a>-->
+<!--														</li>-->
+<!--														<li>-->
+<!--															<a href="assets/img/features/feature-03.jpg" data-fancybox="gallery">-->
+<!--																<img src="assets/img/features/feature-03.jpg" alt="Feature">-->
+<!--															</a>-->
+<!--														</li>-->
+<!--														<li>-->
+<!--															<a href="assets/img/features/feature-04.jpg" data-fancybox="gallery">-->
+<!--																<img src="assets/img/features/feature-04.jpg" alt="Feature">-->
+<!--															</a>-->
+<!--														</li>-->
+<!--													</ul>-->
+<!--												</div>-->
+<!--												<div class="clinic-services">-->
+<!--													<span>Dental Fillings</span>-->
+<!--													<span> Whitneing</span>-->
+<!--												</div>-->
+<!--											</div>-->
+<!--										</div>-->
+<!--										<div class="doc-info-right">-->
+<!--											<div class="clini-infos">-->
+<!--												<ul>-->
+<!--													<li><i class="far fa-thumbs-up"></i> 100%</li>-->
+<!--													<li><i class="far fa-comment"></i> 35 Feedback</li>-->
+<!--													<li><i class="fas fa-map-marker-alt"></i> Newyork, USA</li>-->
+<!--													<li><i class="far fa-money-bill-alt"></i> $50 - $300 <i class="fas fa-info-circle" data-toggle="tooltip" title="Lorem Ipsum"></i></li>-->
+<!--												</ul>-->
+<!--											</div>-->
+<!--											<div class="clinic-booking">-->
+<!--												<a class="view-pro-btn" href="doctor-profile.html">View Profile</a>-->
+<!--												<a class="apt-btn" href="booking.html">Book Appointment</a>-->
+<!--											</div>-->
+<!--										</div>-->
+<!--									</div>-->
+<!--								</div>-->
+<!--							</div>-->
+<!--							&lt;!&ndash; /Doctor Widget &ndash;&gt;-->
+
+<!--							&lt;!&ndash; Doctor Widget &ndash;&gt;-->
+<!--							<div class="card">-->
+<!--								<div class="card-body">-->
+<!--									<div class="doctor-widget">-->
+<!--										<div class="doc-info-left">-->
+<!--											<div class="doctor-img">-->
+<!--												<a href="doctor-profile.html">-->
+<!--													<img src="assets/img/doctors/doctor-thumb-03.jpg" class="img-fluid" alt="User Image">-->
+<!--												</a>-->
+<!--											</div>-->
+<!--											<div class="doc-info-cont">-->
+<!--												<h4 class="doc-name"><a href="doctor-profile.html">Dr. Deborah Angel</a></h4>-->
+<!--												<p class="doc-speciality">MBBS, MD - General Medicine, DNB - Cardiology</p>-->
+<!--												<p class="doc-department"><img src="assets/img/specialities/specialities-04.png" class="img-fluid" alt="Speciality">Cardiology</p>-->
+<!--												<div class="rating">-->
+<!--													<i class="fas fa-star filled"></i>-->
+<!--													<i class="fas fa-star filled"></i>-->
+<!--													<i class="fas fa-star filled"></i>-->
+<!--													<i class="fas fa-star filled"></i>-->
+<!--													<i class="fas fa-star"></i>-->
+<!--													<span class="d-inline-block average-rating">(27)</span>-->
+<!--												</div>-->
+<!--												<div class="clinic-details">-->
+<!--													<p class="doc-location"><i class="fas fa-map-marker-alt"></i> Georgia, USA</p>-->
+<!--													<ul class="clinic-gallery">-->
+<!--														<li>-->
+<!--															<a href="assets/img/features/feature-01.jpg" data-fancybox="gallery">-->
+<!--																<img src="assets/img/features/feature-01.jpg" alt="Feature">-->
+<!--															</a>-->
+<!--														</li>-->
+<!--														<li>-->
+<!--															<a href="assets/img/features/feature-02.jpg" data-fancybox="gallery">-->
+<!--																<img  src="assets/img/features/feature-02.jpg" alt="Feature">-->
+<!--															</a>-->
+<!--														</li>-->
+<!--														<li>-->
+<!--															<a href="assets/img/features/feature-03.jpg" data-fancybox="gallery">-->
+<!--																<img src="assets/img/features/feature-03.jpg" alt="Feature">-->
+<!--															</a>-->
+<!--														</li>-->
+<!--														<li>-->
+<!--															<a href="assets/img/features/feature-04.jpg" data-fancybox="gallery">-->
+<!--																<img src="assets/img/features/feature-04.jpg" alt="Feature">-->
+<!--															</a>-->
+<!--														</li>-->
+<!--													</ul>-->
+<!--												</div>-->
+<!--												<div class="clinic-services">-->
+<!--													<span>Dental Fillings</span>-->
+<!--													<span> Whitneing</span>-->
+<!--												</div>-->
+<!--											</div>-->
+<!--										</div>-->
+<!--										<div class="doc-info-right">-->
+<!--											<div class="clini-infos">-->
+<!--												<ul>-->
+<!--													<li><i class="far fa-thumbs-up"></i> 99%</li>-->
+<!--													<li><i class="far fa-comment"></i> 35 Feedback</li>-->
+<!--													<li><i class="fas fa-map-marker-alt"></i> Newyork, USA</li>-->
+<!--													<li><i class="far fa-money-bill-alt"></i> $100 - $400 <i class="fas fa-info-circle" data-toggle="tooltip" title="Lorem Ipsum"></i></li>-->
+<!--												</ul>-->
+<!--											</div>-->
+<!--											<div class="clinic-booking">-->
+<!--												<a class="view-pro-btn" href="doctor-profile.html">View Profile</a>-->
+<!--												<a class="apt-btn" href="booking.html">Book Appointment</a>-->
+<!--											</div>-->
+<!--										</div>-->
+<!--									</div>-->
+<!--								</div>-->
+<!--							</div>-->
+<!--							&lt;!&ndash; /Doctor Widget &ndash;&gt;-->
+
+<!--							&lt;!&ndash; Doctor Widget &ndash;&gt;-->
+<!--							<div class="card">-->
+<!--								<div class="card-body">-->
+<!--									<div class="doctor-widget">-->
+<!--										<div class="doc-info-left">-->
+<!--											<div class="doctor-img">-->
+<!--												<a href="doctor-profile.html">-->
+<!--													<img src="assets/img/doctors/doctor-thumb-04.jpg" class="img-fluid" alt="User Image">-->
+<!--												</a>-->
+<!--											</div>-->
+<!--											<div class="doc-info-cont">-->
+<!--												<h4 class="doc-name"><a href="doctor-profile.html">Dr. Sofia Brient</a></h4>-->
+<!--												<p class="doc-speciality">MBBS, MS - General Surgery, MCh - Urology</p>-->
+<!--												<p class="doc-department"><img src="assets/img/specialities/specialities-01.png" class="img-fluid" alt="Speciality">Urology</p>-->
+<!--												<div class="rating">-->
+<!--													<i class="fas fa-star filled"></i>-->
+<!--													<i class="fas fa-star filled"></i>-->
+<!--													<i class="fas fa-star filled"></i>-->
+<!--													<i class="fas fa-star filled"></i>-->
+<!--													<i class="fas fa-star"></i>-->
+<!--													<span class="d-inline-block average-rating">(4)</span>-->
+<!--												</div>-->
+<!--												<div class="clinic-details">-->
+<!--													<p class="doc-location"><i class="fas fa-map-marker-alt"></i> Louisiana, USA</p>-->
+<!--													<ul class="clinic-gallery">-->
+<!--														<li>-->
+<!--															<a href="assets/img/features/feature-01.jpg" data-fancybox="gallery">-->
+<!--																<img src="assets/img/features/feature-01.jpg" alt="Feature">-->
+<!--															</a>-->
+<!--														</li>-->
+<!--														<li>-->
+<!--															<a href="assets/img/features/feature-02.jpg" data-fancybox="gallery">-->
+<!--																<img  src="assets/img/features/feature-02.jpg" alt="Feature">-->
+<!--															</a>-->
+<!--														</li>-->
+<!--														<li>-->
+<!--															<a href="assets/img/features/feature-03.jpg" data-fancybox="gallery">-->
+<!--																<img src="assets/img/features/feature-03.jpg" alt="Feature">-->
+<!--															</a>-->
+<!--														</li>-->
+<!--														<li>-->
+<!--															<a href="assets/img/features/feature-04.jpg" data-fancybox="gallery">-->
+<!--																<img src="assets/img/features/feature-04.jpg" alt="Feature">-->
+<!--															</a>-->
+<!--														</li>-->
+<!--													</ul>-->
+<!--												</div>-->
+<!--												<div class="clinic-services">-->
+<!--													<span>Dental Fillings</span>-->
+<!--													<span> Whitneing</span>-->
+<!--												</div>-->
+<!--											</div>-->
+<!--										</div>-->
+<!--										<div class="doc-info-right">-->
+<!--											<div class="clini-infos">-->
+<!--												<ul>-->
+<!--													<li><i class="far fa-thumbs-up"></i> 97%</li>-->
+<!--													<li><i class="far fa-comment"></i> 4 Feedback</li>-->
+<!--													<li><i class="fas fa-map-marker-alt"></i> Newyork, USA</li>-->
+<!--													<li><i class="far fa-money-bill-alt"></i> $150 - $250 <i class="fas fa-info-circle" data-toggle="tooltip" title="Lorem Ipsum"></i></li>-->
+<!--												</ul>-->
+<!--											</div>-->
+<!--											<div class="clinic-booking">-->
+<!--												<a class="view-pro-btn" href="doctor-profile.html">View Profile</a>-->
+<!--												<a class="apt-btn" href="booking.html">Book Appointment</a>-->
+<!--											</div>-->
+<!--										</div>-->
+<!--									</div>-->
+<!--								</div>-->
+<!--							</div>-->
+<!--							&lt;!&ndash; /Doctor Widget &ndash;&gt;-->
+
+<!--							&lt;!&ndash; Doctor Widget &ndash;&gt;-->
+<!--							<div class="card">-->
+<!--								<div class="card-body">-->
+<!--									<div class="doctor-widget">-->
+<!--										<div class="doc-info-left">-->
+<!--											<div class="doctor-img">-->
+<!--												<a href="doctor-profile.html">-->
+<!--													<img src="assets/img/doctors/doctor-thumb-06.jpg" class="img-fluid" alt="User Image">-->
+<!--												</a>-->
+<!--											</div>-->
+<!--											<div class="doc-info-cont">-->
+<!--												<h4 class="doc-name"><a href="doctor-profile.html">Dr. Katharine Berthold</a></h4>-->
+<!--												<p class="doc-speciality">MS - Orthopaedics, MBBS, M.Ch - Orthopaedics</p>-->
+<!--												<p class="doc-department"><img src="assets/img/specialities/specialities-03.png" class="img-fluid" alt="Speciality">Orthopaedics</p>-->
+<!--												<div class="rating">-->
+<!--													<i class="fas fa-star filled"></i>-->
+<!--													<i class="fas fa-star filled"></i>-->
+<!--													<i class="fas fa-star filled"></i>-->
+<!--													<i class="fas fa-star filled"></i>-->
+<!--													<i class="fas fa-star"></i>-->
+<!--													<span class="d-inline-block average-rating">(52)</span>-->
+<!--												</div>-->
+<!--												<div class="clinic-details">-->
+<!--													<p class="doc-location"><i class="fas fa-map-marker-alt"></i> Texas, USA</p>-->
+<!--													<ul class="clinic-gallery">-->
+<!--														<li>-->
+<!--															<a href="assets/img/features/feature-01.jpg" data-fancybox="gallery">-->
+<!--																<img src="assets/img/features/feature-01.jpg" alt="Feature">-->
+<!--															</a>-->
+<!--														</li>-->
+<!--														<li>-->
+<!--															<a href="assets/img/features/feature-02.jpg" data-fancybox="gallery">-->
+<!--																<img  src="assets/img/features/feature-02.jpg" alt="Feature">-->
+<!--															</a>-->
+<!--														</li>-->
+<!--														<li>-->
+<!--															<a href="assets/img/features/feature-03.jpg" data-fancybox="gallery">-->
+<!--																<img src="assets/img/features/feature-03.jpg" alt="Feature">-->
+<!--															</a>-->
+<!--														</li>-->
+<!--														<li>-->
+<!--															<a href="assets/img/features/feature-04.jpg" data-fancybox="gallery">-->
+<!--																<img src="assets/img/features/feature-04.jpg" alt="Feature">-->
+<!--															</a>-->
+<!--														</li>-->
+<!--													</ul>-->
+<!--												</div>-->
+<!--												<div class="clinic-services">-->
+<!--													<span>Dental Fillings</span>-->
+<!--													<span> Whitneing</span>-->
+<!--												</div>-->
+<!--											</div>-->
+<!--										</div>-->
+<!--										<div class="doc-info-right">-->
+<!--											<div class="clini-infos">-->
+<!--												<ul>-->
+<!--													<li><i class="far fa-thumbs-up"></i> 100%</li>-->
+<!--													<li><i class="far fa-comment"></i> 52 Feedback</li>-->
+<!--													<li><i class="fas fa-map-marker-alt"></i> Texas, USA</li>-->
+<!--													<li><i class="far fa-money-bill-alt"></i> $100 - $500 <i class="fas fa-info-circle" data-toggle="tooltip" title="Lorem Ipsum"></i></li>-->
+<!--												</ul>-->
+<!--											</div>-->
+<!--											<div class="clinic-booking">-->
+<!--												<a class="view-pro-btn" href="doctor-profile.html">View Profile</a>-->
+<!--												<a class="apt-btn" href="booking.html">Book Appointment</a>-->
+<!--											</div>-->
+<!--										</div>-->
+<!--									</div>-->
+<!--								</div>-->
+<!--							</div>-->
+							<!-- /Doctor Widget -->
+
+<!--							<div class="load-more text-center">-->
+<!--								<a class="btn btn-primary btn-sm" href="javascript:void(0);">Load More</a>-->
+<!--							</div>-->
+						</div>
+					</div>
+
+				</div>
+
+			</div>
+			<!-- /Page Content -->
+
+			<!-- Footer -->
+		<footer class="ftco-footer ftco-bg-dark ftco-section" style="background-color:black">
+      <div class="container">
+        <div class="row mb-5">
+          <div class="col-md-3">
+            <div class="ftco-footer-widget mb-4">
+              <h2 class="ftco-heading-2" style="color:white">WeDoctor's.</h2>
+              <p style="color:white">WeDoctor's is an online audio/video consultation platform that allows real-time interaction between a doctor and patient. WeDoctor aims to provide virtual healthcare focusing on convenience and comfort. It is the future of healthcare and obviates barriers to efficiency and access.</p>
+            </div>
+            <ul class="ftco-footer-social list-unstyled float-md-left float-lft ">
+              <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
+              <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
+              <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
+            </ul>
+          </div>
+          <div class="col-md-2">
+            <div class="ftco-footer-widget mb-4 ml-md-5">
+              <h2 class="ftco-heading-2" style="color:white">Quick Links</h2>
+              <ul class="list-unstyled">
+                <li><a href="{% url 'about' %}" class="py-2 d-block" style="color:white">About</a></li>
+<!--                <li><a href="#" class="py-2 d-block">Features</a></li>-->
+<!--                <li><a href="#" class="py-2 d-block">Projects</a></li>-->
+<!--                <li><a href="#" class="py-2 d-block">Blog</a></li>-->
+                <li><a href="{% url 'contact' %}" class="py-2 d-block" style="color:white">Contact</a></li>
+              </ul>
+            </div>
+          </div>
+<!--          <div class="col-md-4 pr-md-4">-->
+<!--            <div class="ftco-footer-widget mb-4">-->
+<!--              <h2 class="ftco-heading-2">Recent Blog</h2>-->
+<!--              <div class="block-21 mb-4 d-flex">-->
+<!--                <a class="blog-img mr-4" style="background-image: url({% static 'images/image_1.jpg' %});"></a>-->
+<!--                <div class="text">-->
+<!--                  <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about</a></h3>-->
+<!--                  <div class="meta">-->
+<!--                    <div><a href="#"><span class="icon-calendar"></span> Sept 15, 2018</a></div>-->
+<!--                    <div><a href="#"><span class="icon-person"></span> Admin</a></div>-->
+<!--                    <div><a href="#"><span class="icon-chat"></span> 19</a></div>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--              <div class="block-21 mb-4 d-flex">-->
+<!--                <a class="blog-img mr-4" style="background-image: url({% static 'images/image_2.jpg' %});"></a>-->
+<!--&lt;!&ndash;                <div class="text">&ndash;&gt;-->
+<!--&lt;!&ndash;                  <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about</a></h3>&ndash;&gt;-->
+<!--&lt;!&ndash;                  <div class="meta">&ndash;&gt;-->
+<!--&lt;!&ndash;                    <div><a href="#"><span class="icon-calendar"></span> Sept 15, 2018</a></div>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <div><a href="#"><span class="icon-person"></span> Admin</a></div>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <div><a href="#"><span class="icon-chat"></span> 19</a></div>&ndash;&gt;-->
+<!--&lt;!&ndash;                  </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                </div>&ndash;&gt;-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+          <div class="col-md-3">
+            <div class="ftco-footer-widget mb-4">
+            	<h2 class="ftco-heading-2" style="color:white">Office</h2>
+            	<div class="block-23 mb-3">
+	              <ul>
+	                <li><span class="icon icon-map-marker"></span><span class="text" style="color:white">Fast NAtional University of Computer and Emerging Sciences</span></li>
+	                <li><a href="#"><span class="icon icon-phone"></span><span class="text" style="color:white">+92-346-6211392</span></a></li>
+	                <li><a href="#"><span class="icon icon-envelope"></span><span class="text" style="color:white">wedoctors@gmail.com</span></a></li>
+	              </ul>
+	            </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 text-center" style="color:white">
+
+            <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved by WeDoctor's
+  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+          </div>
+        </div>
+      </div>
+    </footer>
+			<!-- /Footer -->
+
+
+     <!-- loader -->
+  <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="modalRequest" tabindex="-1" role="dialog" aria-labelledby="modalRequestLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <form class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalRequestLabel">Sign In</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form action="#">
+            <div class="form-group">
+              <!-- <label for="appointment_name" class="text-black">Full Name</label> -->
+              <input type="text" class="form-control" id="appointment_email" placeholder="Email" required>
+            </div>
+            <div class="form-group">
+              <!-- <label for="appointment_email" class="text-black">Email</label> -->
+              <input type="password" class="form-control" id="appointment_password" placeholder="Password" required>
+            </div>
+		  </form>
+		</div>
+		  <label style="text-align:center;">
+        <input type="checkbox" checked="checked" name="remember" > Remember me
+      </label>
+            <div class="form-group" style="text-align:center;">
+              <input type="submit" value="Sign In" class="btn btn-primary">
+            </div>
+
+	  </form>
+        </div>
+
+      </div>
+
+  </div>
+
+
+        <script src="{% static 'dosra/assets/js/jquery.min.js' %}"></script>
+
+		<!-- Bootstrap Core JS -->
+		<script src="{% static 'dosra/assets/js/popper.min.js' %}"></script>
+		<script src="{% static 'dosra/assets/js/bootstrap.min.js' %}"></script>
+
+		<!-- Sticky Sidebar JS -->
+        <script src="{% static 'dosra/assets/plugins/theia-sticky-sidebar/ResizeSensor.js' %}"></script>
+        <script src="{% static 'dosra/assets/plugins/theia-sticky-sidebar/theia-sticky-sidebar.js' %}"></script>
+
+		<!-- Select2 JS -->
+		<script src="{% static 'dosra/assets/plugins/select2/js/select2.min.js' %}"></script>
+
+		<!-- Datetimepicker JS -->
+		<script src="{% static 'dosra/assets/js/moment.min.js' %}"></script>
+		<script src="{% static 'dosra/assets/js/bootstrap-datetimepicker.min.js' %}"></script>
+
+		<!-- Fancybox JS -->
+		<script src="{% static 'dosra/assets/plugins/fancybox/jquery.fancybox.min.js' %}"></script>
+
+		<!-- Custom JS -->
+		<script src="{% static 'dosra/assets/js/script.js' %}"></script>
+
+	</body>
+
+
+</html>

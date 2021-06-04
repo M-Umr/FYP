@@ -1,0 +1,387 @@
+
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <title>Predict Disease</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="{% static 'images/dill3.png' %}" rel="icon">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,600,700" rel="stylesheet">
+
+    <link rel="stylesheet" href="{% static 'css/open-iconic-bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+<!--w3 schools-->
+	  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<!--end w3 schools-->
+
+<!--dosri file-->
+
+      <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="au theme template">
+    <meta name="author" content="Hau Nguyen">
+    <meta name="keywords" content="au theme template">
+
+        <!-- Fontfaces CSS-->
+    <link href="{% static 'others/css/font-face.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'others/vendor/font-awesome-4.7/css/font-awesome.min.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'others/vendor/font-awesome-5/css/fontawesome-all.min.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'others/vendor/mdi-font/css/material-design-iconic-font.min.css' %}" rel="stylesheet" media="all">
+
+      <link href="{% static 'others/vendor/bootstrap-4.1/bootstrap.min.css' %}" rel="stylesheet" media="all">
+
+    <!-- Vendor CSS-->
+    <link href="{% static 'others/vendor/animsition/animsition.min.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'others/vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'others/vendor/wow/animate.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'others/vendor/css-hamburgers/hamburgers.min.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'others/vendor/slick/slick.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'others/vendor/select2/select2.min.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'others/vendor/perfect-scrollbar/perfect-scrollbar.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'others/vendor/vector-map/jqvmap.min.css' %}" rel="stylesheet" media="all">
+
+    <!-- Main CSS-->
+    <link href="{% static 'others/css/theme.css' %}" rel="stylesheet" media="all">
+
+
+
+
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
+<!--      symptoms wali jquery-->
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <link rel="stylesheet" href="{% static 'css/aos.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/ionicons.min.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/bootstrap-datepicker.css' %}">
+    <link rel="stylesheet" href="{% static 'css/jquery.timepicker.css' %}">
+
+
+
+
+
+
+
+
+    <link rel="stylesheet" href="{% static 'css/flaticon.css' %}">
+    <link rel="stylesheet" href="{% static 'css/icomoon.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+
+
+
+      <style>
+          body {
+  background-color: black;
+}
+
+
+
+      </style>
+  </head>
+  <body>
+
+	  <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+	    <div class="container">
+            <img src="{% static 'images/dill3.png' %} ">
+	      <a class="navbar-brand"  href="{% url 'patientprofile' %}">We<span>Doctor's</span></a>
+	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+	        <span class="oi oi-menu"></span> Menu
+	      </button>
+
+	      <div class="collapse navbar-collapse" id="ftco-nav">
+	        <ul class="navbar-nav ml-auto">
+	          <li class="nav-item "><a href=" {% url 'patientprofile' %} " class="nav-link">Home</a></li>
+	          <li class="nav-item "><a href= "{% url 'patient_dashboard' %}"  class="nav-link">Dashboard</a></li>
+	          <li class="nav-item"><a href="{% url 'makeappointment' %}" class="nav-link">Make an Appointment</a></li>
+	          <li class="nav-item "><a href="{% url 'predictdisease' %}" class="nav-link">Predict Disease</a></li>
+<!--                <li class="nav-item"><a href="{% url 'livecall_patient' %}" class="nav-link">Live Call</a></li>-->
+<!--	          <li class="nav-item"><a href="{% url 'blog' %}" class="nav-link">Blog</a></li>-->
+	          <li class="nav-item active"><a href="{% url 'mappatient' %}" class="nav-link">Area of Disease</a></li>
+<!--				 <li class="nav-item"><a href="#" class="nav-link">Area of Disease</a></li>-->
+<!--	          <li class="nav-item cta"> <a href="{% url 'login' %}" class="nav-link" data-toggle="modal" data-target="#modalRequest"><span>Sign In</span></a></li>-->
+
+           	<li class="w3-dropdown-hover">
+    <button  class="w3-button " style="border-radius:30px;background-color:#0066FF;color:white" ><img src="{% static 'images/settings.png' %} " style="height:25px;width:25px;">&nbsp;&nbsp;Setting</button>
+    <div class="w3-dropdown-content w3-bar-block w3-border" style="border-radius:20px;background-color:#0066FF">
+      <a href="{% url 'updateprofile' %}" class="w3-bar-item w3-button" style="border-radius:30px;color:white;background-color:#0066FF">Edit Profile</a>
+<!--      <a href="#" class="w3-bar-item w3-button">Link 2</a>-->
+      <form  action="/singnout/" method="POST" style="border-radius:30px;background-color:#0066FF;color:white">
+				 {% csrf_token %}
+
+			 <input type="submit"  value="Sign out" class="btn w3-bar-item w3-button " style="border-radius:30px;background-color:#0066FF;color:white">
+				</form>
+    </div>
+  </li>
+<!--	          <li class="nav-item cta"> <a href="{% url 'login' %}" class="nav-link" data-toggle="modal" data-target="#modalRequest"><span>Sign In</span></a></li>-->
+			</ul>
+	      </div>
+
+	    </div>
+
+      </nav>
+    <!-- END nav -->
+
+
+
+<div class="main-content">
+                <div class="section__content section__content--p30">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <!-- MAP DATA-->
+                                <div class="map-data m-b-40">
+                                    <h3 class="title-3 m-b-30">
+                                        <i class="zmdi zmdi-map"></i>map data</h3>
+<!--                                    <div class="filters">-->
+<!--                                        <div class="rs-select2&#45;&#45;dark rs-select2&#45;&#45;md m-r-10 rs-select2&#45;&#45;border">-->
+<!--                                            <select class="js-select2" name="property">-->
+<!--                                                <option selected="selected">All Properties</option>-->
+<!--                                                <option value="">Products</option>-->
+<!--                                                <option value="">Services</option>-->
+<!--                                            </select>-->
+<!--                                            <div class="dropDownSelect2"></div>-->
+<!--                                        </div>-->
+<!--                                        <div class="rs-select2&#45;&#45;dark rs-select2&#45;&#45;sm rs-select2&#45;&#45;border">-->
+<!--                                            <select class="js-select2 au-select-dark" name="time">-->
+<!--                                                <option selected="selected">All Time</option>-->
+<!--                                                <option value="">By Month</option>-->
+<!--                                                <option value="">By Day</option>-->
+<!--                                            </select>-->
+<!--                                            <div class="dropDownSelect2"></div>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+                                    <div class="map-wrap m-t-45 m-b-20">
+                                        <div id="vmap" style="height: 284px;"></div>
+                                    </div>
+                                </div>
+                                <!-- END MAP DATA-->
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <!-- MAP DATA-->
+                                <div class="map-data m-b-40">
+                                    <h3 class="title-3 m-b-30">
+                                        <i class="zmdi zmdi-map"></i>Punjab</h3>
+                                    <div class="map-wrap">
+                                        <div class="vmap" id="vmap1"></div>
+                                    </div>
+                                </div>
+                                <!-- END MAP DATA-->
+                            </div>
+                            <div class="col-md-6">
+                                <!-- MAP DATA-->
+                                <div class="map-data m-b-40">
+                                    <h3 class="title-3 m-b-30">
+                                        <i class="zmdi zmdi-map"></i>Sindh</h3>
+                                    <div class="map-wrap">
+                                        <div class="vmap" id="vmap2"></div>
+                                    </div>
+                                </div>
+                                <!-- END MAP DATA-->
+                            </div>
+                            <div class="col-md-6">
+                                <!-- MAP DATA-->
+                                <div class="map-data m-b-40">
+                                    <h3 class="title-3 m-b-30">
+                                        <i class="zmdi zmdi-map"></i>Balochistan</h3>
+                                    <div class="map-wrap">
+                                        <div class="vmap" id="vmap3"></div>
+                                    </div>
+                                </div>
+                                <!-- END MAP DATA-->
+                            </div>
+                            <div class="col-md-6">
+                                <!-- MAP DATA-->
+                                <div class="map-data m-b-40">
+                                    <h3 class="title-3 m-b-30">
+                                        <i class="zmdi zmdi-map"></i>KPK</h3>
+                                    <div class="map-wrap">
+                                        <div class="vmap" id="vmap4"></div>
+                                    </div>
+                                </div>
+                                <!-- END MAP DATA-->
+                            </div>
+                            <div class="col-md-6">
+                                <!-- MAP DATA-->
+                                <div class="map-data m-b-40">
+                                    <h3 class="title-3 m-b-30">
+                                        <i class="zmdi zmdi-map"></i>Islamabad</h3>
+                                    <div class="map-wrap">
+                                        <div class="vmap" id="vmap5"></div>
+                                    </div>
+                                </div>
+                                <!-- END MAP DATA-->
+                            </div>
+                            <div class="col-md-6">
+                                <!-- MAP DATA-->
+                                <div class="map-data m-b-40">
+                                    <h3 class="title-3 m-b-30">
+                                        <i class="zmdi zmdi-map"></i>Kashmir</h3>
+                                    <div class="map-wrap">
+                                        <div class="vmap" id="vmap6"></div>
+                                    </div>
+                                </div>
+                                <!-- END MAP DATA-->
+                                <!-- END PAGE CONTAINER-->
+                            </div>
+                        </div>
+<!--                        <div class="row">-->
+<!--                            <div class="col-md-12">-->
+<!--                                <div class="copyright">-->
+<!--                                    <p>Copyright © 2020 WeDoctor's. All rights reserved. </p>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+                    </div>
+                </div>
+            </div>
+
+
+      <footer class="ftco-footer ftco-bg-dark ftco-section">
+      <div class="container">
+        <div class="row mb-5">
+          <div class="col-md-3">
+            <div class="ftco-footer-widget mb-4">
+              <h2 class="ftco-heading-2">WeDoctor's.</h2>
+              <p>WeDoctor's is an online audio/video consultation platform that allows real-time interaction between a doctor and patient. WeDoctor's aims to provide virtual healthcare focusing on convenience and comfort. It is the future of healthcare and obviates barriers to efficiency and access.</p>
+            </div>
+            <ul class="ftco-footer-social list-unstyled float-md-left float-lft ">
+              <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
+              <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
+              <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
+            </ul>
+          </div>
+          <div class="col-md-2">
+            <div class="ftco-footer-widget mb-4 ml-md-5">
+              <h2 class="ftco-heading-2">Quick Links</h2>
+              <ul class="list-unstyled">
+                <li><a href="{% url 'about' %}" class="py-2 d-block">About</a></li>
+<!--                <li><a href="#" class="py-2 d-block">Features</a></li>-->
+<!--                <li><a href="#" class="py-2 d-block">Projects</a></li>-->
+<!--                <li><a href="#" class="py-2 d-block">Blog</a></li>-->
+                <li><a href="{% url 'contact' %}" class="py-2 d-block">Contact</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="ftco-footer-widget mb-4">
+            	<h2 class="ftco-heading-2">Office</h2>
+            	<div class="block-23 mb-3">
+	              <ul>
+	                <li><span class="icon icon-map-marker"></span><span class="text">Fast NAtional University of Computer and Emerging Sciences</span></li>
+	                <li><a href="#"><span class="icon icon-phone"></span><span class="text">+92-346-6211392</span></a></li>
+	                <li><a href="#"><span class="icon icon-envelope"></span><span class="text">wedoctors@gmail.com</span></a></li>
+	              </ul>
+	            </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 text-center">
+
+            <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved by WeDoctor's
+  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+
+
+  <!-- loader -->
+  <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="modalRequest" tabindex="-1" role="dialog" aria-labelledby="modalRequestLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <form class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalRequestLabel">Sign In</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form action="#">
+            <div class="form-group">
+              <!-- <label for="appointment_name" class="text-black">Full Name</label> -->
+              <input type="text" class="form-control" id="appointment_email" placeholder="Email" required>
+            </div>
+            <div class="form-group">
+              <!-- <label for="appointment_email" class="text-black">Email</label> -->
+              <input type="password" class="form-control" id="appointment_password" placeholder="Password" required>
+            </div>
+            </form>
+        </div>
+		  <label style="text-align:center;">
+        <input type="checkbox" checked="checked" name="remember" > Remember me
+           </label>
+            <div class="form-group" style="text-align:center;">
+              <input type="submit" value="Sign In" class="btn btn-primary">
+            </div>
+
+	  </form>
+        </div>
+
+      </div>
+
+
+      <script src="{% static 'js/jquery.min.js' %}"></script>
+  <script src="{% static 'js/jquery-migrate-3.0.1.min.js' %}"></script>
+  <script src="{% static 'js/popper.min.js' %}"></script>
+  <script src="{% static 'js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'js/jquery.easing.1.3.js' %}"></script>
+  <script src="{% static 'js/jquery.waypoints.min.js' %}"></script>
+  <script src="{% static 'js/jquery.stellar.min.js' %}"></script>
+  <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+  <script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
+  <script src="{% static 'js/aos.js' %}"></script>
+  <script src="{% static 'js/jquery.animateNumber.min.js' %}"></script>
+  <script src="{% static 'js/bootstrap-datepicker.js' %}"></script>
+  <script src="{% static 'js/jquery.timepicker.min.js' %}"></script>
+  <script src="{% static 'js/scrollax.min.js' %}"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+  <script src="{% static 'js/google-map.js' %}"></script>
+  <script src="{% static 'js/google-map.js' %}"></script>
+  <script src="{% static 'js/main.js' %}"></script>
+
+
+
+
+      <script src="{% static 'others/vendor/jquery-3.2.1.min.js' %}"></script>
+    <!-- Bootstrap JS-->
+    <script src="{% static 'others/vendor/bootstrap-4.1/popper.min.js' %}"></script>
+    <script src="{% static 'others/vendor/bootstrap-4.1/bootstrap.min.js' %}"></script>
+    <!-- Vendor JS       -->
+    <script src="{% static 'others/vendor/slick/slick.min.js' %}">
+    </script>
+    <script src="{% static 'others/vendor/wow/wow.min.js' %}"></script>
+    <script src="{% static 'others/vendor/animsition/animsition.min.js' %}"></script>
+    <script src="{% static 'others/vendor/bootstrap-progressbar/bootstrap-progressbar.min.js' %}">
+    </script>
+    <script src="{% static 'others/vendor/counter-up/jquery.waypoints.min.js' %}"></script>
+    <script src="{% static 'others/vendor/counter-up/jquery.counterup.min.js' %}">
+    </script>
+    <script src="{% static 'others/vendor/circle-progress/circle-progress.min.js' %}"></script>
+    <script src="{% static 'others/vendor/perfect-scrollbar/perfect-scrollbar.js' %}"></script>
+    <script src="{% static 'others/vendor/chartjs/Chart.bundle.min.js' %}"></script>
+    <script src="{% static 'others/vendor/select2/select2.min.js' %}">
+    </script>
+  <script src="{% static 'others/vendor/vector-map/jquery.vmap.js' %}"></script>
+    <script src="{% static 'others/vendor/vector-map/jquery.vmap.min.js' %}"></script>
+    <script src="{% static 'others/vendor/vector-map/jquery.vmap.sampledata.js' %}"></script>
+    <script src="{% static 'others/vendor/vector-map/jquery.vmap.world.js' %}"></script>
+    <script src="{% static 'others/vendor/vector-map/jquery.vmap.brazil.js' %}"></script>
+    <script src="{% static 'others/vendor/vector-map/jquery.vmap.europe.js' %}"></script>
+    <script src="{% static 'others/vendor/vector-map/jquery.vmap.france.js' %}"></script>
+    <script src="{% static 'others/vendor/vector-map/jquery.vmap.germany.js' %}"></script>
+    <script src="{% static 'others/vendor/vector-map/jquery.vmap.russia.js' %}"></script>
+    <script src="{% static 'others/vendor/vector-map/jquery.vmap.usa.js' %}"></script>
+<script src="{% static 'others/js/main.js' %}"></script>
+  </body>
+</html>

@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<!-- doccure/checkout.html  30 Nov 2019 04:12:16 GMT -->
+<head>
+		<meta charset="utf-8">
+		<title>Payment</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+
+		<!-- Favicons -->
+	<link href="{% static 'images/dill3.png' %}" rel="icon">
+<!--		<link href="{% static 'dosra/assets/img/favicon.png' %}" rel="icon">-->
+<!--w3 schools-->
+	  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<!--end w3 schools-->
+		<!-- Bootstrap CSS -->
+		<link rel="stylesheet" href="{% static 'dosra/assets/css/bootstrap.min.css' %}">
+
+		<!-- Fontawesome CSS -->
+		<link rel="stylesheet" href="{% static 'dosra/assets/plugins/fontawesome/css/fontawesome.min.css' %}">
+		<link rel="stylesheet" href="{% static 'dosra/assets/plugins/fontawesome/css/all.min.css' %}">
+
+		<!-- Main CSS -->
+		<link rel="stylesheet" href="{% static 'dosra/assets/css/style.css' %}">
+
+		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!--[if lt IE 9]>
+			<script src="{% static 'dosra/assets/js/html5shiv.min.js' %}"></script>
+			<script src="{% static 'dosra/assets/js/respond.min.js' %}"></script>
+		<![endif]-->
+
+	</head>
+
+<style>
+	.button {
+  background-color: #0066FF; /* Green */
+  border: none;
+  color: white;
+  width:300px;
+
+  padding: 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+.button2 {border-radius: 20px;
+color:white;}
+
+
+
+
+</style>
+	<body>
+
+		<!-- Main Wrapper -->
+		<div class="main-wrapper">
+
+			<!-- Header -->
+			<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+	    <div class="container">
+			<img src="{% static 'images/dill3.png' %} ">
+	      <a class="navbar-brand"  href="{% url 'patientprofile' %}">We<span>Doctor's</span></a>
+	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+	        <span class="oi oi-menu"></span> Menu
+	      </button>
+
+	      <div class="collapse navbar-collapse" id="ftco-nav">
+	        <ul class="navbar-nav ml-auto">
+	          <li class="nav-item "><a href=" {% url 'patientprofile' %} " class="nav-link">Home</a></li>
+				<li class="nav-item "><a href= "{% url 'patient_dashboard' %}"  class="nav-link">Dashboard</a></li>
+<!--	          <li class="nav-item "><a href= "{% url 'updateprofile' %}"  class="nav-link">Profile</a></li>-->
+	          <li class="nav-item active"><a href="{% url 'makeappointment' %}" class="nav-link">Make an Appointment</a></li>
+	          <li class="nav-item"><a href="{% url 'predictdisease' %}" class="nav-link">Predict Disease</a></li>
+<!--	          <li class="nav-item"><a href="{% url 'blog' %}" class="nav-link">Blog</a></li>-->
+	          <li class="nav-item"><a href="{% url 'mappatient' %}" class="nav-link">Area of Disease</a></li>
+<!--				 <li class="nav-item"><a href="#" class="nav-link">Area of Disease</a></li>-->
+<!--	          <li class="nav-item cta"> <a href="{% url 'login' %}" class="nav-link" data-toggle="modal" data-target="#modalRequest"><span>Sign In</span></a></li>-->
+			<li class="w3-dropdown-hover">
+    <button  class="w3-button " style="border-radius:30px;background-color:#0066FF;color:white" ><img src="{% static 'images/settings.png' %} " style="height:25px;width:25px;">&nbsp;&nbsp;Setting</button>
+    <div class="w3-dropdown-content w3-bar-block w3-border" style="border-radius:20px;background-color:#0066FF">
+      <a href="{% url 'updateprofile' %}" class="w3-bar-item w3-button" style="border-radius:30px;color:white;background-color:#0066FF">Edit Profile</a>
+<!--      <a href="#" class="w3-bar-item w3-button">Link 2</a>-->
+      <form  action="/singnout/" method="POST" style="border-radius:30px;background-color:#0066FF;color:white">
+				 {% csrf_token %}
+
+			 <input type="submit"  value="Sign out" class="btn w3-bar-item w3-button " style="border-radius:30px;background-color:#0066FF;color:white">
+				</form>
+    </div>
+  </li>
+<!--	          <li class="nav-item cta"> <a href="{% url 'login' %}" class="nav-link" data-toggle="modal" data-target="#modalRequest"><span>Sign In</span></a></li>-->
+			</ul>
+	      </div>
+
+	    </div>
+
+        </nav>
+
+
+			<!-- /Header -->
+
+			<!-- Breadcrumb -->
+			<div class="breadcrumb-bar" style="background-color:black">
+				<div class="container-fluid">
+					<div class="row align-items-center">
+						<div class="col-md-12 col-12">
+							<nav aria-label="breadcrumb" class="page-breadcrumb">
+								<ol class="breadcrumb">
+									<li class="breadcrumb-item"><a href="{% url 'patientprofile' %}">Home</a></li>
+                                    <li class="breadcrumb-item"><a href="{% url 'makeappointment' %}">Make an Appointment</a></li>
+<!--								<li class="breadcrumb-item"><a href="{% url 'bookappointment' %}">Book Appointment</a></li>-->
+									<li class="breadcrumb-item"><a href="{% url 'payment' %}">Payment</a></li>
+								</ol>
+							</nav>
+<!--							<h2 class="breadcrumb-title">Payment</h2>-->
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- /Breadcrumb -->
+
+			<!-- Page Content -->
+			<div class="content">
+				<div class="container">
+
+					<div class="row">
+<!--						<div class="col-md-7 col-lg-8">-->
+<!--							<div class="card">-->
+<!--								<div class="card-body">-->
+
+<!--									&lt;!&ndash; Checkout Form &ndash;&gt;-->
+<!--									<form action="#">-->
+
+<!--										&lt;!&ndash; Personal Information &ndash;&gt;-->
+<!--										<div class="info-widget">-->
+<!--											<h4 class="card-title">Personal Information</h4>-->
+<!--											<div class="row">-->
+<!--												<div class="col-md-6 col-sm-12">-->
+<!--													<div class="form-group card-label">-->
+<!--														<label>First Name</label>-->
+<!--														<input class="form-control" type="text" onkeypress="return /[a-z]/i.test(event.key)">-->
+<!--													</div>-->
+<!--												</div>-->
+<!--												<div class="col-md-6 col-sm-12">-->
+<!--													<div class="form-group card-label">-->
+<!--														<label>Last Name</label>-->
+<!--														<input class="form-control" type="text" onkeypress="return /[a-z]/i.test(event.key)">-->
+<!--													</div>-->
+<!--												</div>-->
+<!--												<div class="col-md-6 col-sm-12">-->
+<!--													<div class="form-group card-label">-->
+<!--														<label>Email</label>-->
+<!--														<input class="form-control" type="email">-->
+<!--													</div>-->
+<!--												</div>-->
+<!--												<div class="col-md-6 col-sm-12">-->
+<!--													<div class="form-group card-label">-->
+<!--														<label>Phone</label>-->
+<!--														<input class="form-control" type="tel" onkeypress="return /[0-9]/i.test(event.key)" minlength="10" maxlength="10">-->
+<!--													</div>-->
+<!--												</div>-->
+<!--											</div>-->
+<!--											<div class="exist-customer">Existing Customer? <a href="#">Click here to login</a></div>-->
+<!--										</div>-->
+<!--										&lt;!&ndash; /Personal Information &ndash;&gt;-->
+
+<!--										<div class="payment-widget">-->
+<!--											<h4 class="card-title">Payment Method</h4>-->
+
+<!--											&lt;!&ndash; Credit Card Payment &ndash;&gt;-->
+<!--											<div class="payment-list">-->
+<!--												<label class="payment-radio credit-card-option">-->
+<!--													<input type="radio" name="radio" checked>-->
+<!--													<span class="checkmark"></span>-->
+<!--													Credit card-->
+<!--												</label>-->
+<!--												<div class="row">-->
+<!--													<div class="col-md-6">-->
+<!--														<div class="form-group card-label">-->
+<!--															<label for="card_name">Name on Card</label>-->
+<!--															<input class="form-control" id="card_name" type="text" onkeypress="return /[a-z]/i.test(event.key)">-->
+<!--														</div>-->
+<!--													</div>-->
+<!--													<div class="col-md-6">-->
+<!--														<div class="form-group card-label">-->
+<!--															<label for="card_number">Card Number</label>-->
+<!--															<input class="form-control" maxlength="16" id="card_number" placeholder="1234  5678  9876  5432" type="text">-->
+<!--														</div>-->
+<!--													</div>-->
+<!--													<div class="col-md-4">-->
+<!--														<div class="form-group card-label">-->
+<!--															<label for="expiry_month">Expiry Month</label>-->
+<!--&lt;!&ndash;															<input class="form-control" id="expiry_month" pattern="[0-9]{2}" onkeyup="if(this.value<0){this.value= this.value * -1}" min="1" max="12" maxlength="2" placeholder="MM i.e 11" type="number">&ndash;&gt;-->
+
+
+<!--														<select  id="expiry_month" class="form-control"  aria-labelledby="label_6 sublabel_6_month">-->
+<!--                <option>  </option>-->
+<!--                <option value="January"> January </option>-->
+<!--                <option value="February"> February </option>-->
+<!--                <option value="March"> March </option>-->
+<!--                <option value="April"> April </option>-->
+<!--                <option value="May"> May </option>-->
+<!--                <option value="June"> June </option>-->
+<!--                <option value="July"> July </option>-->
+<!--                <option value="August"> August </option>-->
+<!--                <option value="September"> September </option>-->
+<!--                <option value="October"> October </option>-->
+<!--                <option value="November"> November </option>-->
+<!--                <option value="December"> December </option>-->
+<!--              </select>-->
+
+
+
+
+
+<!--														</div>-->
+<!--													</div>-->
+<!--													<div class="col-md-4">-->
+<!--														<div class="form-group card-label">-->
+<!--															<label for="expiry_year">Expiry Year</label>-->
+<!--&lt;!&ndash;															<input class="form-control" onkeyup="if(this.value<0){this.value= this.value * -1}" maxlength="4" id="expiry_year" placeholder="YYYY" type="text">&ndash;&gt;-->
+
+<!--														<select  id="expiry_year" class="form-control" >-->
+<!--                <option>  </option>-->
+
+<!--                <option value="2021"> 2021 </option>-->
+<!--                <option value="2022"> 2022 </option>-->
+<!--                <option value="2023"> 2023 </option>-->
+<!--                <option value="2024"> 2024 </option>-->
+<!--                <option value="2025"> 2025 </option>-->
+<!--                <option value="2026"> 2026 </option>-->
+<!--                <option value="2027"> 2027 </option>-->
+<!--                <option value="2028"> 2028 </option>-->
+<!--                <option value="2029"> 2029 </option>-->
+<!--                <option value="2030"> 2030 </option>-->
+<!--                <option value="2031"> 2031 </option>-->
+<!--                <option value="2032"> 2032 </option>-->
+<!--                <option value="2033"> 2033 </option>-->
+<!--                <option value="2034"> 2034 </option>-->
+<!--                <option value="2035"> 2035 </option>-->
+<!--                <option value="2036"> 2036 </option>-->
+<!--                <option value="2037"> 2037 </option>-->
+<!--                <option value="2038"> 2038 </option>-->
+<!--                <option value="2039"> 2039 </option>-->
+<!--                <option value="2040"> 2040 </option>-->
+
+<!--              </select>-->
+
+
+<!--														</div>-->
+<!--													</div>-->
+<!--													<div class="col-md-4">-->
+<!--														<div class="form-group card-label">-->
+<!--															<label for="cvv">CVV</label>-->
+
+<!--															<input class="form-control" maxlength="3" id="cvv" type="text" onkeypress="return /[0-9]/i.test(event.key)"  >-->
+<!--														</div>-->
+<!--													</div>-->
+<!--												</div>-->
+<!--											</div>-->
+<!--											&lt;!&ndash; /Credit Card Payment &ndash;&gt;-->
+
+<!--											&lt;!&ndash; Paypal Payment &ndash;&gt;-->
+<!--											<div class="payment-list">-->
+<!--												<label class="payment-radio paypal-option">-->
+<!--													<input type="radio" name="radio">-->
+<!--													<span class="checkmark"></span>-->
+<!--													Paypal-->
+<!--												</label>-->
+<!--											</div>-->
+<!--											&lt;!&ndash; /Paypal Payment &ndash;&gt;-->
+
+<!--											&lt;!&ndash; Terms Accept &ndash;&gt;-->
+<!--											<div class="terms-accept">-->
+<!--												<div class="custom-checkbox">-->
+<!--												   <input type="checkbox" id="terms_accept">-->
+<!--												   <label for="terms_accept">I have read and accept <a href="#">Terms &amp; Conditions</a></label>-->
+<!--												</div>-->
+<!--											</div>-->
+<!--											&lt;!&ndash; /Terms Accept &ndash;&gt;-->
+
+<!--											&lt;!&ndash; Submit Section &ndash;&gt;-->
+<!--											<div class="submit-section mt-4">-->
+<!--												<button type="submit" class="btn btn-primary submit-btn">Confirm and Pay</button>-->
+<!--											</div>-->
+<!--											&lt;!&ndash; /Submit Section &ndash;&gt;-->
+
+<!--										</div>-->
+<!--									</form>-->
+<!--									&lt;!&ndash; /Checkout Form &ndash;&gt;-->
+
+<!--								</div>-->
+<!--							</div>-->
+
+<!--						</div>-->
+
+						<div class="col-md-5 col-lg-4 theiaStickySidebar">
+
+							<!-- Booking Summary -->
+							<div class="card booking-card">
+								<div class="card-header">
+									<h4 class="card-title">Booking Summary</h4>
+								</div>
+								<div class="card-body">
+
+									<!-- Booking Doctor Info -->
+									<div class="booking-doc-info">
+										<a href="#" class="booking-doc-img">
+											 {% if not doctor.image%}
+                                            <img src="{% static 'images/download.png' %}"  />
+                                            {% endif %}
+                                            {% if doctor.image%}
+                                            <img src='/media/{{doctor.image}}'  />
+                                            {% endif %}
+										</a>
+										<div class="booking-info">
+											<h4>{{doctor.first_name}} {{doctor.last_name}}</h4>
+
+											<div class="clinic-details">
+												<p class="doc-location"><i class="fas fa-map-marker-alt"></i> {{doctor.city}},{{doctor.province}}</p>
+											</div>
+										</div>
+									</div>
+									<!-- Booking Doctor Info -->
+
+									<div class="booking-summary">
+										<div class="booking-item-wrap">
+											<ul class="booking-date">
+												<li>Day <span>{{day}}</span></li>
+												<li>Time <span>{{time}}</span></li>
+											</ul>
+											<ul class="booking-fee">
+												<li>Consulting Fee <span>2000 PKR</span></li>
+<!--												<li>Booking Fee <span>10 Pkr</span></li>-->
+<!--												<li>Video Call <span>$50</span></li>-->
+											</ul>
+											<div class="booking-total">
+												<ul class="booking-total-list">
+													<li>
+														<span>Total</span>
+														<span class="total-cost">2000 PKR</span>
+													</li>
+												</ul>
+											</div>
+											 <form  action="/pay_patient/" method="POST">
+												 	  {% csrf_token %}
+												   <input type="hidden" id="first_name" name="first_name" value="{{doctor.first_name}} ">
+									  <input type="hidden" id="last_name" name="last_name" value="{{doctor.last_name}}">
+												 <input type="hidden" id="city" name="city" value="{{doctor.city}}">
+												 <input type="hidden" id="province" name="city" value="{{doctor.province}}">
+									  <input type="hidden" id="doctor" name="doctor" value="{{doctor.email}}">
+
+<button type="submit" class="button button2">
+	<a style="color:white;" href=" {% url 'pay_patient' %} " class="nav-link">Check In</a></button>
+											 </form>
+
+
+
+<!--											<h3>Pay fees</h3>-->
+<!--											<form action="{% url 'pay_patient' %}" method="POST" style="text-align:right">-->
+<!--												{% csrf_token %}-->
+<!--												 <input type="hidden" id="time" name="time">-->
+<!--									  <input type="hidden" id="day" name="day">-->
+<!--									  <input type="hidden" id="doctor" name="doctor" value="{{doc}}">-->
+<!--											<script src="https://checkout.stripe.com/checkout.js" class="stripe-button"-->
+<!--												data-key="{{ key }}"-->
+<!--												data-description="Payment Gateway"-->
+<!--												data-amount="20000"-->
+
+
+<!--												data-locale="auto">-->
+<!--											</script>-->
+<!--												</form>-->
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- /Booking Summary -->
+
+						</div>
+					</div>
+
+				</div>
+
+			</div>
+			<!-- /Page Content -->
+
+			<!-- Footer -->
+			<footer class="ftco-footer ftco-bg-dark ftco-section" style="background-color:black">
+      <div class="container">
+        <div class="row mb-5">
+          <div class="col-md-3">
+            <div class="ftco-footer-widget mb-4">
+              <h2 class="ftco-heading-2" style="color:white">WeDoctor's.</h2>
+              <p style="color:white">WeDoctor's is an online audio/video consultation platform that allows real-time interaction between a doctor and patient. WeDoctor aims to provide virtual healthcare focusing on convenience and comfort. It is the future of healthcare and obviates barriers to efficiency and access.</p>
+            </div>
+            <ul class="ftco-footer-social list-unstyled float-md-left float-lft ">
+              <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
+              <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
+              <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
+            </ul>
+          </div>
+          <div class="col-md-2">
+            <div class="ftco-footer-widget mb-4 ml-md-5">
+              <h2 class="ftco-heading-2" style="color:white">Quick Links</h2>
+              <ul class="list-unstyled">
+                <li><a href="{% url 'about' %}" class="py-2 d-block" style="color:white">About</a></li>
+<!--                <li><a href="#" class="py-2 d-block">Features</a></li>-->
+<!--                <li><a href="#" class="py-2 d-block">Projects</a></li>-->
+<!--                <li><a href="#" class="py-2 d-block">Blog</a></li>-->
+                <li><a href="{% url 'contact' %}" class="py-2 d-block" style="color:white">Contact</a></li>
+              </ul>
+            </div>
+          </div>
+<!--          <div class="col-md-4 pr-md-4">-->
+<!--            <div class="ftco-footer-widget mb-4">-->
+<!--              <h2 class="ftco-heading-2">Recent Blog</h2>-->
+<!--              <div class="block-21 mb-4 d-flex">-->
+<!--                <a class="blog-img mr-4" style="background-image: url({% static 'images/image_1.jpg' %});"></a>-->
+<!--                <div class="text">-->
+<!--                  <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about</a></h3>-->
+<!--                  <div class="meta">-->
+<!--                    <div><a href="#"><span class="icon-calendar"></span> Sept 15, 2018</a></div>-->
+<!--                    <div><a href="#"><span class="icon-person"></span> Admin</a></div>-->
+<!--                    <div><a href="#"><span class="icon-chat"></span> 19</a></div>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--              <div class="block-21 mb-4 d-flex">-->
+<!--                <a class="blog-img mr-4" style="background-image: url({% static 'images/image_2.jpg' %});"></a>-->
+<!--&lt;!&ndash;                <div class="text">&ndash;&gt;-->
+<!--&lt;!&ndash;                  <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about</a></h3>&ndash;&gt;-->
+<!--&lt;!&ndash;                  <div class="meta">&ndash;&gt;-->
+<!--&lt;!&ndash;                    <div><a href="#"><span class="icon-calendar"></span> Sept 15, 2018</a></div>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <div><a href="#"><span class="icon-person"></span> Admin</a></div>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <div><a href="#"><span class="icon-chat"></span> 19</a></div>&ndash;&gt;-->
+<!--&lt;!&ndash;                  </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                </div>&ndash;&gt;-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+          <div class="col-md-3">
+            <div class="ftco-footer-widget mb-4">
+            	<h2 class="ftco-heading-2" style="color:white">Office</h2>
+            	<div class="block-23 mb-3">
+	              <ul>
+	                <li><span class="icon icon-map-marker"></span><span class="text" style="color:white">Fast NAtional University of Computer and Emerging Sciences</span></li>
+	                <li><a href="#"><span class="icon icon-phone"></span><span class="text" style="color:white">+92-346-6211392</span></a></li>
+	                <li><a href="#"><span class="icon icon-envelope"></span><span class="text" style="color:white">wedoctors@gmail.com</span></a></li>
+	              </ul>
+	            </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 text-center" style="color:white">
+
+            <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved by WeDoctor's
+  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+          </div>
+        </div>
+      </div>
+    </footer>
+			<!-- /Footer -->
+
+		</div>
+		<!-- /Main Wrapper -->
+
+		<!-- jQuery -->
+		<script src="{% static 'dosra/assets/js/jquery.min.' %}"></script>
+
+		<!-- Bootstrap Core JS -->
+		<script src="{% static 'dosra/assets/js/popper.min.js' %}"></script>
+		<script src="{% static 'dosra/assets/js/bootstrap.min.js' %}"></script>
+
+		<!-- Sticky Sidebar JS -->
+        <script src="{% static 'dosra/assets/plugins/theia-sticky-sidebar/ResizeSensor.js' %}"></script>
+        <script src="{% static 'dosra/assets/plugins/theia-sticky-sidebar/theia-sticky-sidebar.js' %}"></script>
+
+		<!-- Custom JS -->
+		<script src="{% static 'dosra/assets/js/script.js' %}"></script>
+
+	</body>
+
+<!-- doccure/checkout.html  30 Nov 2019 04:12:16 GMT -->
+</html>
